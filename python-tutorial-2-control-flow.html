@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tutorial-2-python-control-flow.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-2-python-control-flow---making-decisions-in-code-%F0%9F%8E%AE">Tutorial 2: Python Control Flow - Making Decisions in Code! 🎮</h1>
+<p>Hey future programmers! Ready to make your programs smarter? Just like you make decisions in your daily life (like what to wear or what to eat), your code needs to make decisions too! In this tutorial, you'll learn how to make your programs think and act based on different situations.</p>
+<h2 id="%F0%9F%8E%AF-what-youll-learn">🎯 What You'll Learn</h2>
+<ul>
+<li>How to make your code make decisions using if-statements</li>
+<li>How to repeat actions using loops (like in games where you have multiple lives!)</li>
+<li>How to compare values (like checking if you have enough coins to buy something)</li>
+<li>How to write simple functions (like creating your own commands)</li>
+<li>How to build small games and programs!</li>
+</ul>
+<h2 id="1-making-decisions-with-if-statements-%F0%9F%A4%94">1. Making Decisions with If-Statements 🤔</h2>
+<p>Think of if-statements like questions you ask yourself:</p>
+<ul>
+<li>IF it's raining, take an umbrella</li>
+<li>IF you have enough money, buy ice cream</li>
+<li>ELSE save the money</li>
+</ul>
+<h3 id="basic-if-statements">Basic If-Statements</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Check if a player has enough coins to buy an item</span>
+player_coins = <span class="hljs-number">100</span>
+item_cost = <span class="hljs-number">50</span>
+
+<span class="hljs-comment"># This is like asking: "Do I have enough money?"</span>
+<span class="hljs-keyword">if</span> player_coins &gt;= item_cost:
+    print(<span class="hljs-string">"You can buy this item!"</span>)
+    player_coins = player_coins - item_cost  <span class="hljs-comment"># Subtract the cost</span>
+    print(<span class="hljs-string">f"You have <span class="hljs-subst">{player_coins}</span> coins left"</span>)
+</div></code></pre>
+<h3 id="if-else-statements">If-Else Statements</h3>
+<p>When you need to do something in both cases:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Check if a student passed or failed</span>
+score = <span class="hljs-number">75</span>
+passing_score = <span class="hljs-number">70</span>
+
+<span class="hljs-comment"># This is like saying: "If you got 70 or higher you pass,</span>
+<span class="hljs-comment"># otherwise you need to try again"</span>
+<span class="hljs-keyword">if</span> score &gt;= passing_score:
+    print(<span class="hljs-string">"You passed! 🎉"</span>)
+    print(<span class="hljs-string">f"Your score was <span class="hljs-subst">{score - passing_score}</span> points above passing!"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"Try again next time! 📚"</span>)
+    print(<span class="hljs-string">f"You need <span class="hljs-subst">{passing_score - score}</span> more points to pass"</span>)
+</div></code></pre>
+<h3 id="if-elif-else-statements">If-Elif-Else Statements</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Grade calculator</span>
+grade = <span class="hljs-number">85</span>
+
+<span class="hljs-keyword">if</span> grade &gt;= <span class="hljs-number">90</span>:
+    print(<span class="hljs-string">"A - Excellent! 🌟"</span>)
+<span class="hljs-keyword">elif</span> grade &gt;= <span class="hljs-number">80</span>:
+    print(<span class="hljs-string">"B - Good job! ⭐"</span>)
+<span class="hljs-keyword">elif</span> grade &gt;= <span class="hljs-number">70</span>:
+    print(<span class="hljs-string">"C - Keep practicing! 📝"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"Need more practice! 💪"</span>)
+</div></code></pre>
+<h3 id="mini-project-1-simple-game-choice">Mini-Project 1: Simple Game Choice</h3>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"You find a mysterious door. What do you do?"</span>)
+print(<span class="hljs-string">"1. Open the door"</span>)
+print(<span class="hljs-string">"2. Knock first"</span>)
+print(<span class="hljs-string">"3. Walk away"</span>)
+
+choice = input(<span class="hljs-string">"Enter your choice (1/2/3): "</span>)
+
+<span class="hljs-keyword">if</span> choice == <span class="hljs-string">"1"</span>:
+    print(<span class="hljs-string">"The door creaks open..."</span>)
+<span class="hljs-keyword">elif</span> choice == <span class="hljs-string">"2"</span>:
+    print(<span class="hljs-string">"A friendly voice answers..."</span>)
+<span class="hljs-keyword">elif</span> choice == <span class="hljs-string">"3"</span>:
+    print(<span class="hljs-string">"You decide to play it safe..."</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"Invalid choice!"</span>)
+</div></code></pre>
+<h2 id="2-comparison-operators-%F0%9F%94%8D">2. Comparison Operators 🔍</h2>
+<p>Let's learn how to compare things:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Equal to: ==</span>
+<span class="hljs-comment"># Not equal to: !=</span>
+<span class="hljs-comment"># Greater than: &gt;</span>
+<span class="hljs-comment"># Less than: &lt;</span>
+<span class="hljs-comment"># Greater than or equal to: &gt;=</span>
+<span class="hljs-comment"># Less than or equal to: &lt;=</span>
+
+age = <span class="hljs-number">15</span>
+<span class="hljs-keyword">if</span> age &gt;= <span class="hljs-number">13</span>:
+    print(<span class="hljs-string">"You can play teen-rated games!"</span>)
+</div></code></pre>
+<h2 id="3-repeating-actions-with-while-loops-%F0%9F%94%84">3. Repeating Actions with While Loops 🔄</h2>
+<h3 id="basic-while-loop">Basic While Loop</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Countdown timer</span>
+countdown = <span class="hljs-number">5</span>
+
+<span class="hljs-keyword">while</span> countdown &gt; <span class="hljs-number">0</span>:
+    print(<span class="hljs-string">f"<span class="hljs-subst">{countdown}</span>..."</span>)
+    countdown = countdown - <span class="hljs-number">1</span>
+print(<span class="hljs-string">"Blast off! 🚀"</span>)
+</div></code></pre>
+<h3 id="while-loop-with-break">While Loop with Break</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Guess the number game</span>
+secret_number = <span class="hljs-number">7</span>
+attempts = <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    guess = int(input(<span class="hljs-string">"Guess the number (1-10): "</span>))
+    attempts = attempts + <span class="hljs-number">1</span>
+    
+    <span class="hljs-keyword">if</span> guess == secret_number:
+        print(<span class="hljs-string">f"You got it in <span class="hljs-subst">{attempts}</span> tries! 🎉"</span>)
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">elif</span> guess &gt; secret_number:
+        print(<span class="hljs-string">"Too high! Try again!"</span>)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">"Too low! Try again!"</span>)
+</div></code></pre>
+<h2 id="4-for-loops---repeating-with-a-pattern-%F0%9F%94%81">4. For Loops - Repeating with a Pattern 🔁</h2>
+<h3 id="basic-for-loop">Basic For Loop</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Print multiplication table</span>
+number = <span class="hljs-number">5</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>):
+    print(<span class="hljs-string">f"<span class="hljs-subst">{number}</span> x <span class="hljs-subst">{i}</span> = <span class="hljs-subst">{number * i}</span>"</span>)
+</div></code></pre>
+<h3 id="looping-through-lists">Looping Through Lists</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Check your inventory</span>
+inventory = [<span class="hljs-string">"sword"</span>, <span class="hljs-string">"shield"</span>, <span class="hljs-string">"potion"</span>, <span class="hljs-string">"map"</span>]
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> inventory:
+    print(<span class="hljs-string">f"You have a <span class="hljs-subst">{item}</span>"</span>)
+</div></code></pre>
+<h3 id="using-range">Using Range</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Different ways to use range</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">5</span>):  <span class="hljs-comment"># 0 to 4</span>
+    print(i)
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>):  <span class="hljs-comment"># 2 to 4</span>
+    print(i)
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>):  <span class="hljs-comment"># Even numbers 0 to 8</span>
+    print(i)
+</div></code></pre>
+<h2 id="5-break-and-continue-%F0%9F%9A%A6">5. Break and Continue 🚦</h2>
+<h3 id="break---stop-the-loop">Break - Stop the Loop</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Find the first multiple of 7</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">101</span>):
+    <span class="hljs-keyword">if</span> i % <span class="hljs-number">7</span> == <span class="hljs-number">0</span>:
+        print(<span class="hljs-string">f"First multiple of 7 is: <span class="hljs-subst">{i}</span>"</span>)
+        <span class="hljs-keyword">break</span>
+</div></code></pre>
+<h3 id="continue---skip-to-next-iteration">Continue - Skip to Next Iteration</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Print only even numbers</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>):
+    <span class="hljs-keyword">if</span> i % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">continue</span>
+    print(<span class="hljs-string">f"<span class="hljs-subst">{i}</span> is even"</span>)
+</div></code></pre>
+<h2 id="6-introduction-to-functions-%F0%9F%94%A7">6. Introduction to Functions 🔧</h2>
+<h3 id="basic-functions">Basic Functions</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">greet_player</span><span class="hljs-params">(name)</span>:</span>
+    print(<span class="hljs-string">f"Welcome to the game, <span class="hljs-subst">{name}</span>! 🎮"</span>)
+
+<span class="hljs-comment"># Use the function</span>
+greet_player(<span class="hljs-string">"Alex"</span>)
+</div></code></pre>
+<h3 id="functions-with-return-values">Functions with Return Values</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_score</span><span class="hljs-params">(hits, misses)</span>:</span>
+    score = (hits * <span class="hljs-number">100</span>) - (misses * <span class="hljs-number">50</span>)
+    <span class="hljs-keyword">return</span> score
+
+<span class="hljs-comment"># Use the function</span>
+player_score = calculate_score(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>)
+print(<span class="hljs-string">f"Your score: <span class="hljs-subst">{player_score}</span>"</span>)
+</div></code></pre>
+<h2 id="%F0%9F%8E%AE-fun-projects-to-try">🎮 Fun Projects to Try!</h2>
+<h3 id="project-1-number-guessing-game-%F0%9F%8E%B2">Project 1: Number Guessing Game 🎲</h3>
+<p>This game uses random numbers and loops to create a fun guessing game. It's like &quot;Hot and Cold&quot; but with numbers!</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> random  <span class="hljs-comment"># This lets us create random numbers</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">play_guess_game</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Create a random number between 1 and 100</span>
+    secret = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>)
+    attempts = <span class="hljs-number">0</span>
+    max_attempts = <span class="hljs-number">10</span>  <span class="hljs-comment"># Let's give the player 10 tries</span>
+    
+    print(<span class="hljs-string">"🎲 Welcome to the Number Guessing Game! 🎲"</span>)
+    print(<span class="hljs-string">"I'm thinking of a number between 1 and 100..."</span>)
+    print(<span class="hljs-string">f"Can you guess it in <span class="hljs-subst">{max_attempts}</span> attempts?\n"</span>)
+    
+    <span class="hljs-keyword">while</span> attempts &lt; max_attempts:
+        <span class="hljs-comment"># Get the player's guess</span>
+        <span class="hljs-keyword">try</span>:
+            guess = int(input(<span class="hljs-string">"Your guess: "</span>))
+            attempts += <span class="hljs-number">1</span>
+            
+            <span class="hljs-comment"># Check if the guess is correct</span>
+            <span class="hljs-keyword">if</span> guess == secret:
+                print(<span class="hljs-string">f"🎉 You won in <span class="hljs-subst">{attempts}</span> tries! 🎉"</span>)
+                <span class="hljs-keyword">if</span> attempts == <span class="hljs-number">1</span>:
+                    print(<span class="hljs-string">"Wow! First try! You're amazing! 🌟"</span>)
+                <span class="hljs-keyword">elif</span> attempts &lt;= <span class="hljs-number">3</span>:
+                    print(<span class="hljs-string">"Great job! You're really good at this! ⭐"</span>)
+                <span class="hljs-keyword">else</span>:
+                    print(<span class="hljs-string">"Well done! Keep practicing to get better! 👍"</span>)
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-comment"># Give hints if the guess is wrong</span>
+            <span class="hljs-keyword">elif</span> guess &gt; secret:
+                print(<span class="hljs-string">"Too high! Try a lower number 👇"</span>)
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"Too low! Try a higher number 👆"</span>)
+            
+            <span class="hljs-comment"># Tell player how many attempts are left</span>
+            attempts_left = max_attempts - attempts
+            print(<span class="hljs-string">f"Attempts left: <span class="hljs-subst">{attempts_left}</span>\n"</span>)
+            
+        <span class="hljs-keyword">except</span> ValueError:
+            print(<span class="hljs-string">"Please enter a valid number! 🔢"</span>)
+    
+    <span class="hljs-comment"># If player runs out of attempts</span>
+    <span class="hljs-keyword">if</span> attempts &gt;= max_attempts <span class="hljs-keyword">and</span> guess != secret:
+        print(<span class="hljs-string">f"Game Over! The number was <span class="hljs-subst">{secret}</span>"</span>)
+        print(<span class="hljs-string">"Better luck next time! 🎮"</span>)
+
+<span class="hljs-comment"># Play the game</span>
+play_guess_game()
+</div></code></pre>
+<h3 id="project-2-dragons-cave-adventure-game-%F0%9F%90%89">Project 2: Dragon's Cave Adventure Game 🐉</h3>
+<p>This is a text-based adventure game where every choice matters! It's like creating your own story where the player decides what happens next.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dragons_cave</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Initialize player stats</span>
+    health = <span class="hljs-number">100</span>
+    coins = <span class="hljs-number">0</span>
+    has_sword = <span class="hljs-literal">False</span>
+    has_key = <span class="hljs-literal">False</span>
+    
+    print(<span class="hljs-string">"🐉 Welcome to the Dragon's Cave! 🐉"</span>)
+    print(<span class="hljs-string">"Your mission: Find the treasure and escape alive!\n"</span>)
+    
+    <span class="hljs-keyword">while</span> health &gt; <span class="hljs-number">0</span>:
+        <span class="hljs-comment"># Show player status</span>
+        print(<span class="hljs-string">"\n"</span> + <span class="hljs-string">"="</span>*<span class="hljs-number">30</span>)
+        print(<span class="hljs-string">f"Health: <span class="hljs-subst">{<span class="hljs-string">'❤️'</span> * (health // <span class="hljs-number">20</span>)}</span>"</span>)  <span class="hljs-comment"># Visual health bar</span>
+        print(<span class="hljs-string">f"Coins: <span class="hljs-subst">{coins}</span> 💰"</span>)
+        <span class="hljs-keyword">if</span> has_sword:
+            print(<span class="hljs-string">"Items: Sword ⚔️"</span>)
+        <span class="hljs-keyword">if</span> has_key:
+            print(<span class="hljs-string">"Items: Key 🗝️"</span>)
+        print(<span class="hljs-string">"="</span>*<span class="hljs-number">30</span> + <span class="hljs-string">"\n"</span>)
+        
+        print(<span class="hljs-string">"What would you like to do?"</span>)
+        print(<span class="hljs-string">"1. Explore deeper into the cave"</span>)
+        print(<span class="hljs-string">"2. Rest by the campfire"</span>)
+        print(<span class="hljs-string">"3. Look for items"</span>)
+        print(<span class="hljs-string">"4. Try to exit"</span>)
+        
+        choice = input(<span class="hljs-string">"Enter your choice (1-4): "</span>)
+        
+        <span class="hljs-keyword">if</span> choice == <span class="hljs-string">"1"</span>:
+            <span class="hljs-comment"># Random encounter system</span>
+            <span class="hljs-keyword">import</span> random
+            encounter = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)
+            
+            <span class="hljs-keyword">if</span> encounter == <span class="hljs-number">1</span>:
+                print(<span class="hljs-string">"\nYou found a treasure chest! 🎁"</span>)
+                <span class="hljs-keyword">if</span> has_key:
+                    coins += <span class="hljs-number">50</span>
+                    print(<span class="hljs-string">"You used the key to open it and found 50 coins!"</span>)
+                <span class="hljs-keyword">else</span>:
+                    print(<span class="hljs-string">"You need a key to open it..."</span>)
+            <span class="hljs-keyword">elif</span> encounter == <span class="hljs-number">2</span>:
+                print(<span class="hljs-string">"\nA small dragon appears! 🐲"</span>)
+                <span class="hljs-keyword">if</span> has_sword:
+                    print(<span class="hljs-string">"You use your sword to scare it away!"</span>)
+                <span class="hljs-keyword">else</span>:
+                    damage = <span class="hljs-number">20</span>
+                    health -= damage
+                    print(<span class="hljs-string">f"The dragon breathes fire! You lose <span class="hljs-subst">{damage}</span> health!"</span>)
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"\nThe path is quiet... for now..."</span>)
+        
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">"2"</span>:
+            <span class="hljs-keyword">if</span> health &lt; <span class="hljs-number">100</span>:
+                health += <span class="hljs-number">20</span>
+                <span class="hljs-keyword">if</span> health &gt; <span class="hljs-number">100</span>:
+                    health = <span class="hljs-number">100</span>
+                print(<span class="hljs-string">"\nYou rest by the fire and recover some health! ❤️"</span>)
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"\nYou're already at full health!"</span>)
+        
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">"3"</span>:
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> has_sword <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> has_key:
+                found_item = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)
+                <span class="hljs-keyword">if</span> found_item == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> has_sword:
+                    has_sword = <span class="hljs-literal">True</span>
+                    print(<span class="hljs-string">"\nYou found a sword! ⚔️"</span>)
+                <span class="hljs-keyword">elif</span> found_item == <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> has_key:
+                    has_key = <span class="hljs-literal">True</span>
+                    print(<span class="hljs-string">"\nYou found a key! 🗝️"</span>)
+                <span class="hljs-keyword">else</span>:
+                    print(<span class="hljs-string">"\nYou found nothing useful..."</span>)
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"\nYou already have all the items!"</span>)
+        
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">"4"</span>:
+            <span class="hljs-keyword">if</span> coins &gt;= <span class="hljs-number">100</span>:
+                print(<span class="hljs-string">"\n🎉 Congratulations! You escape with the treasure! 🎉"</span>)
+                print(<span class="hljs-string">f"You collected <span class="hljs-subst">{coins}</span> coins!"</span>)
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">else</span>:
+                print(<span class="hljs-string">"\nYou need at least 100 coins to win!"</span>)
+                print(<span class="hljs-string">"Keep exploring!"</span>)
+        
+        <span class="hljs-comment"># Check if player died</span>
+        <span class="hljs-keyword">if</span> health &lt;= <span class="hljs-number">0</span>:
+            print(<span class="hljs-string">"\n💀 Game Over! The dragon was too powerful! 💀"</span>)
+            <span class="hljs-keyword">break</span>
+
+<span class="hljs-comment"># Start the adventure</span>
+dragons_cave()
+</div></code></pre>
+<h2 id="%F0%9F%8E%AF-practice-exercises---level-1-loops-and-logic">🎯 Practice Exercises - Level 1: Loops and Logic</h2>
+<h3 id="exercise-1-countdown-timer-%E2%8F%B0">Exercise 1: Countdown Timer ⏰</h3>
+<p>Create a countdown program that:</p>
+<ul>
+<li>Asks the user for a number</li>
+<li>Counts down from that number to 1</li>
+<li>Prints &quot;Blast off! 🚀&quot; at the end</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example output for input 5:</span>
+<span class="hljs-comment"># 5...</span>
+<span class="hljs-comment"># 4...</span>
+<span class="hljs-comment"># 3...</span>
+<span class="hljs-comment"># 2...</span>
+<span class="hljs-comment"># 1...</span>
+<span class="hljs-comment"># Blast off! 🚀</span>
+</div></code></pre>
+<h3 id="exercise-2-number-pattern-%F0%9F%93%8A">Exercise 2: Number Pattern 📊</h3>
+<p>Print this pattern of numbers:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 1</span>
+<span class="hljs-comment"># 2 2</span>
+<span class="hljs-comment"># 3 3 3</span>
+<span class="hljs-comment"># 4 4 4 4</span>
+<span class="hljs-comment"># 5 5 5 5 5</span>
+</div></code></pre>
+<p>Hint: Use nested loops!</p>
+<h3 id="exercise-3-even-sum-calculator-%E2%9E%97">Exercise 3: Even Sum Calculator ➗</h3>
+<p>Create a program that:</p>
+<ul>
+<li>Asks for a maximum number</li>
+<li>Calculates the sum of all even numbers from 2 to that number</li>
+<li>Prints the total</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example: If user enters 8</span>
+<span class="hljs-comment"># Even numbers: 2, 4, 6, 8</span>
+<span class="hljs-comment"># Output: The sum is 20</span>
+</div></code></pre>
+<h3 id="exercise-4-password-checker-%F0%9F%94%91">Exercise 4: Password Checker 🔑</h3>
+<p>Make a simple password checker that:</p>
+<ul>
+<li>Gives the user 3 attempts to enter the correct password</li>
+<li>Password should be &quot;python123&quot;</li>
+<li>Tells them how many attempts they have left</li>
+<li>Prints &quot;Access granted! 🎉&quot; or &quot;Access denied! 🔒&quot;</li>
+</ul>
+<h3 id="exercise-5-number-guesser-with-range-%F0%9F%8E%B2">Exercise 5: Number Guesser with Range 🎲</h3>
+<p>Create a number guessing game that:</p>
+<ul>
+<li>Asks for a number between 1-50</li>
+<li>Tells if the guess is &quot;getting warmer&quot; or &quot;getting colder&quot; compared to the previous guess</li>
+<li>Counts the number of guesses</li>
+<li>Has a maximum of 7 guesses</li>
+</ul>
+<h2 id="%F0%9F%8E%AF-practice-exercises---level-2-functions-with-loops-and-logic">🎯 Practice Exercises - Level 2: Functions with Loops and Logic</h2>
+<h3 id="exercise-1-temperature-converter-%F0%9F%8C%A1%EF%B8%8F">Exercise 1: Temperature Converter 🌡️</h3>
+<p>Write a function that:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">convert_temperatures</span><span class="hljs-params">(temperatures, convert_to=<span class="hljs-string">"F"</span>)</span>:</span>
+    <span class="hljs-string">"""
+    Convert a list of temperatures between Celsius and Fahrenheit.
+    Example: convert_temperatures([0, 100], "F") should return [32, 212]
+    """</span>
+    <span class="hljs-comment"># Your code here!</span>
+</div></code></pre>
+<h3 id="exercise-2-grade-calculator-%F0%9F%93%9A">Exercise 2: Grade Calculator 📚</h3>
+<p>Create a function that:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_final_grade</span><span class="hljs-params">(assignments, final_exam)</span>:</span>
+    <span class="hljs-string">"""
+    Calculate final grade where:
+    - assignments are worth 60% (can have variable number of assignments)
+    - final_exam is worth 40%
+    Return letter grade (A, B, C, D, or F) and percentage
+    """</span>
+    <span class="hljs-comment"># Your code here!</span>
+
+<span class="hljs-comment"># Example usage:</span>
+grades = [<span class="hljs-number">85</span>, <span class="hljs-number">90</span>, <span class="hljs-number">88</span>, <span class="hljs-number">95</span>]
+final = <span class="hljs-number">83</span>
+letter, percentage = calculate_final_grade(grades, final)
+</div></code></pre>
+<h3 id="exercise-3-word-counter-%F0%9F%93%9D">Exercise 3: Word Counter 📝</h3>
+<p>Write a function that:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">analyze_text</span><span class="hljs-params">(text)</span>:</span>
+    <span class="hljs-string">"""
+    Return a dictionary containing:
+    - Number of words
+    - Number of sentences
+    - Number of uppercase letters
+    - Number of lowercase letters
+    """</span>
+    <span class="hljs-comment"># Your code here!</span>
+
+<span class="hljs-comment"># Example:</span>
+stats = analyze_text(<span class="hljs-string">"Hello, World! This is Python."</span>)
+</div></code></pre>
+<h3 id="exercise-4-game-score-tracker-%F0%9F%8E%AE">Exercise 4: Game Score Tracker 🎮</h3>
+<p>Create a function that:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">track_high_scores</span><span class="hljs-params">(new_score, high_scores)</span>:</span>
+    <span class="hljs-string">"""
+    Keep track of top 5 high scores.
+    - Add new score if it qualifies
+    - Keep list sorted (highest first)
+    - Maximum 5 scores in list
+    """</span>
+    <span class="hljs-comment"># Your code here!</span>
+
+<span class="hljs-comment"># Example:</span>
+scores = [<span class="hljs-number">100</span>, <span class="hljs-number">95</span>, <span class="hljs-number">90</span>, <span class="hljs-number">85</span>, <span class="hljs-number">80</span>]
+updated_scores = track_high_scores(<span class="hljs-number">92</span>, scores)
+<span class="hljs-comment"># Should return: [100, 95, 92, 90, 85]</span>
+</div></code></pre>
+<h3 id="exercise-5-shopping-cart-calculator-%F0%9F%9B%92">Exercise 5: Shopping Cart Calculator 🛒</h3>
+<p>Write a function that:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_shopping_cart</span><span class="hljs-params">(items, discounts)</span>:</span>
+    <span class="hljs-string">"""
+    Calculate total price where:
+    - items is a dictionary of item:price pairs
+    - discounts is a dictionary of item:discount_percentage pairs
+    - Apply discounts when available
+    - Add 8% tax at the end
+    Return total price and savings
+    """</span>
+    <span class="hljs-comment"># Your code here!</span>
+
+<span class="hljs-comment"># Example:</span>
+cart = {<span class="hljs-string">"apple"</span>: <span class="hljs-number">0.50</span>, <span class="hljs-string">"bread"</span>: <span class="hljs-number">2.25</span>, <span class="hljs-string">"milk"</span>: <span class="hljs-number">3.50</span>}
+discounts = {<span class="hljs-string">"bread"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"milk"</span>: <span class="hljs-number">10</span>}
+total, savings = calculate_shopping_cart(cart, discounts)
+</div></code></pre>
+<h2 id="%F0%9F%92%A1-tips-for-solving-the-exercises">💡 Tips for Solving the Exercises</h2>
+<ol>
+<li>
+<p><strong>Break it Down:</strong></p>
+<ul>
+<li>Write down what the program needs to do</li>
+<li>Break big problems into smaller steps</li>
+<li>Test each step before moving to the next</li>
+</ul>
+</li>
+<li>
+<p><strong>Start Simple:</strong></p>
+<ul>
+<li>Get the basic version working first</li>
+<li>Add extra features later</li>
+<li>Test with simple inputs first</li>
+</ul>
+</li>
+<li>
+<p><strong>Debug Strategy:</strong></p>
+<ul>
+<li>Add print statements to check values</li>
+<li>Test with different inputs</li>
+<li>Check indentation</li>
+<li>Read error messages carefully</li>
+</ul>
+</li>
+<li>
+<p><strong>Challenge Yourself:</strong></p>
+<ul>
+<li>After solving an exercise, try to:
+<ul>
+<li>Add extra features</li>
+<li>Make it more user-friendly</li>
+<li>Make the code shorter or more efficient</li>
+<li>Add error handling</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="%F0%9F%8C%9F-extra-challenges">🌟 Extra Challenges</h2>
+<h3 id="challenge-1-adventure-game-upgrade">Challenge 1: Adventure Game Upgrade</h3>
+<p>Add to the Dragon's Cave game:</p>
+<ul>
+<li>More items to find</li>
+<li>Different types of monsters</li>
+<li>A shop system</li>
+<li>Multiple endings</li>
+</ul>
+<h3 id="challenge-2-advanced-number-guessing">Challenge 2: Advanced Number Guessing</h3>
+<p>Improve the Number Guessing game:</p>
+<ul>
+<li>Add different difficulty levels</li>
+<li>Keep track of high scores</li>
+<li>Add hints system</li>
+<li>Add multiplayer mode</li>
+</ul>
+<h3 id="challenge-3-create-your-own">Challenge 3: Create Your Own!</h3>
+<p>Design your own game using:</p>
+<ul>
+<li>At least 3 if-elif-else statements</li>
+<li>At least 2 different types of loops</li>
+<li>At least 2 functions</li>
+<li>A scoring system</li>
+</ul>
+<h2 id="%F0%9F%8E%AF-key-takeaways">🎯 Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Control Flow Basics:</strong></p>
+<ul>
+<li>If-statements help make decisions</li>
+<li>Loops repeat actions</li>
+<li>Functions organize code</li>
+<li>Break and continue give more control</li>
+</ul>
+</li>
+<li>
+<p><strong>Best Practices:</strong></p>
+<ul>
+<li>Keep your code organized</li>
+<li>Test frequently</li>
+<li>Start simple, then add features</li>
+<li>Comment your code</li>
+</ul>
+</li>
+<li>
+<p><strong>Problem-Solving Steps:</strong></p>
+<ul>
+<li>Understand the problem</li>
+<li>Plan your solution</li>
+<li>Write small pieces at a time</li>
+<li>Test and fix errors</li>
+<li>Improve your code</li>
+</ul>
+</li>
+</ol>
+<h2 id="%F0%9F%9A%80-next-steps">🚀 Next Steps</h2>
+<p>After completing this tutorial, you can:</p>
+<ol>
+<li>Try all the practice exercises</li>
+<li>Modify the sample projects</li>
+<li>Create your own games</li>
+<li>Share your code with friends</li>
+<li>Help others learn!</li>
+</ol>
+<h2 id="%F0%9F%A4%94-common-questions">🤔 Common Questions</h2>
+<ol>
+<li>
+<p><strong>&quot;My loop never ends!&quot;</strong></p>
+<ul>
+<li>Check your loop condition</li>
+<li>Make sure values change inside the loop</li>
+<li>Ensure you have a way to break the loop</li>
+</ul>
+</li>
+<li>
+<p><strong>&quot;My if-statement isn't working!&quot;</strong></p>
+<ul>
+<li>Check your indentation</li>
+<li>Verify your comparison operators</li>
+<li>Print values to debug</li>
+</ul>
+</li>
+<li>
+<p><strong>&quot;My function returns the wrong value!&quot;</strong></p>
+<ul>
+<li>Test with simple inputs</li>
+<li>Add print statements</li>
+<li>Check your calculations</li>
+</ul>
+</li>
+</ol>
+<p>Remember: Programming is like learning a new language - practice makes perfect! Don't be afraid to experiment and make mistakes. That's how we learn!</p>
+<p>Need help? Ask your teacher or try explaining your code to a friend - sometimes just talking about it helps you find the solution!</p>
+<p>Happy coding! 🚀</p>
+
+</body>
+</html>

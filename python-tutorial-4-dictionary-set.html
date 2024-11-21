@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Updated_Dictionaries_and_Sets_Tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-2-exploring-dictionaries-and-sets">Tutorial 2: Exploring Dictionaries and Sets</h1>
+<p>Welcome back to your Python journey! Today, we’ll learn about two magical tools: <strong>Dictionaries</strong> and <strong>Sets</strong>. These tools will help you organize data, track unique items, and solve interesting problems. Get ready for some fun coding challenges!</p>
+<hr>
+<h2 id="1-dictionaries-magical-key-value-pairs"><strong>1. Dictionaries: Magical Key-Value Pairs</strong></h2>
+<p>A <strong>dictionary</strong> maps <strong>keys</strong> to <strong>values</strong>. It’s like your school locker system: each locker (key) has a unique number, and inside it (value) is your stuff.</p>
+<hr>
+<h3 id="creating-and-accessing-dictionaries"><strong>Creating and Accessing Dictionaries</strong></h3>
+<ol>
+<li>
+<p><strong>Creating a Dictionary</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Mapping fruits to their prices</span>
+fruit_prices = {<span class="hljs-string">"apple"</span>: <span class="hljs-number">2.5</span>, <span class="hljs-string">"banana"</span>: <span class="hljs-number">1.2</span>, <span class="hljs-string">"cherry"</span>: <span class="hljs-number">3.0</span>}
+</div></code></pre>
+</li>
+<li>
+<p><strong>Creating an Empty Dictionary</strong></p>
+<ul>
+<li>Start with an empty dictionary if you don’t know what to add yet.</li>
+</ul>
+<pre class="hljs"><code><div>empty_dict = {}
+</div></code></pre>
+</li>
+<li>
+<p><strong>Accessing Values</strong></p>
+<ul>
+<li>Use a <strong>key</strong> to get its value:</li>
+</ul>
+<pre class="hljs"><code><div>print(fruit_prices[<span class="hljs-string">"apple"</span>])  <span class="hljs-comment"># Output: 2.5</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Checking if a Key Exists</strong></p>
+<ul>
+<li>Use the <code>in</code> keyword to check if a key is in the dictionary.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> <span class="hljs-string">"banana"</span> <span class="hljs-keyword">in</span> fruit_prices:
+    print(<span class="hljs-string">"Banana exists!"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"No banana found."</span>)
+</div></code></pre>
+</li>
+<li>
+<p><strong>What If the Key Doesn’t Exist?</strong></p>
+<ul>
+<li>Accessing a missing key causes an error:</li>
+</ul>
+<pre class="hljs"><code><div>print(fruit_prices[<span class="hljs-string">"mango"</span>])  <span class="hljs-comment"># KeyError: 'mango'</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>How <code>.get()</code> Can Help</strong></p>
+<ul>
+<li>Avoid errors with <code>.get()</code>, which lets you specify a default value.</li>
+</ul>
+<pre class="hljs"><code><div>print(fruit_prices.get(<span class="hljs-string">"mango"</span>, <span class="hljs-string">"Not Found"</span>))  <span class="hljs-comment"># Output: Not Found</span>
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="adding-updating-and-removing-items"><strong>Adding, Updating, and Removing Items</strong></h3>
+<ol>
+<li>
+<p><strong>Adding or Updating Items</strong></p>
+<pre class="hljs"><code><div>fruit_prices[<span class="hljs-string">"mango"</span>] = <span class="hljs-number">3.5</span>  <span class="hljs-comment"># Adds a new key-value pair</span>
+fruit_prices[<span class="hljs-string">"apple"</span>] = <span class="hljs-number">2.8</span>  <span class="hljs-comment"># Updates an existing key</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Removing Items</strong></p>
+<pre class="hljs"><code><div>removed_price = fruit_prices.pop(<span class="hljs-string">"banana"</span>)
+print(removed_price)  <span class="hljs-comment"># Output: 1.2</span>
+print(fruit_prices)  <span class="hljs-comment"># Output: {'apple': 2.8, 'cherry': 3.0, 'mango': 3.5}</span>
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="iterating-over-dictionaries"><strong>Iterating Over Dictionaries</strong></h3>
+<ol>
+<li>
+<p><strong>Looping Through Keys</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> fruit_prices:
+    print(fruit)
+</div></code></pre>
+</li>
+<li>
+<p><strong>Looping Through Keys and Values</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> fruit, price <span class="hljs-keyword">in</span> fruit_prices.items():
+    print(<span class="hljs-string">f"The price of <span class="hljs-subst">{fruit}</span> is $<span class="hljs-subst">{price}</span>"</span>)
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="exercises-working-with-dictionaries"><strong>Exercises: Working with Dictionaries</strong></h3>
+<ol>
+<li>Create a dictionary that maps your favorite subjects to the number of hours you study them weekly. Print each subject and its hours.</li>
+<li>Write a program to store three friends’ birthdays. Add one more friend’s birthday and update another’s. Print the updated dictionary.</li>
+<li>Create a dictionary of five items and their prices. Remove one item and print the remaining dictionary.</li>
+</ol>
+<hr>
+<h2 id="2-sets-unique-and-magical-collections"><strong>2. Sets: Unique and Magical Collections</strong></h2>
+<p>Sets are like magical bags that only keep unique items. They are perfect for removing duplicates or comparing collections.</p>
+<hr>
+<h3 id="creating-and-using-sets"><strong>Creating and Using Sets</strong></h3>
+<ol>
+<li>
+<p><strong>Creating a Set</strong></p>
+<pre class="hljs"><code><div>fruits = {<span class="hljs-string">"apple"</span>, <span class="hljs-string">"banana"</span>, <span class="hljs-string">"cherry"</span>}
+</div></code></pre>
+</li>
+<li>
+<p><strong>Creating an Empty Set</strong></p>
+<ul>
+<li>Use the <code>set()</code> function for an empty set. <code>{}</code> creates an empty dictionary.</li>
+</ul>
+<pre class="hljs"><code><div>empty_set = set()
+</div></code></pre>
+</li>
+<li>
+<p><strong>Adding and Removing Items</strong></p>
+<pre class="hljs"><code><div>fruits.add(<span class="hljs-string">"mango"</span>)
+fruits.remove(<span class="hljs-string">"banana"</span>)
+print(fruits)  <span class="hljs-comment"># Output: {'apple', 'cherry', 'mango'}</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Checking Membership</strong></p>
+<ul>
+<li>Use <code>in</code> to check if an item exists in a set.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> <span class="hljs-string">"apple"</span> <span class="hljs-keyword">in</span> fruits:
+    print(<span class="hljs-string">"Apple is in the set!"</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">"No apple found."</span>)
+</div></code></pre>
+</li>
+<li>
+<p><strong>Iterating Over a Set</strong></p>
+<ul>
+<li>Loop through all items in a set:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> fruit <span class="hljs-keyword">in</span> fruits:
+    print(fruit)
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="cool-set-operations"><strong>Cool Set Operations</strong></h3>
+<ol>
+<li>
+<p><strong>Union: Combine Two Sets</strong></p>
+<pre class="hljs"><code><div>A = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+B = {<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>}
+print(A | B)  <span class="hljs-comment"># Output: {1, 2, 3, 4, 5}</span>
+print(A.union(B))  <span class="hljs-comment"># Output: {1, 2, 3, 4, 5}</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Intersection: Find Common Items</strong></p>
+<pre class="hljs"><code><div>print(A &amp; B)  <span class="hljs-comment"># Output: {3}</span>
+print(A.intersection(B))  <span class="hljs-comment"># Output: {3}</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>Difference: Items in One Set but Not the Other</strong></p>
+<pre class="hljs"><code><div>print(A - B)  <span class="hljs-comment"># Output: {1, 2}</span>
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h3 id="exercises-working-with-sets"><strong>Exercises: Working with Sets</strong></h3>
+<ol>
+<li>Create a set of your favorite sports. Add one more, remove one, and print the updated set.</li>
+<li>Use sets to find:
+<ul>
+<li>Students who like both basketball and soccer.</li>
+<li>Students who like only basketball.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="3-mini-projects"><strong>3. Mini-Projects</strong></h2>
+<h3 id="project-1-word-frequency-counter"><strong>Project 1: Word Frequency Counter</strong></h3>
+<p><strong>Objective:</strong> Count how many times each word appears in a string using a dictionary.</p>
+<p><strong>Example Input:</strong></p>
+<pre class="hljs"><code><div>&quot;python coding python fun fun fun&quot;
+</div></code></pre>
+<p><strong>Example Output:</strong></p>
+<pre class="hljs"><code><div>{<span class="hljs-string">'python'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'coding'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'fun'</span>: <span class="hljs-number">3</span>}
+</div></code></pre>
+<hr>
+<h3 id="project-2-graph-generator"><strong>Project 2: Graph Generator</strong></h3>
+<p><strong>Objective:</strong> Store data in a dictionary and visualize it as a bar chart.</p>
+<p><strong>Task:</strong></p>
+<ol>
+<li>Create a dictionary of countries and their populations.</li>
+<li>Use <code>matplotlib</code> to generate a bar chart.</li>
+</ol>
+<p><strong>Code Example:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+data = {<span class="hljs-string">"USA"</span>: <span class="hljs-number">331</span>, <span class="hljs-string">"India"</span>: <span class="hljs-number">1391</span>, <span class="hljs-string">"China"</span>: <span class="hljs-number">1441</span>, <span class="hljs-string">"Brazil"</span>: <span class="hljs-number">213</span>}
+countries = list(data.keys())
+populations = list(data.values())
+
+plt.bar(countries, populations)
+plt.xlabel(<span class="hljs-string">"Countries"</span>)
+plt.ylabel(<span class="hljs-string">"Population (millions)"</span>)
+plt.title(<span class="hljs-string">"Country Populations"</span>)
+plt.show()
+</div></code></pre>
+<hr>
+<h3 id="project-3-election-tracker"><strong>Project 3: Election Tracker</strong></h3>
+<p>Imagine your school is holding an election for a class captain. Each student gets one vote. Your task is to track the voters to ensure no one votes more than once.</p>
+<ol>
+<li>Use a set to store the IDs of students who have already voted.</li>
+<li>If a student tries to vote twice, notify them that their vote is invalid.</li>
+</ol>
+<p><strong>Example Input:</strong></p>
+<pre class="hljs"><code><div>Voter IDs: [101, 102, 103, 101, 104]
+</div></code></pre>
+<p><strong>Example Output:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-number">101</span> has already voted!
+Valid Votes: {<span class="hljs-number">101</span>, <span class="hljs-number">102</span>, <span class="hljs-number">103</span>, <span class="hljs-number">104</span>}
+</div></code></pre>
+<p><strong>Code Starter:</strong></p>
+<pre class="hljs"><code><div>voters = [<span class="hljs-number">101</span>, <span class="hljs-number">102</span>, <span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">104</span>]
+unique_voters = set()
+
+<span class="hljs-keyword">for</span> voter <span class="hljs-keyword">in</span> voters:
+    <span class="hljs-keyword">if</span> voter <span class="hljs-keyword">in</span> unique_voters:
+        print(<span class="hljs-string">f"<span class="hljs-subst">{voter}</span> has already voted!"</span>)
+    <span class="hljs-keyword">else</span>:
+        unique_voters.add(voter)
+
+print(<span class="hljs-string">"Valid Votes:"</span>, unique_voters)
+</div></code></pre>
+<hr>
+<h2 id="4-summary"><strong>4. Summary</strong></h2>
+<ul>
+<li><strong>Dictionaries</strong> map keys to values and are ideal for organizing data.</li>
+<li><strong>Sets</strong> store unique items and allow cool operations like union and intersection.</li>
+<li>Practice these concepts to master Python’s data management superpowers!</li>
+</ul>
+<hr>
+
+</body>
+</html>

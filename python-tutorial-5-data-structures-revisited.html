@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tutorial_3_Combining_Data_Structures.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-3-combining-data-structures-for-problem-solving">Tutorial 3: Combining Data Structures for Problem Solving</h1>
+<p>Welcome to Tutorial 3! By now, you’ve mastered the basics of <strong>lists</strong>, <strong>tuples</strong>, <strong>dictionaries</strong>, and <strong>sets</strong>. In this tutorial, we’ll combine these tools to solve practical problems and explore advanced techniques like <strong>comprehensions</strong> and <strong>efficient membership checks</strong>.</p>
+<hr>
+<h2 id="1-revisiting-the-basics"><strong>1. Revisiting the Basics</strong></h2>
+<p>Before diving into advanced scenarios, let’s recall the strengths of each data structure:</p>
+<ul>
+<li><strong>Lists:</strong> Ordered and mutable collections, ideal for sequences of items.</li>
+<li><strong>Tuples:</strong> Immutable collections, perfect for fixed or constant data.</li>
+<li><strong>Dictionaries:</strong> Key-value pairs for organizing data efficiently.</li>
+<li><strong>Sets:</strong> Unordered collections of unique items, great for removing duplicates and performing mathematical operations.</li>
+</ul>
+<h4 id="exercise-match-the-data-structure"><strong>Exercise: Match the Data Structure</strong></h4>
+<p>Match the following scenarios to the most suitable data structure:</p>
+<ol>
+<li>You need to store the names of attendees at an event, ensuring no duplicates.</li>
+<li>You need to map a country to its capital city.</li>
+<li>You want to keep track of daily temperatures in order.</li>
+<li>You want to store the coordinates of a fixed point in space.</li>
+</ol>
+<hr>
+<h2 id="2-combining-data-structures"><strong>2. Combining Data Structures</strong></h2>
+<h3 id="example-1-nested-dictionaries-with-lists"><strong>Example 1: Nested Dictionaries with Lists</strong></h3>
+<p>Use a dictionary of dictionaries to represent students and their grades across subjects.</p>
+<pre class="hljs"><code><div>students = {
+    <span class="hljs-string">"Alice"</span>: {<span class="hljs-string">"Math"</span>: <span class="hljs-number">85</span>, <span class="hljs-string">"Science"</span>: <span class="hljs-number">90</span>},
+    <span class="hljs-string">"Bob"</span>: {<span class="hljs-string">"Math"</span>: <span class="hljs-number">78</span>, <span class="hljs-string">"Science"</span>: <span class="hljs-number">80</span>},
+}
+</div></code></pre>
+<h4 id="tasks">Tasks:</h4>
+<ol>
+<li>Add a new subject and score for a student.</li>
+<li>Calculate the average score for each student.</li>
+<li>Identify the subject in which the class performed best.</li>
+</ol>
+<hr>
+<h3 id="example-2-using-sets-with-lists"><strong>Example 2: Using Sets with Lists</strong></h3>
+<p>Track attendees for multiple events using sets to find common or unique participants.</p>
+<pre class="hljs"><code><div>event1 = {<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Charlie"</span>}
+event2 = {<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"David"</span>, <span class="hljs-string">"Alice"</span>}
+
+<span class="hljs-comment"># Combine attendees</span>
+all_attendees = event1 | event2
+
+<span class="hljs-comment"># Common attendees</span>
+common_attendees = event1 &amp; event2
+
+print(all_attendees)  <span class="hljs-comment"># Output: {'Alice', 'Bob', 'Charlie', 'David'}</span>
+print(common_attendees)  <span class="hljs-comment"># Output: {'Alice', 'Bob'}</span>
+</div></code></pre>
+<hr>
+<h3 id="example-3-tuples-as-dictionary-keys"><strong>Example 3: Tuples as Dictionary Keys</strong></h3>
+<p>Use tuples as keys for storing multi-dimensional data like weather by city and date.</p>
+<pre class="hljs"><code><div>weather = {
+    (<span class="hljs-string">"Sydney"</span>, <span class="hljs-string">"2024-11-01"</span>): <span class="hljs-number">25</span>,
+    (<span class="hljs-string">"Melbourne"</span>, <span class="hljs-string">"2024-11-01"</span>): <span class="hljs-number">20</span>,
+}
+
+<span class="hljs-comment"># Access weather data</span>
+print(weather[(<span class="hljs-string">"Sydney"</span>, <span class="hljs-string">"2024-11-01"</span>)])  <span class="hljs-comment"># Output: 25</span>
+</div></code></pre>
+<h4 id="exercise">Exercise:</h4>
+<p>Add weather data for new cities and calculate the average temperature across all records.</p>
+<hr>
+<h2 id="3-when-to-use-sets-instead-of-lists"><strong>3. When to Use Sets Instead of Lists</strong></h2>
+<h3 id="membership-check-faster-in-sets"><strong>Membership Check: Faster in Sets</strong></h3>
+<p>Checking if an item exists in a <strong>set</strong> is faster than checking in a <strong>list</strong>, especially for large datasets.</p>
+<h4 id="example-comparing-membership-check-speed"><strong>Example: Comparing Membership Check Speed</strong></h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> timeit
+
+<span class="hljs-comment"># Create large list and set</span>
+large_list = list(range(<span class="hljs-number">1</span>_000_000))
+large_set = set(large_list)
+
+<span class="hljs-comment"># Time membership checks</span>
+list_time = timeit.timeit(<span class="hljs-string">'999_999 in large_list'</span>, globals=globals(), number=<span class="hljs-number">1000</span>)
+set_time = timeit.timeit(<span class="hljs-string">'999_999 in large_set'</span>, globals=globals(), number=<span class="hljs-number">1000</span>)
+
+print(<span class="hljs-string">f"List time: <span class="hljs-subst">{list_time}</span> seconds"</span>)
+print(<span class="hljs-string">f"Set time: <span class="hljs-subst">{set_time}</span> seconds"</span>)
+</div></code></pre>
+<p><strong>Output:</strong></p>
+<pre class="hljs"><code><div>List time: 2.3 seconds
+Set time: 0.002 seconds
+</div></code></pre>
+<hr>
+<h3 id="removing-duplicates-from-a-list"><strong>Removing Duplicates from a List</strong></h3>
+<p>Use a set to clean up duplicates from a list:</p>
+<pre class="hljs"><code><div>names = [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Charlie"</span>, <span class="hljs-string">"Bob"</span>]
+unique_names = list(set(names))
+print(unique_names)  <span class="hljs-comment"># Output: ['Alice', 'Bob', 'Charlie']</span>
+</div></code></pre>
+<hr>
+<h3 id="mixing-data-structures-representing-friend-lists"><strong>Mixing Data Structures: Representing Friend Lists</strong></h3>
+<p>Imagine a social media platform where users have friends. Use a dictionary to represent these relationships:</p>
+<ul>
+<li><strong>Keys:</strong> Usernames.</li>
+<li><strong>Values:</strong> Lists or sets of friends.</li>
+</ul>
+<h4 id="example-1-using-lists"><strong>Example 1: Using Lists</strong></h4>
+<p>Lists allow duplicates and maintain the order of interactions.</p>
+<pre class="hljs"><code><div>friend_list = {
+    <span class="hljs-string">"Alice"</span>: [<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Charlie"</span>],
+    <span class="hljs-string">"Bob"</span>: [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Charlie"</span>, <span class="hljs-string">"Charlie"</span>],
+    <span class="hljs-string">"Charlie"</span>: [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>]
+}
+</div></code></pre>
+<h4 id="example-2-using-sets"><strong>Example 2: Using Sets</strong></h4>
+<p>Sets ensure unique friends for each user.</p>
+<pre class="hljs"><code><div>friend_list = {
+    <span class="hljs-string">"Alice"</span>: {<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Charlie"</span>},
+    <span class="hljs-string">"Bob"</span>: {<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Charlie"</span>},
+    <span class="hljs-string">"Charlie"</span>: {<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>}
+}
+</div></code></pre>
+<h4 id="exercise">Exercise:</h4>
+<ol>
+<li>Write a function to add a new friend for a user.</li>
+<li>Find mutual friends between two users.</li>
+<li>Check if two users are directly connected.</li>
+</ol>
+<hr>
+<h2 id="4-reinforcing-functions"><strong>4. Reinforcing Functions</strong></h2>
+<h3 id="what-happens-when-we-pass-data-structures-to-a-function"><strong>What Happens When We Pass Data Structures to a Function?</strong></h3>
+<p>Python passes all arguments by object reference:</p>
+<ul>
+<li>Lists, sets, and dictionaries can be modified inside the function.</li>
+<li>Tuples remain unchanged because they are immutable.</li>
+</ul>
+<h4 id="example"><strong>Example:</strong></h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">modify_structures</span><span class="hljs-params">(lst, tup, s, d)</span>:</span>
+    lst.append(<span class="hljs-number">99</span>)
+    s.add(<span class="hljs-string">"new_item"</span>)
+    d[<span class="hljs-string">"new_key"</span>] = <span class="hljs-string">"new_value"</span>
+
+my_list = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+my_tuple = (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+my_set = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+my_dict = {<span class="hljs-string">"key1"</span>: <span class="hljs-string">"value1"</span>}
+
+modify_structures(my_list, my_tuple, my_set, my_dict)
+</div></code></pre>
+<hr>
+<h3 id="exercises"><strong>Exercises</strong></h3>
+<ol>
+<li>Write a function that counts unique words in a string using a set.</li>
+<li>Write a function that groups strings by their lengths in a dictionary.</li>
+<li>Write a function that uses a tuple to store constant data, like allowed actions in a game.</li>
+</ol>
+<hr>
+<h2 id="5-list-dictionary-and-set-comprehensions"><strong>5. List, Dictionary, and Set Comprehensions</strong></h2>
+<p>Python comprehensions let you create new data structures efficiently.</p>
+<h3 id="list-comprehensions"><strong>List Comprehensions</strong></h3>
+<pre class="hljs"><code><div>numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+squared = [n ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> numbers]
+</div></code></pre>
+<h3 id="dictionary-comprehensions"><strong>Dictionary Comprehensions</strong></h3>
+<pre class="hljs"><code><div>squared_dict = {n: n ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> numbers}
+</div></code></pre>
+<h3 id="set-comprehensions"><strong>Set Comprehensions</strong></h3>
+<pre class="hljs"><code><div>unique_squared = {n ** <span class="hljs-number">2</span> <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> numbers}
+</div></code></pre>
+<hr>
+<h2 id="6-mini-projects"><strong>6. Mini-Projects</strong></h2>
+<h3 id="project-1-social-media-insights"><strong>Project 1: Social Media Insights</strong></h3>
+<p>Analyze user activity:</p>
+<ul>
+<li>Use a <strong>dictionary</strong> to map user IDs to their post IDs (list).</li>
+<li>Use a <strong>set</strong> to track unique post IDs that were liked.</li>
+</ul>
+<h4 id="tasks">Tasks:</h4>
+<ol>
+<li>Identify the most active user.</li>
+<li>Find posts liked by multiple users.</li>
+<li>Summarize user activity.</li>
+</ol>
+<hr>
+<h3 id="project-2-student-report-card"><strong>Project 2: Student Report Card</strong></h3>
+<p>Manage a class report card system:</p>
+<ul>
+<li>Use a <strong>nested dictionary</strong> to store student grades.</li>
+</ul>
+<h4 id="tasks">Tasks:</h4>
+<ol>
+<li>Add a new subject for a student.</li>
+<li>Calculate the average score for each student.</li>
+<li>Find the student with the highest average score.</li>
+</ol>
+<hr>
+<h3 id="project-3-event-attendance"><strong>Project 3: Event Attendance</strong></h3>
+<p>Track and analyze participation at events:</p>
+<ul>
+<li>Use <strong>sets</strong> to represent attendees.</li>
+</ul>
+<h4 id="tasks">Tasks:</h4>
+<ol>
+<li>Combine attendees from all events into one list (remove duplicates).</li>
+<li>Find attendees common to multiple events.</li>
+<li>Identify attendees who only participated in one event.</li>
+</ol>
+<hr>
+<h2 id="7-summary"><strong>7. Summary</strong></h2>
+<ul>
+<li>Use comprehensions for concise and efficient code.</li>
+<li>Combine data structures creatively to solve real-world problems.</li>
+<li>Practice the projects to solidify your understanding of Python data structures.</li>
+</ul>
+<hr>
+
+</body>
+</html>
