@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>complete-python-tutorial-1.md</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+	<style>
+		body {
+			font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+			font-size: var(--vscode-markdown-font-size, 14px);
+			padding: 0 26px;
+			line-height: var(--vscode-markdown-line-height, 22px);
+			word-wrap: break-word;
+		}
+
+		#code-csp-warning {
+			position: fixed;
+			top: 0;
+			right: 0;
+			color: white;
+			margin: 16px;
+			text-align: center;
+			font-size: 12px;
+			font-family: sans-serif;
+			background-color: #444444;
+			cursor: pointer;
+			padding: 6px;
+			box-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+		}
+
+		#code-csp-warning:hover {
+			text-decoration: none;
+			background-color: #007acc;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, .25);
+		}
+
+		body.scrollBeyondLastLine {
+			margin-bottom: calc(100vh - 22px);
+		}
+
+		body.showEditorSelection .code-line {
+			position: relative;
+		}
+
+		body.showEditorSelection .code-active-line:before,
+		body.showEditorSelection .code-line:hover:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: -12px;
+			height: 100%;
+		}
+
+		body.showEditorSelection li.code-active-line:before,
+		body.showEditorSelection li.code-line:hover:before {
+			left: -30px;
+		}
+
+		.vscode-light.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(0, 0, 0, 0.15);
+		}
+
+		.vscode-light.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(0, 0, 0, 0.40);
+		}
+
+		.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		.vscode-dark.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(255, 255, 255, 0.4);
+		}
+
+		.vscode-dark.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(255, 255, 255, 0.60);
+		}
+
+		.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-active-line:before {
+			border-left: 3px solid rgba(255, 160, 0, 0.7);
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+			border-left: 3px solid rgba(255, 160, 0, 1);
+		}
+
+		.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+			border-left: none;
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		a:focus,
+		input:focus,
+		select:focus,
+		textarea:focus {
+			outline: 1px solid -webkit-focus-ring-color;
+			outline-offset: -1px;
+		}
+
+		hr {
+			border: 0;
+			height: 2px;
+			border-bottom: 2px solid;
+		}
+
+		h1 {
+			padding-bottom: 0.3em;
+			line-height: 1.2;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-weight: normal;
+		}
+
+		table {
+			border-collapse: collapse;
+		}
+
+		table>thead>tr>th {
+			text-align: left;
+			border-bottom: 1px solid;
+		}
+
+		table>thead>tr>th,
+		table>thead>tr>td,
+		table>tbody>tr>th,
+		table>tbody>tr>td {
+			padding: 5px 10px;
+		}
+
+		table>tbody>tr+tr>td {
+			border-top: 1px solid;
+		}
+
+		blockquote {
+			margin: 0 7px 0 5px;
+			padding: 0 16px 0 10px;
+			border-left-width: 5px;
+			border-left-style: solid;
+		}
+
+		code {
+			font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+			font-size: 1em;
+			line-height: 1.357em;
+		}
+
+		body.wordWrap pre {
+			white-space: pre-wrap;
+		}
+
+		pre:not(.hljs),
+		pre.hljs code>div {
+			padding: 16px;
+			border-radius: 3px;
+			overflow: auto;
+		}
+
+		pre code {
+			color: var(--vscode-editor-foreground);
+			tab-size: 4;
+		}
+
+		/** Theming */
+
+		.vscode-light pre {
+			background-color: rgba(220, 220, 220, 0.4);
+		}
+
+		.vscode-dark pre {
+			background-color: rgba(10, 10, 10, 0.4);
+		}
+
+		.vscode-high-contrast pre {
+			background-color: rgb(0, 0, 0);
+		}
+
+		.vscode-high-contrast h1 {
+			border-color: rgb(0, 0, 0);
+		}
+
+		.vscode-light table>thead>tr>th {
+			border-color: rgba(0, 0, 0, 0.69);
+		}
+
+		.vscode-dark table>thead>tr>th {
+			border-color: rgba(255, 255, 255, 0.69);
+		}
+
+		.vscode-light h1,
+		.vscode-light hr,
+		.vscode-light table>tbody>tr+tr>td {
+			border-color: rgba(0, 0, 0, 0.18);
+		}
+
+		.vscode-dark h1,
+		.vscode-dark hr,
+		.vscode-dark table>tbody>tr+tr>td {
+			border-color: rgba(255, 255, 255, 0.18);
+		}
+	</style>
+
+	<style>
+		/* Tomorrow Theme */
+		/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+		/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+		/* Tomorrow Comment */
+		.hljs-comment,
+		.hljs-quote {
+			color: #8e908c;
+		}
+
+		/* Tomorrow Red */
+		.hljs-variable,
+		.hljs-template-variable,
+		.hljs-tag,
+		.hljs-name,
+		.hljs-selector-id,
+		.hljs-selector-class,
+		.hljs-regexp,
+		.hljs-deletion {
+			color: #c82829;
+		}
+
+		/* Tomorrow Orange */
+		.hljs-number,
+		.hljs-built_in,
+		.hljs-builtin-name,
+		.hljs-literal,
+		.hljs-type,
+		.hljs-params,
+		.hljs-meta,
+		.hljs-link {
+			color: #f5871f;
+		}
+
+		/* Tomorrow Yellow */
+		.hljs-attribute {
+			color: #eab700;
+		}
+
+		/* Tomorrow Green */
+		.hljs-string,
+		.hljs-symbol,
+		.hljs-bullet,
+		.hljs-addition {
+			color: #718c00;
+		}
+
+		/* Tomorrow Blue */
+		.hljs-title,
+		.hljs-section {
+			color: #4271ae;
+		}
+
+		/* Tomorrow Purple */
+		.hljs-keyword,
+		.hljs-selector-tag {
+			color: #8959a8;
+		}
+
+		.hljs {
+			display: block;
+			overflow-x: auto;
+			color: #4d4d4c;
+			padding: 0.5em;
+		}
+
+		.hljs-emphasis {
+			font-style: italic;
+		}
+
+		.hljs-strong {
+			font-weight: bold;
+		}
+	</style>
+
+	<style>
+		/*
+ * Markdown PDF CSS
+ */
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+			padding: 0 12px;
+		}
+
+		pre {
+			background-color: #f8f8f8;
+			border: 1px solid #cccccc;
+			border-radius: 3px;
+			overflow-x: auto;
+			white-space: pre-wrap;
+			overflow-wrap: break-word;
+		}
+
+		pre:not(.hljs) {
+			padding: 23px;
+			line-height: 19px;
+		}
+
+		blockquote {
+			background: rgba(127, 127, 127, 0.1);
+			border-color: rgba(0, 122, 204, 0.5);
+		}
+
+		.emoji {
+			height: 1.4em;
+		}
+
+		code {
+			font-size: 14px;
+			line-height: 19px;
+		}
+
+		/* for inline code */
+		:not(pre):not(.hljs)>code {
+			color: #C9AE75;
+			/* Change the old color so it seems less like an error */
+			font-size: inherit;
+		}
+
+		/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+		.page {
+			page-break-after: always;
+		}
+	</style>
+
+	<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+	<script>
+		mermaid.initialize({
+			startOnLoad: true,
+			theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+				? 'dark'
+				: 'default'
+		});
+	</script>
+	<h1 id="tutorial-1-introduction-to-python---lets-start-coding-%F0%9F%9A%80">Tutorial 1: Introduction to Python -
+		Let's Start Coding! 🚀</h1>
+	<h2 id="table-of-contents">Table of Contents</h2>
+	<ol>
+		<li><a href="#1-what-is-python-">What is Python?</a></li>
+		<li><a href="#2-your-first-python-program-">Your First Python Program</a></li>
+		<li><a href="#3-variables-and-data-types-">Variables and Data Types</a></li>
+		<li><a href="#4-working-with-numbers-">Working with Numbers</a></li>
+		<li><a href="#5-working-with-strings-">Working with Strings</a></li>
+		<li><a href="#6-getting-input-from-users-">Getting Input from Users</a></li>
+		<li><a href="#7-organizing-your-python-programs-">Organizing Your Python Programs</a></li>
+		<li><a href="#8-type-conversion-">Type Conversion</a></li>
+		<li><a href="#9-practice-exercises-">Practice Exercises</a></li>
+	</ol>
+	<h2 id="1-what-is-python-%F0%9F%90%8D">1. What is Python? 🐍</h2>
+	<h3 id="what-makes-python-special">What Makes Python Special?</h3>
+	<p>Python is a programming language created to be easy to read and understand. Imagine giving instructions to a
+		friend - Python lets you write code that almost reads like regular English! It's like having a conversation with
+		your computer.</p>
+	<h3 id="why-learn-python">Why Learn Python?</h3>
+	<ul>
+		<li><strong>Beginner-Friendly</strong>: Python uses simple, clear commands</li>
+		<li><strong>Powerful</strong>: Despite being easy to learn, it can create amazing things</li>
+		<li><strong>Widely Used</strong>: Companies like Google, Netflix, and NASA use Python</li>
+		<li><strong>Versatile</strong>: You can make games, websites, apps, and much more!</li>
+	</ul>
+	<h3 id="what-can-you-build">What Can You Build?</h3>
+	<ul>
+		<li>Games like simple quiz games or adventure games</li>
+		<li>Programs that can solve math problems</li>
+		<li>Tools to organize your files</li>
+		<li>Websites and web applications</li>
+		<li>Data analysis and visualization</li>
+	</ul>
+	<h3 id="setting-up-python-%F0%9F%9B%A0%EF%B8%8F">Setting Up Python 🛠️</h3>
+	<p>Before we start coding, we need to install Python on your computer:</p>
+	<ol>
+		<li>
+			<p><strong>Download Python</strong>:</p>
+			<ul>
+				<li>Go to <a href="https://python.org">python.org</a></li>
+				<li>Click &quot;Downloads&quot;</li>
+				<li>Download the latest version for your operating system</li>
+			</ul>
+		</li>
+		<li>
+			<p><strong>Install Python</strong>:</p>
+			<ul>
+				<li>Run the installer you downloaded</li>
+				<li>Important: Check ✅ &quot;Add Python to PATH&quot;</li>
+				<li>Click &quot;Install Now&quot;</li>
+			</ul>
+		</li>
+		<li>
+			<p><strong>Choose an Editor</strong>:</p>
+			<ul>
+				<li>IDLE (comes with Python) - great for beginners</li>
+				<li>Thonny [https://thonny.org] - another beginner-friendly IDE</li>
+				<li>PyCharm Educational Edition - more features but still beginner-friendly</li>
+				<li>Visual Studio Code - very popular but might be complex at first</li>
+			</ul>
+		</li>
+	</ol>
+	<h2 id="2-your-first-python-program-%F0%9F%91%8B">2. Your First Python Program 👋</h2>
+	<h3 id="understanding-code-basics">Understanding Code Basics</h3>
+	<p>Just like learning a new language, we'll start with something simple. In Python, we use the <code>print()</code>
+		command to show text on the screen.</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># This is a comment - Python ignores anything after #</span>
+<span class="hljs-comment"># Comments help us explain what our code does</span>
+
+print(<span class="hljs-string">"Hello, World!"</span>)  <span class="hljs-comment"># This shows text on the screen</span>
+</div></code></pre>
+	<h3 id="how-it-works">How It Works:</h3>
+	<ol>
+		<li><code>print()</code> is a command (we call it a function)</li>
+		<li>The text inside quotes <code>&quot;Hello, World!&quot;</code> is what we want to show</li>
+		<li>When you run this program, it displays: <code>Hello, World!</code></li>
+	</ol>
+	<h3 id="try-these-examples">Try These Examples:</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Simple messages</span>
+print(<span class="hljs-string">"Welcome to Python!"</span>)
+print(<span class="hljs-string">"I'm learning to code!"</span>)
+
+<span class="hljs-comment"># Multiple lines</span>
+print(<span class="hljs-string">"First line"</span>)
+print(<span class="hljs-string">"Second line"</span>)
+print(<span class="hljs-string">"Third line"</span>)
+
+<span class="hljs-comment"># Printing numbers (no quotes needed for numbers)</span>
+print(<span class="hljs-number">42</span>)
+print(<span class="hljs-number">3.14</span>)
+</div></code></pre>
+	<h3 id="common-mistakes-to-avoid">Common Mistakes to Avoid:</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Wrong: Missing quotes</span>
+print(Hello World)    <span class="hljs-comment"># This will cause an error</span>
+
+<span class="hljs-comment"># Wrong: Missing parentheses</span>
+<span class="hljs-keyword">print</span> <span class="hljs-string">"Hello"</span>         <span class="hljs-comment"># This will cause an error</span>
+
+<span class="hljs-comment"># Correct:</span>
+print(<span class="hljs-string">"Hello World"</span>)
+</div></code></pre>
+	<h2 id="3-variables-and-data-types-%F0%9F%93%A6">3. Variables and Data Types 📦</h2>
+	<h3 id="understanding-variables">Understanding Variables</h3>
+	<p>Think of variables as labeled containers that store information:</p>
+	<ul>
+		<li>Like a box labeled &quot;age&quot; that holds a number</li>
+		<li>Or a box labeled &quot;name&quot; that holds text</li>
+		<li>You can change what's in the box anytime</li>
+	</ul>
+	<h3 id="types-of-data">Types of Data</h3>
+	<h4 id="1-numbers">1. Numbers</h4>
+	<p>Python has different types of numbers:</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Integers (whole numbers)</span>
+age = <span class="hljs-number">15</span>             <span class="hljs-comment"># An integer (int)</span>
+students = <span class="hljs-number">30</span>
+negative = <span class="hljs-number">-5</span>
+
+<span class="hljs-comment"># Decimal numbers (floating-point)</span>
+height = <span class="hljs-number">1.75</span>        <span class="hljs-comment"># A float</span>
+temperature = <span class="hljs-number">98.6</span>
+pi = <span class="hljs-number">3.14159</span>
+
+<span class="hljs-comment"># You can do math with both types</span>
+age = <span class="hljs-number">15</span>
+next_year = age + <span class="hljs-number">1</span>
+print(next_year)     <span class="hljs-comment"># Shows: 16</span>
+</div></code></pre>
+	<h4 id="2-strings-text">2. Strings (Text)</h4>
+	<p>Any text between quotes is a string:</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Different ways to create strings</span>
+name = <span class="hljs-string">"Alex"</span>        <span class="hljs-comment"># Double quotes</span>
+color = <span class="hljs-string">'blue'</span>       <span class="hljs-comment"># Single quotes</span>
+message = <span class="hljs-string">"""This is
+a multi-line
+string"""</span>           <span class="hljs-comment"># Triple quotes for multiple lines</span>
+
+<span class="hljs-comment"># Combining strings</span>
+first = <span class="hljs-string">"Hello"</span>
+last = <span class="hljs-string">"World"</span>
+full = first + <span class="hljs-string">" "</span> + last    <span class="hljs-comment"># Joining strings</span>
+print(full)         <span class="hljs-comment"># Shows: Hello World</span>
+</div></code></pre>
+	<h4 id="3-booleans-truefalse">3. Booleans (True/False)</h4>
+	<p>Booleans are like switches - they're either True or False:</p>
+	<pre class="hljs"><code><div>is_raining = <span class="hljs-literal">True</span>
+has_homework = <span class="hljs-literal">False</span>
+game_over = <span class="hljs-literal">False</span>
+
+<span class="hljs-comment"># You can change boolean values</span>
+game_over = <span class="hljs-literal">True</span>    <span class="hljs-comment"># Game is now over</span>
+</div></code></pre>
+	<h2 id="4-working-with-numbers-%F0%9F%94%A2">4. Working with Numbers 🔢</h2>
+	<h3 id="basic-operations">Basic Operations</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Addition (+)</span>
+sum = <span class="hljs-number">10</span> + <span class="hljs-number">5</span>
+print(sum)      <span class="hljs-comment"># Shows: 15</span>
+
+<span class="hljs-comment"># Subtraction (-)</span>
+difference = <span class="hljs-number">10</span> - <span class="hljs-number">5</span>
+print(difference)   <span class="hljs-comment"># Shows: 5</span>
+
+<span class="hljs-comment"># Multiplication (*)</span>
+product = <span class="hljs-number">10</span> * <span class="hljs-number">5</span>
+print(product)    <span class="hljs-comment"># Shows: 50</span>
+
+<span class="hljs-comment"># Division (/)</span>
+quotient = <span class="hljs-number">10</span> / <span class="hljs-number">5</span>
+print(quotient)   <span class="hljs-comment"># Shows: 2.0  (always gives a decimal number)</span>
+</div></code></pre>
+	<h3 id="special-operations">Special Operations</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Integer Division (//)</span>
+result = <span class="hljs-number">17</span> // <span class="hljs-number">5</span>     <span class="hljs-comment"># Divides and rounds down</span>
+print(result)        <span class="hljs-comment"># Shows: 3</span>
+
+<span class="hljs-comment"># Modulus (%)</span>
+remainder = <span class="hljs-number">17</span> % <span class="hljs-number">5</span>   <span class="hljs-comment"># Shows remainder after division</span>
+print(remainder)     <span class="hljs-comment"># Shows: 2</span>
+
+<span class="hljs-comment"># Exponents (**)</span>
+square = <span class="hljs-number">5</span> ** <span class="hljs-number">2</span>     <span class="hljs-comment"># 5 squared</span>
+cube = <span class="hljs-number">2</span> ** <span class="hljs-number">3</span>       <span class="hljs-comment"># 2 cubed</span>
+print(square)       <span class="hljs-comment"># Shows: 25</span>
+print(cube)         <span class="hljs-comment"># Shows: 8</span>
+</div></code></pre>
+	<h3 id="real-world-examples">Real World Examples</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Calculate total cost</span>
+pencils = <span class="hljs-number">5</span>
+pencil_price = <span class="hljs-number">0.75</span>
+total = pencils * pencil_price
+print(<span class="hljs-string">f"Total cost: $<span class="hljs-subst">{total}</span>"</span>)    <span class="hljs-comment"># Shows: Total cost: $3.75</span>
+
+<span class="hljs-comment"># Convert minutes to hours and minutes</span>
+total_minutes = <span class="hljs-number">145</span>
+hours = total_minutes // <span class="hljs-number">60</span>
+minutes = total_minutes % <span class="hljs-number">60</span>
+print(<span class="hljs-string">f"<span class="hljs-subst">{total_minutes}</span> minutes is <span class="hljs-subst">{hours}</span>h <span class="hljs-subst">{minutes}</span>m"</span>)
+</div></code></pre>
+	<h2 id="5-working-with-strings-%F0%9F%93%9D">5. Working with Strings 📝</h2>
+	<h3 id="creating-strings">Creating Strings</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Using single or double quotes</span>
+name1 = <span class="hljs-string">"Alex"</span>        <span class="hljs-comment"># Double quotes</span>
+name2 = <span class="hljs-string">'Alex'</span>        <span class="hljs-comment"># Single quotes</span>
+
+<span class="hljs-comment"># Quotes inside strings</span>
+message1 = <span class="hljs-string">"Don't forget to smile"</span>    <span class="hljs-comment"># Using double quotes outside</span>
+message2 = <span class="hljs-string">'He said "Hello!" to me'</span>   <span class="hljs-comment"># Using single quotes outside</span>
+
+<span class="hljs-comment"># Multi-line strings</span>
+long_text = <span class="hljs-string">"""This is a long message
+that can span across
+multiple lines!"""</span>
+</div></code></pre>
+	<h3 id="string-operations">String Operations</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Combining strings (concatenation)</span>
+first_name = <span class="hljs-string">"Alex"</span>
+last_name = <span class="hljs-string">"Smith"</span>
+full_name = first_name + <span class="hljs-string">" "</span> + last_name
+print(full_name)    <span class="hljs-comment"># Shows: Alex Smith</span>
+
+<span class="hljs-comment"># Repeating strings</span>
+print(<span class="hljs-string">"Hip "</span> * <span class="hljs-number">2</span> + <span class="hljs-string">"Hooray!"</span>)    <span class="hljs-comment"># Shows: Hip Hip Hooray!</span>
+print(<span class="hljs-string">"-"</span> * <span class="hljs-number">20</span>)                  <span class="hljs-comment"># Shows: --------------------</span>
+
+<span class="hljs-comment"># F-strings (formatted strings)</span>
+name = <span class="hljs-string">"Alex"</span>
+age = <span class="hljs-number">15</span>
+print(<span class="hljs-string">f"My name is <span class="hljs-subst">{name}</span> and I am <span class="hljs-subst">{age}</span> years old"</span>)
+</div></code></pre>
+	<h3 id="string-methods">String Methods</h3>
+	<pre class="hljs"><code><div>message = <span class="hljs-string">"Hello, Python!"</span>
+
+<span class="hljs-comment"># Converting case</span>
+print(message.upper())      <span class="hljs-comment"># Shows: HELLO, PYTHON!</span>
+print(message.lower())      <span class="hljs-comment"># Shows: hello, python!</span>
+
+<span class="hljs-comment"># Finding and counting</span>
+print(message.count(<span class="hljs-string">'o'</span>))   <span class="hljs-comment"># Shows: 2</span>
+print(message.find(<span class="hljs-string">'Python'</span>))  <span class="hljs-comment"># Shows: 7</span>
+
+<span class="hljs-comment"># Removing whitespace</span>
+text = <span class="hljs-string">"   Hello   "</span>
+print(text.strip())        <span class="hljs-comment"># Shows: Hello</span>
+</div></code></pre>
+	<h2 id="6-getting-input-from-users-%F0%9F%8E%A4">6. Getting Input from Users 🎤</h2>
+	<h3 id="basic-input">Basic Input</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Getting text input</span>
+name = input(<span class="hljs-string">"What's your name? "</span>)
+print(<span class="hljs-string">f"Hello, <span class="hljs-subst">{name}</span>!"</span>)
+
+<span class="hljs-comment"># Getting numbers (remember to convert!)</span>
+age_string = input(<span class="hljs-string">"How old are you? "</span>)
+age = int(age_string)
+print(<span class="hljs-string">f"Next year you'll be <span class="hljs-subst">{age + <span class="hljs-number">1</span>}</span>"</span>)
+</div></code></pre>
+	<h3 id="converting-input-types">Converting Input Types</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Converting to integer</span>
+height_cm = int(input(<span class="hljs-string">"Height in cm: "</span>))
+
+<span class="hljs-comment"># Converting to float</span>
+weight_kg = float(input(<span class="hljs-string">"Weight in kg: "</span>))
+
+<span class="hljs-comment"># Combining input and conversion</span>
+temperature = float(input(<span class="hljs-string">"Temperature: "</span>))
+</div></code></pre>
+	<h2 id="7-organizing-your-python-programs-%F0%9F%93%82">7. Organizing Your Python Programs 📂</h2>
+	<h3 id="file-and-folder-organization-windows">File and Folder Organization (Windows)</h3>
+	<p>Create a clear folder structure:</p>
+	<pre class="hljs"><code><div>Python_Projects\
+├── Tutorial_1\
+│   ├── hello_world.py
+│   └── exercises\
+├── Tutorial_2\
+└── Practice\
+</div></code></pre>
+	<h3 id="naming-your-files">Naming Your Files</h3>
+	<p>Good names:</p>
+	<pre class="hljs"><code><div>hello_world.py
+temperature_converter.py
+calculator.py
+</div></code></pre>
+	<p>Bad names:</p>
+	<pre class="hljs"><code><div>program.py           # Too vague
+My Program.py       # Has spaces
+test.py             # Not descriptive
+</div></code></pre>
+	<h2 id="8-type-conversion-%F0%9F%94%84">8. Type Conversion 🔄</h2>
+	<h3 id="converting-strings-to-numbers">Converting Strings to Numbers</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># String to integer</span>
+text_number = <span class="hljs-string">"123"</span>
+number = int(text_number)    <span class="hljs-comment"># number is now 123</span>
+
+<span class="hljs-comment"># String to float</span>
+text_decimal = <span class="hljs-string">"12.34"</span>
+decimal = float(text_decimal)  <span class="hljs-comment"># decimal is now 12.34</span>
+</div></code></pre>
+	<h3 id="converting-numbers-to-strings">Converting Numbers to Strings</h3>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Number to string</span>
+age = <span class="hljs-number">15</span>
+message = <span class="hljs-string">"I am "</span> + str(age) + <span class="hljs-string">" years old"</span>
+
+<span class="hljs-comment"># Decimal to string</span>
+price = <span class="hljs-number">19.99</span>
+print(<span class="hljs-string">"The price is $"</span> + str(price))
+</div></code></pre>
+	<h2 id="9-practice-exercises-%F0%9F%8E%AF">9. Practice Exercises 🎯</h2>
+	<h2 id="basic-print-and-variables">Basic Print and Variables</h2>
+	<h3 id="1-personal-introduction">1. Personal Introduction</h3>
+	<p>Create a program that introduces yourself using variables and print statements.</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample output:</span>
+<span class="hljs-comment"># Hi! My name is Alex Smith</span>
+<span class="hljs-comment"># I am 15 years old</span>
+<span class="hljs-comment"># I love programming with Python! 🐍</span>
+</div></code></pre>
+	<h3 id="2-variable-swap">2. Variable Swap</h3>
+	<p>Create a program that swaps the values of two variables.</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample code start:</span>
+a = <span class="hljs-number">5</span>
+b = <span class="hljs-number">10</span>
+<span class="hljs-comment"># Your code here to swap values</span>
+<span class="hljs-comment"># After swapping, a should be 10 and b should be 5</span>
+</div></code></pre>
+	<h3 id="3-ascii-art">3. ASCII Art</h3>
+	<p>Create a simple picture using text characters in multiple print statements.</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample output (house):</span>
+<span class="hljs-comment">#    /\</span>
+<span class="hljs-comment">#   /  \</span>
+<span class="hljs-comment">#  /____\</span>
+<span class="hljs-comment">#  |    |</span>
+<span class="hljs-comment">#  |  []|</span>
+<span class="hljs-comment">#  |    |</span>
+<span class="hljs-comment">#  ------</span>
+</div></code></pre>
+	<h2 id="number-operations">Number Operations</h2>
+	<h3 id="4-rectangle-calculator">4. Rectangle Calculator</h3>
+	<p>Write a program that:</p>
+	<ul>
+		<li>Asks for length and width of a rectangle</li>
+		<li>Calculates both area and perimeter</li>
+		<li>Prints results nicely formatted</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter length: <span class="hljs-number">5</span>
+Enter width: <span class="hljs-number">3</span>
+Area: <span class="hljs-number">15</span> square units
+Perimeter: <span class="hljs-number">16</span> units
+</div></code></pre>
+	<h3 id="5-temperature-converter">5. Temperature Converter</h3>
+	<p>Create a program that converts temperature between Celsius and Fahrenheit.
+		Formula: (C × 9/5) + 32 = F</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter temperature <span class="hljs-keyword">in</span> Celsius: <span class="hljs-number">30</span>
+<span class="hljs-number">30</span>°C <span class="hljs-keyword">is</span> equal to <span class="hljs-number">86</span>°F
+</div></code></pre>
+	<h3 id="6-circle-calculator">6. Circle Calculator</h3>
+	<p>Write a program that calculates the area and circumference of a circle.
+		Use π (pi) = 3.14159</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter circle radius: <span class="hljs-number">5</span>
+Area: <span class="hljs-number">78.54</span> square units
+Circumference: <span class="hljs-number">31.42</span> units
+</div></code></pre>
+	<h3 id="7-average-calculator">7. Average Calculator</h3>
+	<p>Create a program that:</p>
+	<ul>
+		<li>Takes three test scores</li>
+		<li>Calculates their average</li>
+		<li>Prints the result</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter first score: <span class="hljs-number">85</span>
+Enter second score: <span class="hljs-number">92</span>
+Enter third score: <span class="hljs-number">88</span>
+Average score: <span class="hljs-number">88.33</span>
+</div></code></pre>
+	<h2 id="string-operations">String Operations</h2>
+	<h3 id="8-name-formatter">8. Name Formatter</h3>
+	<p>Create a program that:</p>
+	<ul>
+		<li>Takes first and last name</li>
+		<li>Prints them in different formats</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter first name: Alex
+Enter last name: Smith
+Full name: Alex Smith
+Reverse order: Smith, Alex
+Initials: A.S.
+</div></code></pre>
+	<h3 id="9-string-repeater">9. String Repeater</h3>
+	<p>Write a program that:</p>
+	<ul>
+		<li>Takes a word and a number</li>
+		<li>Repeats the word that many times</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter a word: Hello
+Enter number of repeats: <span class="hljs-number">3</span>
+HelloHelloHello
+</div></code></pre>
+	<h3 id="10-receipt-generator">10. Receipt Generator</h3>
+	<p>Create a simple receipt that:</p>
+	<ul>
+		<li>Takes store name</li>
+		<li>Takes three items and prices</li>
+		<li>Displays them neatly formatted</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter store name: My Shop
+Enter item <span class="hljs-number">1</span>: Apple
+Enter price <span class="hljs-number">1</span>: <span class="hljs-number">0.50</span>
+Enter item <span class="hljs-number">2</span>: Bread
+Enter price <span class="hljs-number">2</span>: <span class="hljs-number">1.25</span>
+Enter item <span class="hljs-number">3</span>: Milk
+Enter price <span class="hljs-number">3</span>: <span class="hljs-number">2.75</span>
+
+====================
+      MY SHOP
+====================
+Apple:      $<span class="hljs-number">0.50</span>
+Bread:      $<span class="hljs-number">1.25</span>
+Milk:       $<span class="hljs-number">2.75</span>
+--------------------
+Total:      $<span class="hljs-number">4.50</span>
+====================
+</div></code></pre>
+	<h2 id="additional-math-exercises">Additional Math Exercises</h2>
+	<h3 id="11-paint-calculator">11. Paint Calculator</h3>
+	<p>Calculate how much paint is needed to paint a room:</p>
+	<ul>
+		<li>Get room dimensions (length, width, height)</li>
+		<li>Calculate wall area (excluding ceiling)</li>
+		<li>One liter of paint covers 10 square meters</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter room length (meters): <span class="hljs-number">4</span>
+Enter room width (meters): <span class="hljs-number">3</span>
+Enter room height (meters): <span class="hljs-number">2.5</span>
+
+Wall area: <span class="hljs-number">35.0</span> square meters
+Paint needed: <span class="hljs-number">3.5</span> liters
+</div></code></pre>
+	<h3 id="12-money-converter">12. Money Converter</h3>
+	<p>Create a program that converts a large amount of cents into dollars and cents:</p>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter amount <span class="hljs-keyword">in</span> cents: <span class="hljs-number">1234</span>
+That equals: $<span class="hljs-number">12.34</span>
+</div></code></pre>
+	<h3 id="13-distance-and-time">13. Distance and Time</h3>
+	<p>Create a program that calculates average speed:</p>
+	<ul>
+		<li>Ask for distance in kilometers</li>
+		<li>Ask for time in hours and minutes</li>
+		<li>Calculate speed in km/h</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter distance (km): <span class="hljs-number">150</span>
+Enter hours: <span class="hljs-number">2</span>
+Enter minutes: <span class="hljs-number">30</span>
+
+Time taken: <span class="hljs-number">2.5</span> hours
+Average speed: <span class="hljs-number">60.0</span> km/h
+</div></code></pre>
+	<h3 id="14-exercise-points-calculator">14. Exercise Points Calculator</h3>
+	<p>Create a program that calculates total exercise points:</p>
+	<ul>
+		<li>Running: 5 points per minute</li>
+		<li>Swimming: 7 points per minute</li>
+		<li>Cycling: 4 points per minute</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Minutes spent running: <span class="hljs-number">20</span>
+Minutes spent swimming: <span class="hljs-number">15</span>
+Minutes spent cycling: <span class="hljs-number">30</span>
+
+Points earned:
+Running: <span class="hljs-number">100</span> points
+Swimming: <span class="hljs-number">105</span> points
+Cycling: <span class="hljs-number">120</span> points
+Total points: <span class="hljs-number">325</span>
+</div></code></pre>
+	<h2 id="type-conversion-exercises">Type Conversion Exercises</h2>
+	<h3 id="15-number-formatter">15. Number Formatter</h3>
+	<p>Create a program that:</p>
+	<ul>
+		<li>Takes a number</li>
+		<li>Shows it in different formats</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter a number: <span class="hljs-number">123.456</span>
+As integer: <span class="hljs-number">123</span>
+With <span class="hljs-number">2</span> decimal places: <span class="hljs-number">123.46</span>
+As scientific notation: <span class="hljs-number">1.23e+02</span>
+</div></code></pre>
+	<h3 id="16-shopping-calculator">16. Shopping Calculator</h3>
+	<p>Create a program that:</p>
+	<ul>
+		<li>Asks for prices of 5 items</li>
+		<li>Calculates total</li>
+		<li>Calculates average price per item</li>
+		<li>Shows both rounded and exact values</li>
+	</ul>
+	<pre class="hljs"><code><div><span class="hljs-comment"># Sample run:</span>
+Enter price <span class="hljs-keyword">for</span> item <span class="hljs-number">1</span>: <span class="hljs-number">2.99</span>
+Enter price <span class="hljs-keyword">for</span> item <span class="hljs-number">2</span>: <span class="hljs-number">1.50</span>
+Enter price <span class="hljs-keyword">for</span> item <span class="hljs-number">3</span>: <span class="hljs-number">3.25</span>
+Enter price <span class="hljs-keyword">for</span> item <span class="hljs-number">4</span>: <span class="hljs-number">4.75</span>
+Enter price <span class="hljs-keyword">for</span> item <span class="hljs-number">5</span>: <span class="hljs-number">2.50</span>
+
+Receipt Summary:
+Total (rounded): $<span class="hljs-number">15</span>
+Total (exact): $<span class="hljs-number">14.99</span>
+Average per item (rounded): $<span class="hljs-number">3</span>
+Average per item (exact): $<span class="hljs-number">2.998</span>
+</div></code></pre>
+	<h2 id="tips-for-solving-exercises">Tips for Solving Exercises:</h2>
+	<ol>
+		<li>Read the problem carefully</li>
+		<li>Write down what inputs you need</li>
+		<li>Plan your calculations</li>
+		<li>Format your output nicely</li>
+		<li>Test with different values</li>
+		<li>Check your results by hand</li>
+	</ol>
+	<h2 id="common-mistakes-to-watch-for">Common Mistakes to Watch For:</h2>
+	<ol>
+		<li>Forgetting to convert input to numbers</li>
+		<li>Missing spaces in output formatting</li>
+		<li>Not using clear variable names</li>
+		<li>Forgetting to use f-strings for formatting</li>
+		<li>Not testing with different inputs</li>
+	</ol>
+	<p>Remember:</p>
+	<ul>
+		<li>Start with the easier exercises</li>
+		<li>Test your code frequently</li>
+		<li>Keep your code neat and organized</li>
+		<li>Add comments to explain your code</li>
+		<li>Have fun while coding!</li>
+	</ul>
+	<h2 id="tips-for-success-%F0%9F%92%A1">Tips for Success 💡</h2>
+	<ol>
+		<li>Always save your code files with <code>.py</code> extension</li>
+		<li>Use meaningful variable names</li>
+		<li>Add comments to explain your code</li>
+		<li>Test your program with different inputs</li>
+		<li>Keep your code organized and neat</li>
+		<li>Ask for help when stuck!</li>
+	</ol>
+	<h2 id="common-mistakes-to-avoid-%E2%9A%A0%EF%B8%8F">Common Mistakes to Avoid ⚠️</h2>
+	<ol>
+		<li>Forgetting quotes around strings</li>
+		<li>Not converting input to the right type</li>
+		<li>Using spaces in file names</li>
+		<li>Forgetting to save files before running</li>
+		<li>Missing parentheses in print()</li>
+	</ol>
+	<p>Remember: Programming is like learning a new language - practice makes perfect! Don't be afraid to experiment and
+		make mistakes. That's how we learn!</p>
+	<p>Need help? Ask your teacher or try explaining your code to a friend - sometimes just talking about it helps you
+		find the solution!</p>
+	<p>Happy coding! 🚀</p>
+
+</body>
+
+</html>
