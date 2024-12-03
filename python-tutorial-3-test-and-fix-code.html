@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>complete-debugging-tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-3-test-and-fix-your-code-like-a-pro-%F0%9F%94%8D">Tutorial 3: Test and Fix Your Code Like a Pro! 🔍</h1>
+<p>Welcome future coders! Ever wondered how programmers make sure their code works correctly? Just like proofreading your homework, we need to test our code to find and fix mistakes. In this tutorial, you'll learn how to be a code detective! 🕵️‍♀️</p>
+<h2 id="1-meet-your-new-friend-assert">1. Meet Your New Friend: Assert!</h2>
+<p><code>assert</code> is like a helpful friend who checks if something is true. If it's not true, it tells you there's a problem!</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Basic assert examples</span>
+score = <span class="hljs-number">85</span>
+<span class="hljs-keyword">assert</span> score &gt;= <span class="hljs-number">0</span>, <span class="hljs-string">"Score can't be negative!"</span>
+<span class="hljs-keyword">assert</span> score &lt;= <span class="hljs-number">100</span>, <span class="hljs-string">"Score can't be more than 100!"</span>
+
+<span class="hljs-comment"># Testing a simple calculation</span>
+result = <span class="hljs-number">5</span> + <span class="hljs-number">3</span>
+<span class="hljs-keyword">assert</span> result == <span class="hljs-number">8</span>, <span class="hljs-string">f"5 + 3 should be 8, but we got <span class="hljs-subst">{result}</span>"</span>
+
+<span class="hljs-comment"># Testing if something is in a list</span>
+my_pets = [<span class="hljs-string">"dog"</span>, <span class="hljs-string">"cat"</span>, <span class="hljs-string">"fish"</span>]
+<span class="hljs-keyword">assert</span> <span class="hljs-string">"dog"</span> <span class="hljs-keyword">in</span> my_pets, <span class="hljs-string">"Where's the dog?"</span>
+
+<span class="hljs-comment"># Testing the length of something</span>
+name = <span class="hljs-string">"Alex"</span>
+<span class="hljs-keyword">assert</span> len(name) &gt; <span class="hljs-number">0</span>, <span class="hljs-string">"Name cannot be empty!"</span>
+</div></code></pre>
+<h2 id="2-practice-challenges">2. Practice Challenges</h2>
+<h2 id="challenge-1-fizzbuzz-game">Challenge 1: FizzBuzz Game</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a number as input</li>
+<li>If it's divisible by 3, say &quot;Fizz&quot;</li>
+<li>If it's divisible by 5, say &quot;Buzz&quot;</li>
+<li>If it's divisible by both 3 and 5, say &quot;FizzBuzz&quot;</li>
+<li>Otherwise, just return the number as text</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_fizz_buzz</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test each case</span>
+    <span class="hljs-keyword">assert</span> fizz_buzz(<span class="hljs-number">3</span>) == <span class="hljs-string">"Fizz"</span>, <span class="hljs-string">"3 should give Fizz"</span>
+    <span class="hljs-keyword">assert</span> fizz_buzz(<span class="hljs-number">5</span>) == <span class="hljs-string">"Buzz"</span>, <span class="hljs-string">"5 should give Buzz"</span>
+    <span class="hljs-keyword">assert</span> fizz_buzz(<span class="hljs-number">15</span>) == <span class="hljs-string">"FizzBuzz"</span>, <span class="hljs-string">"15 should give FizzBuzz"</span>
+    <span class="hljs-keyword">assert</span> fizz_buzz(<span class="hljs-number">2</span>) == <span class="hljs-string">"2"</span>, <span class="hljs-string">"2 should give 2"</span>
+    print(<span class="hljs-string">"All FizzBuzz tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fizz_buzz</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">if</span> n % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Fizz"</span>
+    <span class="hljs-keyword">elif</span> n % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Buzz"</span>
+    <span class="hljs-keyword">elif</span> n % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> n % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>:  <span class="hljs-comment"># This line never runs! Why?</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"FizzBuzz"</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> str(n)
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_fizz_buzz()
+</div></code></pre>
+<h2 id="challenge-2-find-the-biggest-number">Challenge 2: Find the Biggest Number</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take three numbers</li>
+<li>Return the biggest one</li>
+<li>If any number is negative, return None</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_find_biggest</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test normal numbers</span>
+    <span class="hljs-keyword">assert</span> find_biggest(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">3</span>) == <span class="hljs-number">10</span>, <span class="hljs-string">"10 is the biggest!"</span>
+    <span class="hljs-keyword">assert</span> find_biggest(<span class="hljs-number">15</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>) == <span class="hljs-number">15</span>, <span class="hljs-string">"15 is the biggest!"</span>
+    <span class="hljs-keyword">assert</span> find_biggest(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>) == <span class="hljs-number">3</span>, <span class="hljs-string">"All numbers are the same!"</span>
+    
+    <span class="hljs-comment"># Test negative numbers</span>
+    <span class="hljs-keyword">assert</span> find_biggest(<span class="hljs-number">-5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">3</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Negative numbers not allowed!"</span>
+    print(<span class="hljs-string">"All biggest number tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_biggest</span><span class="hljs-params">(a, b, c)</span>:</span>
+    <span class="hljs-keyword">if</span> a &gt; b:
+        <span class="hljs-keyword">return</span> a
+    <span class="hljs-keyword">elif</span> b &gt; c:
+        <span class="hljs-keyword">return</span> b
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> c
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_find_biggest()
+</div></code></pre>
+<h2 id="challenge-3-grade-calculator">Challenge 3: Grade Calculator</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a score from 0 to 100</li>
+<li>Return 'A' for scores 90 or above</li>
+<li>Return 'B' for scores 80 to 89</li>
+<li>Return 'C' for scores 70 to 79</li>
+<li>Return 'F' for scores below 70</li>
+<li>Return None if the score is less than 0 or more than 100</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_grade_calculator</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test normal grades</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">95</span>) == <span class="hljs-string">"A"</span>, <span class="hljs-string">"95 should get an A"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">85</span>) == <span class="hljs-string">"B"</span>, <span class="hljs-string">"85 should get a B"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">75</span>) == <span class="hljs-string">"C"</span>, <span class="hljs-string">"75 should get a C"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">65</span>) == <span class="hljs-string">"F"</span>, <span class="hljs-string">"65 should get an F"</span>
+    
+    <span class="hljs-comment"># Test edge cases</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">90</span>) == <span class="hljs-string">"A"</span>, <span class="hljs-string">"90 should get an A"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">80</span>) == <span class="hljs-string">"B"</span>, <span class="hljs-string">"80 should get a B"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">70</span>) == <span class="hljs-string">"C"</span>, <span class="hljs-string">"70 should get a C"</span>
+    
+    <span class="hljs-comment"># Test invalid scores</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">-5</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Negative scores not allowed!"</span>
+    <span class="hljs-keyword">assert</span> calculate_grade(<span class="hljs-number">105</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Scores above 100 not allowed!"</span>
+    print(<span class="hljs-string">"All grade calculator tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_grade</span><span class="hljs-params">(score)</span>:</span>
+    <span class="hljs-keyword">if</span> score &gt;= <span class="hljs-number">90</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"A"</span>
+    <span class="hljs-keyword">if</span> score &gt;= <span class="hljs-number">80</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"B"</span>
+    <span class="hljs-keyword">if</span> score &gt;= <span class="hljs-number">70</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"C"</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"F"</span>
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_grade_calculator()
+</div></code></pre>
+<h2 id="challenge-4-word-reverser">Challenge 4: Word Reverser</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a word or sentence</li>
+<li>Return the text reversed</li>
+<li>Ignore spaces at the start and end</li>
+<li>Return None if the text is empty</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_word_reverser</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test simple words</span>
+    <span class="hljs-keyword">assert</span> reverse_word(<span class="hljs-string">"hello"</span>) == <span class="hljs-string">"olleh"</span>, <span class="hljs-string">"'hello' reversed should be 'olleh'"</span>
+    <span class="hljs-keyword">assert</span> reverse_word(<span class="hljs-string">"python"</span>) == <span class="hljs-string">"nohtyp"</span>, <span class="hljs-string">"'python' reversed should be 'nohtyp'"</span>
+    
+    <span class="hljs-comment"># Test with spaces</span>
+    <span class="hljs-keyword">assert</span> reverse_word(<span class="hljs-string">"hi there"</span>) == <span class="hljs-string">"ereht ih"</span>, <span class="hljs-string">"'hi there' reversed should be 'ereht ih'"</span>
+    <span class="hljs-keyword">assert</span> reverse_word(<span class="hljs-string">"  hi  "</span>) == <span class="hljs-string">"ih"</span>, <span class="hljs-string">"Spaces at ends should be removed"</span>
+    
+    <span class="hljs-comment"># Test empty or None</span>
+    <span class="hljs-keyword">assert</span> reverse_word(<span class="hljs-string">""</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Empty string should return None"</span>
+    print(<span class="hljs-string">"All word reverser tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_word</span><span class="hljs-params">(text)</span>:</span>
+    <span class="hljs-keyword">return</span> text[::<span class="hljs-number">-1</span>]  <span class="hljs-comment"># This doesn't handle spaces or empty strings!</span>
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_word_reverser()
+</div></code></pre>
+<h2 id="challenge-5-prime-number-checker">Challenge 5: Prime Number Checker</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a number</li>
+<li>Return True if it's a prime number</li>
+<li>Return False if it's not a prime number</li>
+<li>Return None if the number is less than 2 (prime numbers start at 2!)
+Remember: A prime number is only divisible by 1 and itself</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_prime_number</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test prime numbers</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">2</span>) == <span class="hljs-literal">True</span>, <span class="hljs-string">"2 is prime!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">17</span>) == <span class="hljs-literal">True</span>, <span class="hljs-string">"17 is prime!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">23</span>) == <span class="hljs-literal">True</span>, <span class="hljs-string">"23 is prime!"</span>
+    
+    <span class="hljs-comment"># Test non-prime numbers</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">4</span>) == <span class="hljs-literal">False</span>, <span class="hljs-string">"4 is not prime!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">15</span>) == <span class="hljs-literal">False</span>, <span class="hljs-string">"15 is not prime!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">100</span>) == <span class="hljs-literal">False</span>, <span class="hljs-string">"100 is not prime!"</span>
+    
+    <span class="hljs-comment"># Test invalid numbers</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">1</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"1 is not prime by definition!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">0</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"0 is not prime!"</span>
+    <span class="hljs-keyword">assert</span> is_prime(<span class="hljs-number">-5</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Negative numbers can't be prime!"</span>
+    print(<span class="hljs-string">"All prime number tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_prime</span><span class="hljs-params">(n)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>, n):
+        <span class="hljs-keyword">if</span> n % i == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_prime_number()
+</div></code></pre>
+<h2 id="challenge-6-temperature-converter">Challenge 6: Temperature Converter</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a temperature in Celsius</li>
+<li>Convert it to Fahrenheit using the formula: (C × 9/5) + 32</li>
+<li>Round the result to one decimal place</li>
+<li>Return None if the temperature is below absolute zero (-273.15°C)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_temperature_converter</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test normal temperatures</span>
+    <span class="hljs-keyword">assert</span> celsius_to_fahrenheit(<span class="hljs-number">0</span>) == <span class="hljs-number">32.0</span>, <span class="hljs-string">"0°C should be 32.0°F"</span>
+    <span class="hljs-keyword">assert</span> celsius_to_fahrenheit(<span class="hljs-number">100</span>) == <span class="hljs-number">212.0</span>, <span class="hljs-string">"100°C should be 212.0°F"</span>
+    <span class="hljs-keyword">assert</span> celsius_to_fahrenheit(<span class="hljs-number">-40</span>) == <span class="hljs-number">-40.0</span>, <span class="hljs-string">"-40°C should be -40.0°F"</span>
+    
+    <span class="hljs-comment"># Test decimal temperatures</span>
+    <span class="hljs-keyword">assert</span> celsius_to_fahrenheit(<span class="hljs-number">37.5</span>) == <span class="hljs-number">99.5</span>, <span class="hljs-string">"37.5°C should be 99.5°F"</span>
+    
+    <span class="hljs-comment"># Test invalid temperatures</span>
+    <span class="hljs-keyword">assert</span> celsius_to_fahrenheit(<span class="hljs-number">-300</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Below absolute zero not allowed!"</span>
+    print(<span class="hljs-string">"All temperature converter tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">celsius_to_fahrenheit</span><span class="hljs-params">(celsius)</span>:</span>
+    fahrenheit = celsius * <span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>
+    <span class="hljs-keyword">return</span> fahrenheit
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_temperature_converter()
+</div></code></pre>
+<h2 id="challenge-7-game-score-counter">Challenge 7: Game Score Counter</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Keep track of a player's score in a game</li>
+<li>Add points when they win (positive numbers only)</li>
+<li>Remove points when they lose (but score can't go below 0)</li>
+<li>Return the current score</li>
+<li>Include a bonus point if they reach multiples of 100!</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_score_counter</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test adding points</span>
+    <span class="hljs-keyword">assert</span> update_score(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>) == <span class="hljs-number">50</span>, <span class="hljs-string">"Starting from 0, adding 50 should give 50"</span>
+    <span class="hljs-keyword">assert</span> update_score(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>) == <span class="hljs-number">100</span>, <span class="hljs-string">"50 + 50 should give 100 + 1 bonus"</span>
+    
+    <span class="hljs-comment"># Test removing points</span>
+    <span class="hljs-keyword">assert</span> update_score(<span class="hljs-number">50</span>, <span class="hljs-number">-20</span>) == <span class="hljs-number">30</span>, <span class="hljs-string">"50 - 20 should give 30"</span>
+    <span class="hljs-keyword">assert</span> update_score(<span class="hljs-number">30</span>, <span class="hljs-number">-40</span>) == <span class="hljs-number">0</span>, <span class="hljs-string">"Score shouldn't go below 0"</span>
+    
+    <span class="hljs-comment"># Test bonus points</span>
+    <span class="hljs-keyword">assert</span> update_score(<span class="hljs-number">95</span>, <span class="hljs-number">5</span>) == <span class="hljs-number">101</span>, <span class="hljs-string">"Reaching 100 should give a bonus point"</span>
+    print(<span class="hljs-string">"All score counter tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_score</span><span class="hljs-params">(current_score, points)</span>:</span>
+    new_score = current_score + points
+    <span class="hljs-keyword">return</span> new_score
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_score_counter()
+</div></code></pre>
+<h2 id="challenge-8-number-pattern-generator">Challenge 8: Number Pattern Generator</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a number n</li>
+<li>Create a pattern up to that number</li>
+<li>Pattern rule: Each number is the sum of the previous two numbers</li>
+<li>Start with 1, 1 (like: 1, 1, 2, 3, 5, 8, ...)</li>
+<li>Return None if n is less than 2</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_pattern_generator</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test normal patterns</span>
+    <span class="hljs-keyword">assert</span> generate_pattern(<span class="hljs-number">5</span>) == [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>], <span class="hljs-string">"Pattern of 5 numbers is wrong"</span>
+    <span class="hljs-keyword">assert</span> generate_pattern(<span class="hljs-number">3</span>) == [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-string">"Pattern of 3 numbers is wrong"</span>
+    
+    <span class="hljs-comment"># Test small numbers</span>
+    <span class="hljs-keyword">assert</span> generate_pattern(<span class="hljs-number">2</span>) == [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], <span class="hljs-string">"Pattern of 2 should be [1, 1]"</span>
+    <span class="hljs-keyword">assert</span> generate_pattern(<span class="hljs-number">1</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"n less than 2 should return None"</span>
+    print(<span class="hljs-string">"All pattern generator tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_pattern</span><span class="hljs-params">(n)</span>:</span>
+    pattern = [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):
+        pattern.append(i)
+    <span class="hljs-keyword">return</span> pattern
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_pattern_generator()
+</div></code></pre>
+<h2 id="challenge-9-word-counter">Challenge 9: Word Counter</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take a sentence</li>
+<li>Count how many words are in it</li>
+<li>Ignore extra spaces between words</li>
+<li>Return 0 for an empty string or string with only spaces</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_word_counter</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test normal sentences</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">"Hello world"</span>) == <span class="hljs-number">2</span>, <span class="hljs-string">"'Hello world' has 2 words"</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">"I love Python"</span>) == <span class="hljs-number">3</span>, <span class="hljs-string">"'I love Python' has 3 words"</span>
+    
+    <span class="hljs-comment"># Test extra spaces</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">"Hello    world"</span>) == <span class="hljs-number">2</span>, <span class="hljs-string">"Extra spaces shouldn't count"</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">"   Hello   world   "</span>) == <span class="hljs-number">2</span>, <span class="hljs-string">"Spaces at ends shouldn't count"</span>
+    
+    <span class="hljs-comment"># Test empty or spaces</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">""</span>) == <span class="hljs-number">0</span>, <span class="hljs-string">"Empty string has 0 words"</span>
+    <span class="hljs-keyword">assert</span> count_words(<span class="hljs-string">"   "</span>) == <span class="hljs-number">0</span>, <span class="hljs-string">"String with only spaces has 0 words"</span>
+    print(<span class="hljs-string">"All word counter tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_words</span><span class="hljs-params">(sentence)</span>:</span>
+    <span class="hljs-keyword">return</span> len(sentence.split())
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_word_counter()
+</div></code></pre>
+<h2 id="challenge-10-distance-calculator">Challenge 10: Distance Calculator</h2>
+<p><strong>What should the program do?</strong></p>
+<ul>
+<li>Take two points (x1, y1) and (x2, y2)</li>
+<li>Calculate the straight-line distance between them</li>
+<li>Round the result to 2 decimal places</li>
+<li>Return None if any coordinate is greater than 100 or less than -100</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_distance_calculator</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># Test basic distances</span>
+    <span class="hljs-keyword">assert</span> calculate_distance(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>) == <span class="hljs-number">5.00</span>, <span class="hljs-string">"Distance should be 5.00"</span>
+    <span class="hljs-keyword">assert</span> calculate_distance(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>) == <span class="hljs-number">5.00</span>, <span class="hljs-string">"Distance should be 5.00"</span>
+    
+    <span class="hljs-comment"># Test same points</span>
+    <span class="hljs-keyword">assert</span> calculate_distance(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>) == <span class="hljs-number">0.00</span>, <span class="hljs-string">"Same points should have distance 0"</span>
+    
+    <span class="hljs-comment"># Test invalid coordinates</span>
+    <span class="hljs-keyword">assert</span> calculate_distance(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">200</span>, <span class="hljs-number">0</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Coordinates &gt; 100 not allowed"</span>
+    <span class="hljs-keyword">assert</span> calculate_distance(<span class="hljs-number">-150</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>) == <span class="hljs-literal">None</span>, <span class="hljs-string">"Coordinates &lt; -100 not allowed"</span>
+    print(<span class="hljs-string">"All distance calculator tests passed! 🌟"</span>)
+
+<span class="hljs-comment"># This function has bugs! Can you fix it?</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_distance</span><span class="hljs-params">(x1, y1, x2, y2)</span>:</span>
+    distance = ((x2 - x1) + (y2 - y1)) ** <span class="hljs-number">0.5</span>  <span class="hljs-comment"># Bug: wrong formula!</span>
+    <span class="hljs-keyword">return</span> round(distance, <span class="hljs-number">2</span>)
+
+<span class="hljs-comment"># Let's run the tests!</span>
+test_distance_calculator()
+</div></code></pre>
+<h2 id="3-tips-and-tricks">3. Tips and Tricks</h2>
+<ul>
+<li>Always run your tests before trying to fix the code</li>
+<li>Read the error messages carefully - they're like clues!</li>
+<li>Fix one problem at a time</li>
+<li>If you're stuck, try printing values to see what's happening</li>
+<li>Keep track of what you've tried</li>
+</ul>
+<h2 id="4-whats-next">4. What's Next?</h2>
+<p>Now that you know how to test and fix code, you can:</p>
+<ul>
+<li>Write your own test cases for your programs</li>
+<li>Find and fix bugs more easily</li>
+<li>Create more reliable code</li>
+<li>Help others debug their programs</li>
+</ul>
+<p>Remember: Even professional programmers make mistakes! The difference is they know how to find and fix them. Now you do too! 🚀</p>
+<p>Happy coding! 👩‍💻👨‍💻</p>
+
+</body>
+</html>

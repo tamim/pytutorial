@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>python-files-tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="python-tutorial-working-with-files-%F0%9F%93%81">Python Tutorial: Working with Files 📁</h1>
+<p>Welcome to our Python journey! Today we'll learn about working with files - a super important skill for any programmer. We'll learn how to read and write files safely, and create some cool projects!</p>
+<h2 id="%F0%9F%9B%A1%EF%B8%8F-file-safety-first">🛡️ File Safety First!</h2>
+<p>Before we start our file adventure, let's learn how to stay safe when working with files on your computer.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 🚫 DON'T work in these folders:</span>
+<span class="hljs-string">"C:\Windows"</span>      <span class="hljs-comment"># System folders</span>
+<span class="hljs-string">"C:\Program Files"</span><span class="hljs-comment"># Program folders</span>
+<span class="hljs-string">"/usr/bin"</span>        <span class="hljs-comment"># Linux system folders</span>
+<span class="hljs-string">"/System"</span>         <span class="hljs-comment"># Mac system folders</span>
+
+<span class="hljs-comment"># ✅ DO work in these folders:</span>
+<span class="hljs-string">"Documents/python_practice"</span>  <span class="hljs-comment"># Your practice folder</span>
+<span class="hljs-string">"Desktop/python_files"</span>      <span class="hljs-comment"># A folder you create</span>
+</div></code></pre>
+<h3 id="why-these-safety-rules">Why These Safety Rules?</h3>
+<ol>
+<li>
+<p><strong>Stay in Your Space</strong>:</p>
+<ul>
+<li>Think of your computer like a house</li>
+<li>System folders are like your parents' room - don't mess with them!</li>
+<li>Make your own &quot;room&quot; (folder) for Python practice</li>
+</ul>
+</li>
+<li>
+<p><strong>Always Make Backups</strong>:</p>
+<ul>
+<li>Before changing any file, make a copy</li>
+<li>Name it something like <code>original_file_backup.txt</code></li>
+<li>If something goes wrong, you have the original!</li>
+</ul>
+</li>
+<li>
+<p><strong>Start Small</strong>:</p>
+<ul>
+<li>Begin with tiny text files (a few lines)</li>
+<li>Use test files you create yourself</li>
+<li>Don't experiment with important files</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-understanding-files-and-folders-%F0%9F%93%82">1. Understanding Files and Folders 📂</h2>
+<h3 id="whats-a-file-path">What's a File Path?</h3>
+<p>Think of a file path like giving directions to your house:</p>
+<pre class="hljs"><code><div>Country
+  └── City
+       └── Street
+            └── House Number
+</div></code></pre>
+<p>On your computer, it's similar:</p>
+<pre class="hljs"><code><div>C:\
+  └── Documents
+       └── python_practice
+            └── my_file.txt
+</div></code></pre>
+<h3 id="types-of-paths">Types of Paths:</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Absolute Path (full address)</span>
+full_path = <span class="hljs-string">"C:/Documents/python_practice/my_file.txt"</span>
+
+<span class="hljs-comment"># Relative Path (directions from where you are)</span>
+relative_path = <span class="hljs-string">"./my_file.txt"</span>  <span class="hljs-comment"># Current folder</span>
+relative_path = <span class="hljs-string">"../my_file.txt"</span> <span class="hljs-comment"># Parent folder</span>
+</div></code></pre>
+<h2 id="2-reading-files-%F0%9F%93%96">2. Reading Files 📖</h2>
+<h3 id="the-safe-way-to-open-files">The Safe Way to Open Files</h3>
+<p>Always use <code>with</code> statements - they automatically close your file when you're done:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># ✅ The GOOD way:</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"my_diary.txt"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+    content = file.read()
+    <span class="hljs-comment"># File closes automatically when done!</span>
+
+<span class="hljs-comment"># ❌ The BAD way:</span>
+file = open(<span class="hljs-string">"my_diary.txt"</span>, <span class="hljs-string">"r"</span>)
+content = file.read()
+<span class="hljs-comment"># Oops! Forgot to close the file!</span>
+</div></code></pre>
+<h3 id="reading-examples">Reading Examples:</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example 1: Reading a simple diary</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"my_diary.txt"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> diary:
+    <span class="hljs-comment"># Read the whole file at once</span>
+    all_entries = diary.read()
+    print(<span class="hljs-string">"My diary contains:"</span>, all_entries)
+
+<span class="hljs-comment"># Example 2: Reading line by line</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"my_diary.txt"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> diary:
+    <span class="hljs-comment"># Read one line at a time</span>
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> diary:
+        print(<span class="hljs-string">"Today's entry:"</span>, line)
+
+<span class="hljs-comment"># Example 3: Reading into a list</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"high_scores.txt"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> scores:
+    <span class="hljs-comment"># Get all lines as a list</span>
+    score_list = scores.readlines()
+    print(<span class="hljs-string">"Top score:"</span>, score_list[<span class="hljs-number">0</span>])
+</div></code></pre>
+<h3 id="%F0%9F%91%89-your-turn-try-this">👉 Your Turn! Try This:</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Create a file called 'test.txt' with these contents:</span>
+<span class="hljs-string">"""
+Hello
+World
+Python
+"""</span>
+
+<span class="hljs-comment"># Now write code to:</span>
+<span class="hljs-comment"># 1. Read and print the entire file</span>
+<span class="hljs-comment"># 2. Read and print line by line</span>
+<span class="hljs-comment"># 3. Store the lines in a list</span>
+</div></code></pre>
+<h3 id="%F0%9F%8E%AF-checkpoint-exercise">🎯 Checkpoint Exercise</h3>
+<p>Try to solve these challenges:</p>
+<ol>
+<li>Create a new file called <code>friends.txt</code> and write some friend names in it</li>
+<li>Write a program that:
+<ul>
+<li>Opens and reads the file</li>
+<li>Counts how many friends you have</li>
+<li>Prints each name with &quot;Hello, [name]!&quot;</li>
+<li>Handles the error if the file doesn't exist</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-writing-files-%E2%9C%8D%EF%B8%8F">3. Writing Files ✍️</h2>
+<p>Writing to files is like writing in a notebook - you can either start with a fresh page (write mode) or add to the end of existing notes (append mode).</p>
+<h3 id="creating-and-writing-files">Creating and Writing Files</h3>
+<p>We use different modes when writing files:</p>
+<ul>
+<li><code>&quot;w&quot;</code> - Write mode: Creates a new file or overwrites an existing one</li>
+<li><code>&quot;a&quot;</code> - Append mode: Adds content to the end of an existing file</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example 1: Writing a new file</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"shopping.txt"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    file.write(<span class="hljs-string">"Apples\n"</span>)  <span class="hljs-comment"># \n means "new line"</span>
+    file.write(<span class="hljs-string">"Bananas\n"</span>)
+    file.write(<span class="hljs-string">"Oranges\n"</span>)
+
+<span class="hljs-comment"># Example 2: Appending to a file (adding more items)</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"shopping.txt"</span>, <span class="hljs-string">"a"</span>) <span class="hljs-keyword">as</span> file:
+    file.write(<span class="hljs-string">"Milk\n"</span>)    <span class="hljs-comment"># Adds to end of file</span>
+
+<span class="hljs-comment"># Example 3: Writing multiple lines at once</span>
+games = [<span class="hljs-string">"Minecraft"</span>, <span class="hljs-string">"Roblox"</span>, <span class="hljs-string">"Pokemon"</span>]
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"games.txt"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    file.writelines(game + <span class="hljs-string">"\n"</span> <span class="hljs-keyword">for</span> game <span class="hljs-keyword">in</span> games)
+</div></code></pre>
+<h3 id="%F0%9F%9A%A8-important-safety-tips">🚨 Important Safety Tips!</h3>
+<p>Just like keeping backup copies of your homework, it's important to backup files before changing them:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Before overwriting a file, check if it exists</span>
+<span class="hljs-keyword">import</span> os
+
+filename = <span class="hljs-string">"important_notes.txt"</span>
+<span class="hljs-keyword">if</span> os.path.exists(filename):
+    <span class="hljs-comment"># Make a backup first</span>
+    backup_name = filename + <span class="hljs-string">".backup"</span>
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> source:
+        <span class="hljs-keyword">with</span> open(backup_name, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> backup:
+            backup.write(source.read())
+    print(<span class="hljs-string">f"Backup created: <span class="hljs-subst">{backup_name}</span>"</span>)
+
+<span class="hljs-comment"># Now it's safe to write the file</span>
+<span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    file.write(<span class="hljs-string">"New content\n"</span>)
+</div></code></pre>
+<h3 id="%F0%9F%91%89-your-turn-practice-writing">👉 Your Turn! Practice Writing:</h3>
+<p>Create a simple todo list manager that saves tasks to a file:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Challenge: Create a simple todo list manager</span>
+todos = []
+
+<span class="hljs-comment"># Add some todos</span>
+todos.append(<span class="hljs-string">"Do homework"</span>)
+todos.append(<span class="hljs-string">"Play outside"</span>)
+todos.append(<span class="hljs-string">"Read a book"</span>)
+
+<span class="hljs-comment"># Write them to a file with numbers</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"todo.txt"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">for</span> i, todo <span class="hljs-keyword">in</span> enumerate(todos, <span class="hljs-number">1</span>):
+        file.write(<span class="hljs-string">f"<span class="hljs-subst">{i}</span>. <span class="hljs-subst">{todo}</span>\n"</span>)
+</div></code></pre>
+<h2 id="4-working-with-csv-files-%F0%9F%93%8A">4. Working with CSV Files 📊</h2>
+<p>CSV files are like digital spreadsheets - perfect for storing information in rows and columns. Think of them as Excel files in their simplest form.</p>
+<h3 id="reading-csv-files">Reading CSV Files</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> csv
+
+<span class="hljs-comment"># Example 1: Reading a simple CSV file</span>
+<span class="hljs-comment"># grades.csv contains: Subject,Grade</span>
+<span class="hljs-comment">#                     Math,A</span>
+<span class="hljs-comment">#                     Science,B+</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+    csv_reader = csv.reader(file)
+    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> csv_reader:
+        print(<span class="hljs-string">f"Subject: <span class="hljs-subst">{row[<span class="hljs-number">0</span>]}</span>, Grade: <span class="hljs-subst">{row[<span class="hljs-number">1</span>]}</span>"</span>)
+
+<span class="hljs-comment"># Example 2: Reading CSV with headers</span>
+<span class="hljs-comment"># students.csv has column names in first row</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"students.csv"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+    csv_reader = csv.DictReader(file)
+    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> csv_reader:
+        print(<span class="hljs-string">f"Name: <span class="hljs-subst">{row[<span class="hljs-string">'name'</span>]}</span>, Age: <span class="hljs-subst">{row[<span class="hljs-string">'age'</span>]}</span>"</span>)
+</div></code></pre>
+<h3 id="writing-csv-files">Writing CSV Files</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example 1: Writing a simple class list</span>
+data = [
+    [<span class="hljs-string">"Name"</span>, <span class="hljs-string">"Age"</span>, <span class="hljs-string">"Grade"</span>],  <span class="hljs-comment"># Header row</span>
+    [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"12"</span>, <span class="hljs-string">"A"</span>],
+    [<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"13"</span>, <span class="hljs-string">"B"</span>],
+    [<span class="hljs-string">"Charlie"</span>, <span class="hljs-string">"12"</span>, <span class="hljs-string">"A"</span>]
+]
+
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"class.csv"</span>, <span class="hljs-string">"w"</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+    csv_writer = csv.writer(file)
+    csv_writer.writerows(data)
+
+<span class="hljs-comment"># Example 2: Writing student records using dictionaries</span>
+students = [
+    {<span class="hljs-string">"name"</span>: <span class="hljs-string">"David"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">13</span>, <span class="hljs-string">"grade"</span>: <span class="hljs-string">"B+"</span>},
+    {<span class="hljs-string">"name"</span>: <span class="hljs-string">"Emma"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">12</span>, <span class="hljs-string">"grade"</span>: <span class="hljs-string">"A-"</span>}
+]
+
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"more_students.csv"</span>, <span class="hljs-string">"w"</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+    fieldnames = [<span class="hljs-string">"name"</span>, <span class="hljs-string">"age"</span>, <span class="hljs-string">"grade"</span>]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    
+    writer.writeheader()  <span class="hljs-comment"># Write the column names</span>
+    writer.writerows(students)
+</div></code></pre>
+<h3 id="%F0%9F%8E%AE-mini-project-grade-tracker">🎮 Mini-Project: Grade Tracker</h3>
+<p>Let's build a program that helps teachers keep track of student grades. It will store grades in a CSV file and let us look up how any student is doing.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> csv
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_grade</span><span class="hljs-params">(filename, student, subject, grade)</span>:</span>
+    <span class="hljs-comment"># Adds a new grade entry to our grade book</span>
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">"a"</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+        writer = csv.writer(file)
+        writer.writerow([student, subject, grade])
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_student_grades</span><span class="hljs-params">(filename, student_name)</span>:</span>
+    <span class="hljs-comment"># Finds and returns all grades for a student</span>
+    grades = []
+    <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+        reader = csv.reader(file)
+        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> reader:
+            <span class="hljs-keyword">if</span> row[<span class="hljs-number">0</span>] == student_name:
+                grades.append(<span class="hljs-string">f"<span class="hljs-subst">{row[<span class="hljs-number">1</span>]}</span>: <span class="hljs-subst">{row[<span class="hljs-number">2</span>]}</span>"</span>)
+    <span class="hljs-keyword">return</span> grades
+
+<span class="hljs-comment"># Example usage:</span>
+print(<span class="hljs-string">"=== School Grade Tracker ==="</span>)
+
+<span class="hljs-comment"># Record some grades</span>
+add_grade(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Math"</span>, <span class="hljs-string">"A"</span>)
+add_grade(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Science"</span>, <span class="hljs-string">"B+"</span>)
+
+<span class="hljs-comment"># Check Alice's progress</span>
+print(<span class="hljs-string">"\nAlice's grades:"</span>)
+<span class="hljs-keyword">for</span> grade <span class="hljs-keyword">in</span> get_student_grades(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"Alice"</span>):
+    print(grade)
+</div></code></pre>
+<h3 id="%F0%9F%91%89-practice-exercise-build-a-personal-library">👉 Practice Exercise: Build a Personal Library</h3>
+<p>Create a digital bookshelf that keeps track of your books. The program should:</p>
+<ol>
+<li>Store books in a CSV file (title, author, read/unread)</li>
+<li>Let you add new books you want to read</li>
+<li>Mark books as read when you finish them</li>
+<li>Show you all your books</li>
+<li>Help you find books by title or author</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> csv
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_book</span><span class="hljs-params">(filename, title, author)</span>:</span>
+    <span class="hljs-comment"># Your code here: Add a new book to your library</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mark_as_read</span><span class="hljs-params">(filename, title)</span>:</span>
+    <span class="hljs-comment"># Your code here: Mark a book as read</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">list_books</span><span class="hljs-params">(filename)</span>:</span>
+    <span class="hljs-comment"># Your code here: Show all your books</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search_books</span><span class="hljs-params">(filename, search_term)</span>:</span>
+    <span class="hljs-comment"># Your code here: Find books by title or author</span>
+    <span class="hljs-keyword">pass</span>
+</div></code></pre>
+<p>Remember: Always make backups before modifying files, and test your code with small data first! 🚀</p>
+<h2 id="5-understanding-errors-and-handling-them-%F0%9F%9B%A0%EF%B8%8F">5. Understanding Errors and Handling Them 🛠️</h2>
+<h3 id="what-are-errors">What Are Errors?</h3>
+<p>Think of errors like warning messages from Python. Just like a parent telling you &quot;you can't do that!&quot;, Python tells us when something's not right.</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Common file errors you might see:</span>
+file = open(<span class="hljs-string">"missing_file.txt"</span>)  <span class="hljs-comment"># FileNotFoundError</span>
+<span class="hljs-comment"># Python says: "Hey! This file doesn't exist!"</span>
+
+number = int(<span class="hljs-string">"hello"</span>)  <span class="hljs-comment"># ValueError</span>
+<span class="hljs-comment"># Python says: "I can't turn 'hello' into a number!"</span>
+</div></code></pre>
+<h3 id="introducing-try-except-your-error-safety-net-%F0%9F%8E%AF">Introducing try-except: Your Error Safety Net 🎯</h3>
+<p>Think of try-except like a safety net at a circus:</p>
+<ul>
+<li>The acrobat (your code) tries to do something</li>
+<li>If they fall (an error occurs), the net (except) catches them</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Without try-except (dangerous!)</span>
+file = open(<span class="hljs-string">"data.txt"</span>)           <span class="hljs-comment"># Program crashes if file missing!</span>
+
+<span class="hljs-comment"># With try-except (safe!)</span>
+<span class="hljs-keyword">try</span>:
+    file = open(<span class="hljs-string">"data.txt"</span>)
+    content = file.read()
+    print(<span class="hljs-string">"File content:"</span>, content)
+<span class="hljs-keyword">except</span> FileNotFoundError:
+    print(<span class="hljs-string">"Oops! The file wasn't found. Check the file name!"</span>)
+</div></code></pre>
+<h3 id="common-file-errors-and-how-to-handle-them">Common File Errors and How to Handle Them</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Example 1: Missing File</span>
+<span class="hljs-keyword">try</span>:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"homework.txt"</span>) <span class="hljs-keyword">as</span> file:
+        content = file.read()
+<span class="hljs-keyword">except</span> FileNotFoundError:
+    print(<span class="hljs-string">"Can't find homework.txt - did you create it?"</span>)
+
+<span class="hljs-comment"># Example 2: Permission Error (trying to access a locked file)</span>
+<span class="hljs-keyword">try</span>:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"secret_file.txt"</span>) <span class="hljs-keyword">as</span> file:
+        content = file.read()
+<span class="hljs-keyword">except</span> PermissionError:
+    print(<span class="hljs-string">"Sorry, you're not allowed to read this file!"</span>)
+
+<span class="hljs-comment"># Example 3: Multiple Error Types</span>
+<span class="hljs-keyword">try</span>:
+    <span class="hljs-keyword">with</span> open(<span class="hljs-string">"notes.txt"</span>) <span class="hljs-keyword">as</span> file:
+        content = file.read()
+        numbers = [int(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> content.split()]
+<span class="hljs-keyword">except</span> FileNotFoundError:
+    print(<span class="hljs-string">"File is missing!"</span>)
+<span class="hljs-keyword">except</span> ValueError:
+    print(<span class="hljs-string">"File doesn't contain valid numbers!"</span>)
+</div></code></pre>
+<h3 id="%F0%9F%91%89-practice-safe-file-operations">👉 Practice: Safe File Operations</h3>
+<p>Let's create a safe file reader that handles different problems:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">safe_read_file</span><span class="hljs-params">(filename)</span>:</span>
+    <span class="hljs-string">"""
+    Safely reads a file and handles possible errors.
+    Returns the content if successful, or None if there's an error.
+    """</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> file:
+            <span class="hljs-keyword">return</span> file.read()
+    <span class="hljs-keyword">except</span> FileNotFoundError:
+        print(<span class="hljs-string">f"Sorry, <span class="hljs-subst">{filename}</span> doesn't exist!"</span>)
+    <span class="hljs-keyword">except</span> PermissionError:
+        print(<span class="hljs-string">f"Not allowed to read <span class="hljs-subst">{filename}</span>!"</span>)
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">f"Something went wrong: <span class="hljs-subst">{e}</span>"</span>)
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+
+<span class="hljs-comment"># Try it out!</span>
+content = safe_read_file(<span class="hljs-string">"my_diary.txt"</span>)
+<span class="hljs-keyword">if</span> content:
+    print(<span class="hljs-string">"Successfully read the file!"</span>)
+    print(content)
+</div></code></pre>
+<h3 id="advanced-error-handling-%F0%9F%8C%9F">Advanced Error Handling 🌟</h3>
+<p>Sometimes we want to check for problems before they happen:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> os
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">safe_write_file</span><span class="hljs-params">(filename, content)</span>:</span>
+    <span class="hljs-string">"""
+    Safely writes to a file with checks and backups.
+    """</span>
+    <span class="hljs-comment"># Check 1: Does the folder exist?</span>
+    folder = os.path.dirname(filename)
+    <span class="hljs-keyword">if</span> folder <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> os.path.exists(folder):
+        print(<span class="hljs-string">f"Creating folder: <span class="hljs-subst">{folder}</span>"</span>)
+        os.makedirs(folder)
+    
+    <span class="hljs-comment"># Check 2: File already exists? Make backup!</span>
+    <span class="hljs-keyword">if</span> os.path.exists(filename):
+        backup_name = filename + <span class="hljs-string">'.backup'</span>
+        <span class="hljs-keyword">try</span>:
+            <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> source:
+                <span class="hljs-keyword">with</span> open(backup_name, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> backup:
+                    backup.write(source.read())
+            print(<span class="hljs-string">f"Backup created: <span class="hljs-subst">{backup_name}</span>"</span>)
+        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+            print(<span class="hljs-string">f"Couldn't create backup: <span class="hljs-subst">{e}</span>"</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+    
+    <span class="hljs-comment"># Now try to write the file</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>) <span class="hljs-keyword">as</span> file:
+            file.write(content)
+        print(<span class="hljs-string">"File written successfully!"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">f"Error writing file: <span class="hljs-subst">{e}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+<span class="hljs-comment"># Try it out:</span>
+success = safe_write_file(<span class="hljs-string">"notes/diary.txt"</span>, <span class="hljs-string">"Dear Diary..."</span>)
+</div></code></pre>
+<h3 id="%F0%9F%8E%AE-mini-project-safe-grade-manager">🎮 Mini-Project: Safe Grade Manager</h3>
+<p>Let's update our grade tracker to handle errors properly:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> csv
+<span class="hljs-keyword">import</span> os
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">safe_add_grade</span><span class="hljs-params">(filename, student, subject, grade)</span>:</span>
+    <span class="hljs-string">"""
+    Safely adds a grade to the CSV file.
+    """</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># Check if grade is valid (A, B, C, D, F)</span>
+        <span class="hljs-keyword">if</span> grade <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>, <span class="hljs-string">'F'</span>]:
+            print(<span class="hljs-string">"Invalid grade! Use A, B, C, D, or F"</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+            
+        <span class="hljs-comment"># Create file if it doesn't exist</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(filename):
+            <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'w'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+                writer = csv.writer(file)
+                writer.writerow([<span class="hljs-string">'Student'</span>, <span class="hljs-string">'Subject'</span>, <span class="hljs-string">'Grade'</span>])
+        
+        <span class="hljs-comment"># Add the grade</span>
+        <span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">'a'</span>, newline=<span class="hljs-string">''</span>) <span class="hljs-keyword">as</span> file:
+            writer = csv.writer(file)
+            writer.writerow([student, subject, grade])
+        print(<span class="hljs-string">f"Added grade <span class="hljs-subst">{grade}</span> for <span class="hljs-subst">{student}</span> in <span class="hljs-subst">{subject}</span>"</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+        
+    <span class="hljs-keyword">except</span> PermissionError:
+        print(<span class="hljs-string">"Can't write to file - check permissions!"</span>)
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        print(<span class="hljs-string">f"An error occurred: <span class="hljs-subst">{e}</span>"</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+<span class="hljs-comment"># Test it out</span>
+safe_add_grade(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Math"</span>, <span class="hljs-string">"A"</span>)    <span class="hljs-comment"># Should work</span>
+safe_add_grade(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Science"</span>, <span class="hljs-string">"Z"</span>)   <span class="hljs-comment"># Invalid grade</span>
+</div></code></pre>
+<h3 id="%F0%9F%91%89-your-turn-practice-exercise">👉 Your Turn! Practice Exercise</h3>
+<p>Create a program that:</p>
+<ol>
+<li>Asks the user for a filename</li>
+<li>Tries to read the file</li>
+<li>Handles all possible errors</li>
+<li>Keeps asking until successful or user quits</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_user_file</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        filename = input(<span class="hljs-string">"Enter filename (or 'quit' to exit): "</span>)
+        <span class="hljs-keyword">if</span> filename.lower() == <span class="hljs-string">'quit'</span>:
+            <span class="hljs-keyword">break</span>
+            
+        <span class="hljs-comment"># Your code here!</span>
+        <span class="hljs-comment"># Try to read the file</span>
+        <span class="hljs-comment"># Handle possible errors</span>
+        <span class="hljs-comment"># Print the content if successful</span>
+
+<span class="hljs-comment"># Try running this and entering different filenames!</span>
+read_user_file()
+</div></code></pre>
+<p>Remember: Good programmers aren't those who never make mistakes - they're the ones who know how to handle them! 🚀</p>
+<h1 id="review-quiz-%F0%9F%93%9D">Review Quiz 📝</h1>
+<h2 id="part-1-basic-understanding">Part 1: Basic Understanding</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># Question 1: File Paths</span>
+<span class="hljs-comment"># What's wrong with this code?</span>
+file_path = <span class="hljs-string">"homework folder/notes.txt"</span>
+my_file = open(file_path)
+<span class="hljs-comment"># A) Spaces in folder names might cause problems</span>
+<span class="hljs-comment"># B) Should use backslash instead</span>
+<span class="hljs-comment"># C) Need to add 'r' mode</span>
+<span class="hljs-comment"># D) Nothing wrong</span>
+
+<span class="hljs-comment"># Question 2: Reading Files</span>
+<span class="hljs-comment"># What will this code print?</span>
+content = <span class="hljs-string">"""Hello
+Python
+World"""</span>
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"test.txt"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    file.write(content)
+    
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"test.txt"</span>, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+    print(file.readline())
+</div></code></pre>
+<h2 id="part-2-working-with-files">Part 2: Working with Files</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># Question 3: File Modes</span>
+<span class="hljs-comment"># What does each mode do?</span>
+modes = {
+    <span class="hljs-string">"r"</span>: <span class="hljs-string">"______"</span>,  <span class="hljs-comment"># Fill in</span>
+    <span class="hljs-string">"w"</span>: <span class="hljs-string">"______"</span>,  <span class="hljs-comment"># Fill in</span>
+    <span class="hljs-string">"a"</span>: <span class="hljs-string">"______"</span>   <span class="hljs-comment"># Fill in</span>
+}
+
+<span class="hljs-comment"># Question 4: Writing Files</span>
+<span class="hljs-comment"># Which code adds text without erasing the file?</span>
+<span class="hljs-comment"># A) open("notes.txt", "w")</span>
+<span class="hljs-comment"># B) open("notes.txt", "r")</span>
+<span class="hljs-comment"># C) open("notes.txt", "a")</span>
+<span class="hljs-comment"># D) open("notes.txt")</span>
+
+<span class="hljs-comment"># Question 5: CSV Files</span>
+<span class="hljs-comment"># What's wrong with this code?</span>
+<span class="hljs-keyword">import</span> csv
+data = [[<span class="hljs-string">"Name"</span>, <span class="hljs-string">"Grade"</span>], [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"A"</span>], [<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"B"</span>]]
+<span class="hljs-keyword">with</span> open(<span class="hljs-string">"grades.csv"</span>, <span class="hljs-string">"w"</span>) <span class="hljs-keyword">as</span> file:
+    writer = csv.writer(file)
+    writer.write(data)
+</div></code></pre>
+<h2 id="part-3-error-handling">Part 3: Error Handling</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># Question 6: Try-Except</span>
+<span class="hljs-comment"># What will this code print?</span>
+<span class="hljs-keyword">try</span>:
+    file = open(<span class="hljs-string">"missing.txt"</span>)
+    content = file.read()
+<span class="hljs-keyword">except</span> FileNotFoundError:
+    print(<span class="hljs-string">"File not found!"</span>)
+<span class="hljs-keyword">finally</span>:
+    print(<span class="hljs-string">"Done!"</span>)
+
+<span class="hljs-comment"># Question 7: Error Types</span>
+<span class="hljs-comment"># What error will you get if:</span>
+<span class="hljs-comment"># 1. The file doesn't exist? _______</span>
+<span class="hljs-comment"># 2. You try to read a file that's locked? _______</span>
+</div></code></pre>
+<h2 id="practice-problems">Practice Problems</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># Question 8: Fix This Code</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_scores</span><span class="hljs-params">(filename)</span>:</span>
+    file = open(filename)
+    scores = file.readlines()
+    <span class="hljs-keyword">return</span> scores
+<span class="hljs-comment"># What's wrong with this code?</span>
+<span class="hljs-comment"># How would you fix it?</span>
+
+<span class="hljs-comment"># Question 9: Diary Program</span>
+<span class="hljs-comment"># Which is better for a diary app and why?</span>
+option_1 = <span class="hljs-string">"""
+with open('diary.txt', 'w') as file:
+    file.write(new_entry)
+"""</span>
+
+option_2 = <span class="hljs-string">"""
+with open('diary.txt', 'a') as file:
+    file.write(new_entry)
+"""</span>
+
+<span class="hljs-comment"># Question 10: Complete the Function</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">save_high_score</span><span class="hljs-params">(player_name, score)</span>:</span>
+    <span class="hljs-string">"""
+    Save a player's high score to 'scores.txt'.
+    Each line should be: player_name,score
+    Don't erase other scores!
+    """</span>
+    <span class="hljs-comment"># Your code here</span>
+    <span class="hljs-keyword">pass</span>
+</div></code></pre>
+<p>Remember:</p>
+<ul>
+<li>Always use 'with' when opening files</li>
+<li>Handle errors with try-except</li>
+<li>Choose the right mode (r, w, a)</li>
+<li>Make backups of important files</li>
+</ul>
+<p>Good luck! 🚀</p>
+
+</body>
+</html>
