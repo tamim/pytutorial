@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 8: Sets & Dictionaries - Organizing and Accessing Data Efficiently 📚 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 8: Sets & Dictionaries - Organizing and Accessing Data Efficiently 📚</h1></p><p><h2><strong>1️⃣ Why Learn About Sets and Dictionaries?</strong></h2>
+In Python, <strong>sets</strong> and <strong>dictionaries</strong> provide efficient ways to store and retrieve data.</p><p>✅ <strong>Why Use Sets and Dictionaries?</strong>
+- <strong>Sets</strong> help store <strong>unique values</strong> and perform operations like union and intersection.
+- <strong>Dictionaries</strong> store <strong>key-value pairs</strong>, making data lookup fast and efficient.</p><p><hr>
+<h2><strong>2️⃣ Sets: A Collection of Unique Elements</strong> 🔢</h2>
+<h3><strong>Creating a Set</strong></h3>
+<pre><code class='language-python'>
+fruits = {&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;apple&quot;}  # Duplicate &quot;apple&quot; removed automatically
+print(fruits)  # Output: {'apple', 'banana', 'cherry'}
+</code></pre>
+✅ <strong>Use Cases:</strong> Removing duplicates, membership checks, set operations.</p><p><h3><strong>Adding and Removing Elements</strong></h3>
+<pre><code class='language-python'>
+fruits.add(&quot;orange&quot;)  # Add an element
+fruits.remove("banana")  # Remove an element
+print(fruits)
+</code></pre></p><p><h3><strong>Set Operations (Union, Intersection, Difference)</strong></h3>
+<pre><code class='language-python'>
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}</p><p>print(set_a | set_b)  # Union: {1, 2, 3, 4, 5, 6}
+print(set_a & set_b)  # Intersection: {3, 4}
+print(set_a - set_b)  # Difference: {1, 2}
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create two sets and find their union and intersection.</p><p><hr>
+<h2><strong>3️⃣ Dictionaries: Key-Value Pairs for Fast Lookups</strong> 📖</h2>
+<h3><strong>Creating a Dictionary</strong></h3>
+<pre><code class='language-python'>
+student = {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 22, &quot;major&quot;: &quot;Computer Science&quot;}
+print(student["name"])  # Output: Alice
+</code></pre>
+✅ <strong>Use Cases:</strong> Storing structured data, fast lookups, mapping relationships.</p><p><h3><strong>Adding and Modifying Values</strong></h3>
+<pre><code class='language-python'>
+student[&quot;age&quot;] = 23  # Modify value
+student["grade"] = "A"  # Add new key-value pair
+print(student)
+</code></pre></p><p><h3><strong>Iterating Over a Dictionary</strong></h3>
+<pre><code class='language-python'>
+for key, value in student.items():
+    print(f"{key}: {value}")
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a dictionary storing book titles and their authors, then print each pair.</p><p><hr>
+<h2><strong>4️⃣ Dictionary Methods & Operations</strong> 🛠️</h2>
+<pre><code class='language-python'>
+print(student.keys())  # Get all keys
+print(student.values())  # Get all values
+print("age" in student)  # Check if key exists
+student.pop("major")  # Remove a key-value pair
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Write a program that keeps track of student scores using a dictionary.</p><p><hr>
+<h2><strong>5️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li>Create a set of numbers and remove an element from it.</li></ol>
+<ol><li>Write a program that creates a dictionary to store information about a car (brand, model, year).</li></ol>
+<ol><li>Use a loop to print all keys and values from a dictionary.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li>Given two sets, find and print their union and intersection.</li></ol>
+<ol><li>Write a program that stores five students’ names and their grades in a dictionary, then prints the highest grade.</li></ol>
+<ol><li>Write a function that takes a dictionary and returns a list of all its values.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li>Implement a <strong>word frequency counter</strong>: Read a sentence from the user and count occurrences of each word using a dictionary.</li></ol>
+<ol><li>Write a <strong>set-based duplicate remover</strong>: Ask the user for a list of numbers and remove duplicates using a set.</li></ol>
+<ol><li>Create a <strong>basic contacts app</strong> where users can add, remove, and search for contacts stored in a dictionary.</li></ol></p><p><hr>
+<h2><strong>6️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to use <strong>sets</strong> to store unique values and perform set operations.
+- How to use <strong>dictionaries</strong> for fast data lookup and key-value storage.</p><p>🔜 <strong>Coming Up Next: Data Structures Revisited - Combining Lists, Tuples, Sets, and Dictionaries!</strong></p><p>💡 <strong>Tip:</strong> Sets and dictionaries are <strong>powerful tools</strong> for managing data. Try using them in real-world scenarios like contact lists, word counters, or filtering unique elements! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 07 Working with Files.html" class="nav-button">← Tutorial 7: Working with Files</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 09 Data Structures Revisited.html" class="nav-button">Tutorial 9: Data Structures Revisited →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

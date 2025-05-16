@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Workout Session 2 - Strengthening Conditional Logic, Loops, Strings & Functions 💪 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Python Workout Session 2 - Strengthening Conditional Logic, Loops, Strings & Functions 💪</h1></p><p><h2><strong>1️⃣ Purpose of This Session</strong> 🎯</h2>
+This session is designed to help you <strong>apply</strong> core programming concepts in real-world scenarios, focusing on:
+- <strong>Conditional Logic</strong> (if-else statements)
+- <strong>Loops</strong> (for, while)
+- <strong>Functions</strong> (defining and using functions)
+- <strong>Strings</strong> (manipulation and formatting)</p><p>📌 <strong>Session Breakdown (90 minutes):</strong>
+- <strong>30% Examples & Explanations</strong> 👨‍🏫
+- <strong>30% Guided Exercises</strong> 🏋️‍♂️
+- <strong>40% Independent Challenges</strong> 🔥</p><p><hr>
+<h2><strong>2️⃣ Warm-Up: Quick Examples (30%)</strong> 🏁</h2></p><p><h3><strong>Example 1: Find the First and Last Character of a String</strong></h3>
+<pre><code class='language-python'>
+def first_last(s):
+    return s[0] + s[-1] if len(s) > 1 else s * 2</p><p>print(first_last("hello"))  # Output: ho
+print(first_last("a"))  # Output: aa
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this function to return the first and last two characters if the string length is more than 4.</p><p><h3><strong>Example 2: Summing Digits in a Number</strong></h3>
+<pre><code class='language-python'>
+def sum_digits(n):
+    return sum(int(digit) for digit in str(n))</p><p>print(sum_digits(1234))  # Output: 10
+</code></pre>
+✅ <strong>Modify this to return the product of the digits instead.</strong></p><p><h3><strong>Example 3: Checking if a String is a Palindrome</strong></h3>
+<pre><code class='language-python'>
+def is_palindrome(s):
+    return s == s[::-1]</p><p>print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("python"))  # Output: False
+</code></pre>
+✅ <strong>Modify this function to ignore case and spaces while checking for palindromes.</strong></p><p><hr></p><p><h2><strong>3️⃣ Guided Exercises (30%)</strong> 🏋️‍♂️</h2></p><p><h3><strong>Exercise 1: String Splitting and Joining</strong></h3>
+Write a function that takes a sentence and reverses the order of words.
+<pre><code class='language-python'>
+def reverse_words(sentence):
+    # Your code here</p><p>print(reverse_words("Hello World"))  # Output: "World Hello"
+</code></pre></p><p><h3><strong>Exercise 2: Counting Occurrences of a Letter</strong></h3>
+Write a function that takes a string and a letter, and counts how many times that letter appears.
+<pre><code class='language-python'>
+def count_letter(s, letter):
+    # Your code here</p><p>print(count_letter("banana", "a"))  # Output: 3
+</code></pre></p><p><h3><strong>Exercise 3: Implementing a Simple Substring Check</strong></h3>
+Write a function that checks if one string appears inside another, case-insensitive.
+<pre><code class='language-python'>
+def contains_substring(text, substring):
+    # Your code here</p><p>print(contains_substring("Hello World", "hello"))  # Output: True
+</code></pre></p><p>✅ <strong>Test your solutions with multiple inputs.</strong></p><p><hr></p><p><h2><strong>4️⃣ Independent Challenges (40%)</strong> 🔥</h2></p><p><h3><strong>Challenge 1: Lucky 7s</strong> 🏆</h3>
+Write a function that takes a list of numbers and returns <code>True</code> if any two numbers sum to 7.
+<pre><code class='language-python'>
+def lucky_sevens(nums):
+    # Your code here</p><p>print(lucky_sevens([1, 2, 3, 4]))  # Output: True (3+4)
+</code></pre></p><p><h3><strong>Challenge 2: Common Characters</strong> 🔡</h3>
+Write a function that takes two strings and returns a set of characters they have in common.
+<pre><code class='language-python'>
+def common_chars(str1, str2):
+    # Your code here</p><p>print(common_chars("python", "typhoon"))  # Output: {'o', 't', 'h', 'y', 'n'}
+</code></pre></p><p><h3><strong>Challenge 3: Finding the Middle Character(s)</strong> 🔢</h3>
+Write a function that returns the middle character of a string. If even length, return two characters.
+<pre><code class='language-python'>
+def middle_chars(s):
+    # Your code here</p><p>print(middle_chars("python"))  # Output: th
+print(middle_chars("race"))  # Output: ac
+</code></pre></p><p>✅ <strong>Test different cases and ensure accuracy.</strong></p><p><hr></p><p><h2><strong>5️⃣ Reflection: What Did You Learn?</strong> 🤔</h2>
+- What was the easiest exercise? What was the hardest?
+- Which debugging technique helped you the most?
+- How can you apply these concepts in real-world coding?</p><p>✅ <strong>Final Challenge:</strong> Create a program that asks the user for their name and birth year, then returns a fun fact about their birth year using functions, loops, and string manipulation!</p><p><hr></p><p><h2><strong>6️⃣ Next Steps 🚀</strong></h2>
+✅ <strong>Great job!</strong> You’ve strengthened your Python fundamentals.
+🔜 <strong>Coming Up Next: More Advanced Programming Concepts!</strong></p><p>💡 <strong>Tip:</strong> Practice makes perfect! Try modifying the exercises and experiment with different inputs. 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 08 Sets and Dictionaries.html" class="nav-button">← Tutorial 8: Sets and Dictionaries</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 09 Data Structures Revisited.html" class="nav-button">Tutorial 9: Data Structures Revisited →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

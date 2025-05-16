@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 7: Working with Files - Read, Write, and Manage Data 📂 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">        
+        <main>
+            <p><h1>Tutorial 7: Working with Files - Read, Write, and Manage Data 📂</h1></p><p><h2><strong>1️⃣ Why Work with Files in Python?</strong></h2>
+Files allow us to <strong>store and retrieve data</strong> for later use. Instead of losing information when a program ends, we can save it to a file.</p><p>✅ <strong>Why Files?</strong>
+- Store data permanently
+- Share and manage structured information
+- Work with logs, user data, and reports</p><p><hr>
+<h2><strong>2️⃣ Reading from a File</strong> 📖</h2>
+<h3><strong>Opening and Reading a File</strong></h3>
+<pre><code class='language-python'>
+with open(&quot;example.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()
+    print(content)
+</code></pre>
+✅ <strong>Explanation:</strong>
+- <code>open("filename", "r")</code> opens the file in <strong>read mode</strong>.
+- <code>.read()</code> retrieves the entire content.
+- <code>with open(...)</code> ensures the file <strong>closes automatically</strong> after use.</p><p><h3><strong>Reading Line by Line</strong></h3>
+<pre><code class='language-python'>
+with open(&quot;example.txt&quot;, &quot;r&quot;) as file:
+    for line in file:
+        print(line.strip())  # Removes extra newlines
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to count the number of lines in a file.</p><p><hr>
+<h2><strong>3️⃣ Writing to a File</strong> ✍️</h2>
+<h3><strong>Writing and Overwriting a File</strong></h3>
+<pre><code class='language-python'>
+with open(&quot;example.txt&quot;, &quot;w&quot;) as file:
+    file.write("Hello, Python learners!\n")
+</code></pre>
+✅ <strong>Explanation:</strong>
+- <code>"w"</code> mode <strong>overwrites</strong> existing content.
+- <code>write()</code> adds new text.</p><p><h3><strong>Appending to a File</strong></h3>
+<pre><code class='language-python'>
+with open(&quot;example.txt&quot;, &quot;a&quot;) as file:
+    file.write("Appending this line!\n")
+</code></pre>
+✅ <strong>Use <code>a</code> mode</strong> to add new data <strong>without deleting existing content</strong>.</p><p>💡 <strong>Mini Challenge:</strong> Write a program that asks for a user's name and saves it to a file.</p><p><hr>
+<h2><strong>4️⃣ Working with CSV Files</strong> 📊</h2>
+CSV (Comma-Separated Values) files store <strong>structured data</strong> like spreadsheets.</p><p><h3><strong>Reading a CSV File</strong></h3>
+<pre><code class='language-python'>
+import csv</p><p>with open("data.csv", "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+</code></pre>
+✅ <strong>Explanation:</strong>
+- The <code>csv.reader()</code> processes each line as a <strong>list of values</strong>.
+- Each <code>row</code> is printed as a list.</p><p><h3><strong>Writing to a CSV File</strong></h3>
+<pre><code class='language-python'>
+import csv</p><p>data = [["Name", "Age"], ["Alice", 25], ["Bob", 30]]</p><p>with open("data.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+</code></pre>
+✅ <strong>Try-it:</strong> Modify the program to <strong>append</strong> instead of overwrite.</p><p><hr>
+<h2><strong>5️⃣ Exception Handling in File Operations</strong> ⚠️</h2>
+<h3><strong>Handling Missing Files Gracefully</strong></h3>
+<pre><code class='language-python'>
+try:
+    with open("nonexistent.txt", "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("Error: File not found!")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to ask the user for a filename and handle errors properly.</p><p><hr>
+<h2><strong>6️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li><strong>File Reader:</strong> Write a program that opens a file, reads its content, and prints it to the console. Try it with different text files.</li></ol>
+<ol><li><strong>Write Your Thoughts:</strong> Create a file and write three lines of text to it. Think of it as a small diary entry!</li></ol>
+<ol><li><strong>Modify a File:</strong> Open an existing file and append a new sentence to it. Can you make it a small story?</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li><strong>Word Counter:</strong> Write a program that counts the number of words in a file.</li></ol>
+<ol><li><strong>Extracting Data from CSV:</strong> Read a CSV file and print only the second column (e.g., extracting names from a name-age dataset).</li></ol>
+<ol><li><strong>Activity Logger:</strong> Write a program that logs user activities (like logins, button clicks) into a file. This can help you understand how event tracking works!</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li><strong>Simple Notes App:</strong> Implement a basic notes application where users can write, save, and retrieve their notes.</li></ol>
+<ol><li><strong>Merging Files:</strong> Create a program that merges multiple text files into one. This is useful for handling logs or reports.</li></ol>
+<ol><li><strong>Student Grades System:</strong> Write a program that reads student scores from a CSV file, calculates the average, and writes the results back to a new file.</li></ol></p><p><hr>
+<h2><strong>7️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to <strong>read and write</strong> text files.
+- How to <strong>handle CSV files</strong>.
+- How to <strong>manage exceptions</strong> when working with files.</p><p>🔜 <strong>Coming Up Next: Sets and Dictionaries!</strong></p><p>💡 <strong>Tip:</strong> Files are essential for real-world applications. Try building a program that saves user data for later retrieval! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 06 Lists and Tuples.html" class="nav-button">← Tutorial 6: Lists and Tuples</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 08 Sets and Dictionaries.html" class="nav-button">Tutorial 8: Sets and Dictionaries →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

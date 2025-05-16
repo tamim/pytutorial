@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 12: Algorithmic Thinking & Problem-Solving 🧠🔍 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 12: Algorithmic Thinking & Problem-Solving 🧠🔍</h1></p><p><h2><strong>1️⃣ Why Learn Algorithmic Thinking?</strong></h2>
+Algorithmic thinking is essential for solving problems efficiently. It involves:
+✅ Breaking down problems into smaller steps.
+✅ Recognizing patterns and applying logic.
+✅ Writing efficient and optimized code.</p><p>🔍 <strong>In this tutorial, you’ll learn:</strong>
+- Common algorithmic techniques.
+- Simple sorting and searching algorithms.
+- Problem-solving strategies with easy-to-follow examples.
+- Why learning algorithms is important for the future.
+- An introduction to competitive programming and motivation to learn more.</p><p><hr>
+<h2><strong>2️⃣ Finding Maximum and Second Largest Number</strong> 🏗️</h2>
+Algorithmic thinking involves breaking a problem into steps and finding the best approach to solve it.</p><p><h3><strong>Example: Find the Largest Number in a List (Step-by-Step Thinking)</strong></h3>
+<pre><code class='language-python'>
+def find_max(numbers):
+    max_num = numbers[0]  # Assume the first number is the largest
+    for num in numbers:
+        if num > max_num:
+            max_num = num  # Update max if a larger number is found
+    return max_num</p><p>print(find_max([3, 7, 2, 8, 5]))  # Output: 8
+</code></pre></p><p>✅ <strong>Try-it:</strong> Modify this function to return both the maximum and minimum numbers.</p><p><h3><strong>Using Python’s Built-in max() Function</strong></h3>
+<pre><code class='language-python'>
+numbers = [3, 7, 2, 8, 5]
+print(max(numbers))  # Output: 8
+</code></pre></p><p>🚀 <strong>Why still learn step-by-step thinking?</strong>
+- Built-in functions are optimized, but understanding their logic helps in solving complex problems where built-in solutions do not exist.
+- Algorithmic thinking improves debugging and optimization skills.
+- Some problems require custom implementations beyond standard functions.</p><p><h3><strong>Finding the Second Largest Number (Handling Duplicates)</strong></h3>
+<pre><code class='language-python'>
+def second_largest(numbers):
+    first, second = float('-inf'), float('-inf')
+    for num in numbers:
+        if num > first:
+            second, first = first, num
+        elif num > second and num != first:
+            second = num
+    return second</p><p>print(second_largest([3, 7, 2, 8, 5, 8]))  # Output: 7
+</code></pre>
+✅ <strong>Challenge:</strong> Find the lowest and second lowest number from a list.</p><p><hr>
+<h2><strong>3️⃣ Linear Search & Binary Search (Guessing Game First!)</strong> 🔍</h2>
+<h3><strong>1. Linear Search Example</strong></h3>
+Linear search checks every element one by one.
+<pre><code class='language-python'>
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return the index where found
+    return -1</p><p>print(linear_search([10, 20, 30, 40], 30))  # Output: 2
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this function to return all occurrences of the target value.</p><p><h3><strong>2. Guess the Number Game (Binary Search in Action)</strong></h3>
+Before explaining binary search, let's introduce it using a <strong>number guessing game</strong>.
+<pre><code class='language-python'>
+def guess_number(target):
+    low, high = 1, 100
+    while low <= high:
+        mid = (low + high) // 2
+        print(f"Is it {mid}?")
+        if mid == target:
+            print("Correct!")
+            return
+        elif mid < target:
+            low = mid + 1
+        else:
+            high = mid - 1</p><p><h1>Try guessing a number between 1 and 100</h1>
+guess_number(42)
+</code></pre>
+✅ <strong>Try-it:</strong> Modify the game to allow user input for responses.</p><p><h3><strong>3. Binary Search for Sorted Lists</strong></h3>
+Now that we understand binary search from the guessing game, let's apply it to <strong>sorted lists</strong>.
+<pre><code class='language-python'>
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</p><p>print(binary_search([10, 20, 30, 40, 50], 30))  # Output: 2
+</code></pre>
+✅ <strong>Challenge:</strong> Modify this function to return all occurrences of the target value.</p><p><h3><strong>4. Comparing Linear Search vs. Binary Search Performance</strong> ⚡</h3>
+Use <code>timeit</code> to compare search speeds for a large dataset.
+<pre><code class='language-python'>
+import timeit</p><p>large_list = list(range(1000000))
+print("Linear Search Time:", timeit.timeit(lambda: linear_search(large_list, 999999), number=1))
+print("Binary Search Time:", timeit.timeit(lambda: binary_search(large_list, 999999), number=1))
+</code></pre>
+✅ <strong>Challenge:</strong> Modify this to find the average time over multiple runs.</p><p><hr>
+<h2><strong>4️⃣ Optimized Prime Number Checking & Sieve of Eratosthenes</strong> 🔢</h2>
+<h3><strong>1. Iterative Prime Checker Improvements</strong></h3>
+<pre><code class='language-python'>
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True  # 2 is the only even prime number
+    if n % 2 == 0:
+        return False  # Eliminate all even numbers
+    for i in range(3, int(n**0.5) + 1, 2):  # Check odd numbers only, up to sqrt(n)
+        if n % i == 0:
+            return False
+    return True
+</code></pre>
+🔹 <strong>Why is this optimized?</strong>
+- <strong>Skip even numbers after checking 2</strong>.
+- <strong>Check only up to <code>sqrt(n)</code></strong> instead of <code>n // 2</code>.</p><p><h3><strong>2. Efficient Prime Finding: Sieve of Eratosthenes (Using While Loop for Simplicity)</strong></h3>
+<pre><code class='language-python'>
+def sieve_of_eratosthenes(limit):
+    primes = [True] * (limit + 1)
+    primes[0] = primes[1] = False  # 0 and 1 are not prime
+    i = 2
+    while i * i <= limit:
+        if primes[i]:
+            j = i * i
+            while j <= limit:
+                primes[j] = False
+                j += i
+        i += 1
+    return [i for i in range(limit + 1) if primes[i]]
+</code></pre>
+✅ <strong>Challenge:</strong> Why is this method more efficient? Compare it with the basic prime-checking function.</p><p><hr>
+<h2><strong>5️⃣ Checking Balanced Brackets Using Stack</strong> 🔢</h2>
+One common algorithmic problem is checking if brackets in an expression are <strong>balanced</strong> (i.e., every opening bracket has a corresponding closing bracket in the correct order).</p><p><h3><strong>Example: Checking Balanced Brackets</strong></h3>
+<pre><code class='language-python'>
+def is_balanced(expression):
+    stack = []
+    brackets = {')': '(', ']': '[', '}': '{'}
+    
+    for char in expression:
+        if char in brackets.values():  # If it's an opening bracket, push to stack
+            stack.append(char)
+        elif char in brackets.keys():  # If it's a closing bracket, check for match
+            if not stack or stack.pop() != brackets[char]:
+                return False
+    return not stack  # Stack should be empty if balanced</p><p>print(is_balanced("(a + b) * [c - d]"))  # Output: True
+print(is_balanced("(a + b) * [c - d"))   # Output: False
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this function to ignore non-bracket characters in the input.</p><p><hr>
+<h2><strong>6️⃣ Motivation for Algorithmic Learning & Competitions</strong> 🚀</h2>
+Why learn algorithms?
+- <strong>Helps in writing efficient and scalable programs.</strong>
+- <strong>Encourages logical thinking and problem breakdown.</strong>
+- <strong>Prepares students for problem-solving competitions!</strong></p><p><h3><strong>Popular Competitions to Explore:</strong></h3>
+- <strong>International Olympiad in Informatics (IOI)</strong>
+- <strong>Australian Informatics Olympiad (AIO)</strong>
+- <strong>Google Code Jam, Codeforces, AtCoder</strong></p><p>✅ <strong>Try-it:</strong> Solve easy problems on platforms like <strong>Codeforces, LeetCode, or AtCoder</strong>.</p><p><hr>
+<h2><strong>7️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to optimize searching and sorting.
+- How to compare algorithm performance.
+- How to improve problem-solving with better approaches.</p><p>🔜 <strong>Coming Up Next: Mini-Projects & Advanced Challenges!</strong></p><p>💡 <strong>Tip:</strong> Join a coding competition to test your skills and gain confidence! 🚀
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 11 Error Handling and Defensive Programming.html" class="nav-button">← Tutorial 11: Error Handling and Defensive Programming</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="#" class="nav-button"> →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

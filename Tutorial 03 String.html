@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 3: String Adventures - Playing with Text! ✍️ - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 3: String Adventures - Playing with Text! ✍️</h1></p><p><h2><strong>1️⃣ What are Strings?</strong> 📜</h2>
+A <strong>string</strong> is a sequence of characters enclosed in quotes. You can use either <strong>single (<code>'</code>) or double (<code>"</code>) quotes</strong>.</p><p><pre><code class='language-python'>
+message = &quot;Hello, Python!&quot;
+name = 'Alice'
+</code></pre></p><p>✅ <strong>Checkpoint:</strong> Try assigning different sentences to a string variable and printing them.</p><p><hr></p><p><h2><strong>2️⃣ Combining and Formatting Strings</strong></h2></p><p><h3><strong>String Concatenation</strong></h3>
+Use <code>+</code> to join strings together.</p><p><pre><code class='language-python'>
+first_name = &quot;John&quot;
+last_name = "Doe"
+full_name = first_name + " " + last_name
+print(full_name)  # Output: John Doe
+</code></pre></p><p>💡 <strong>Try-it:</strong> Ask the user for their first and last name and print their full name.</p><p><h3><strong>String Formatting (f-strings)</strong></h3>
+Instead of using <code>+</code>, f-strings provide a cleaner way to format text.</p><p><pre><code class='language-python'>
+name = &quot;Alice&quot;
+age = 25
+print(f"My name is {name} and I am {age} years old.")
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Modify the program to print a sentence using different variables.</p><p><hr></p><p><h2><strong>3️⃣ String Methods</strong> 🛠️</h2>
+Python provides many built-in methods to work with strings.</p><p><h3><strong>Changing Case</strong></h3>
+<pre><code class='language-python'>
+text = &quot;Hello, Python!&quot;
+print(text.upper())  # HELLO, PYTHON!
+print(text.lower())  # hello, python!
+print(text.title())  # Hello, Python!
+</code></pre></p><p><h3><strong>Removing Extra Spaces</strong></h3>
+<pre><code class='language-python'>
+user_input = &quot;   Python   &quot;
+print(user_input.strip())  # "Python"
+</code></pre></p><p><h3><strong>Replacing and Finding Text</strong></h3>
+<pre><code class='language-python'>
+text = &quot;I love Java!&quot;
+print(text.replace("Java", "Python"))  # I love Python!
+print(text.find("Java"))  # Returns index where 'Java' starts
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Write a program that asks for a sentence and replaces one word with another.</p><p><hr></p><p><h2><strong>4️⃣ Checking String Content</strong> 🔍</h2></p><p><pre><code class='language-python'>
+text = &quot;Hello123&quot;
+print(text.isalpha())  # False (contains numbers)
+print(text.isdigit())  # False (contains letters)
+print("12345".isdigit())  # True
+print(text.isalnum())  # True (contains only letters and numbers, no spaces or special characters)
+print("Hello!".isalnum())  # False (contains a special character)
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Ask the user to enter their age and check if it’s a valid number.</p><p><hr></p><p><h2><strong>5️⃣ Splitting and Joining Strings</strong> 🔗</h2></p><p><h3><strong>Splitting Strings into Lists</strong></h3>
+<pre><code class='language-python'>
+sentence = &quot;Python is fun&quot;
+words = sentence.split()
+print(words)  # ['Python', 'is', 'fun']
+</code></pre></p><p><h3><strong>Joining Lists into a String</strong></h3>
+<pre><code class='language-python'>
+words = [&quot;Python&quot;, &quot;is&quot;, &quot;awesome&quot;]
+sentence = " ".join(words)
+print(sentence)  # Python is awesome
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Ask the user for a sentence and count how many words it contains.</p><p><hr></p><p><h2><strong>6️⃣ Looping Over a String</strong> 🔄</h2>
+You can iterate through each character in a string using a loop.</p><p><pre><code class='language-python'>
+text = &quot;Python&quot;
+for char in text:
+    print(char)
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Modify the loop to print the index and character side by side.</p><p><hr></p><p><h2><strong>7️⃣ Counting Vowels in a String</strong> 🏆</h2>
+You can count how many vowels are in a string using a loop.</p><p><pre><code class='language-python'>
+text = &quot;Hello, Python!&quot;
+vowels = "aeiouAEIOU"
+vowel_count = 0
+for char in text:
+    if char in vowels:
+        vowel_count += 1
+print("Number of vowels:", vowel_count)
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Ask the user for a sentence and count how many vowels and consonants it contains.</p><p><hr></p><p><h2><strong>8️⃣ Practice Exercises</strong> 🏋️‍♂️</h2></p><p><h3><strong>Beginner Level</strong></h3>
+<ol><li>Write a program that takes a user's name and prints it in uppercase.</li></ol>
+<ol><li>Ask the user to enter a sentence and print it in reverse order.</li></ol>
+<ol><li>Write a program that checks if a user-entered word exists in a predefined sentence.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li>Ask the user for their full name and print only their first and last names.</li></ol>
+<ol><li>Write a program that removes extra spaces from user input and formats it properly.</li></ol>
+<ol><li>Ask the user to enter a comma-separated list of words and sort them alphabetically.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li>Create a <strong>username generator</strong> that takes a user's full name and generates a username.</li></ol>
+<ol><li>Write a program that counts the frequency of each letter in a given sentence.</li></ol>
+<ol><li>Create a <strong>simple password strength checker</strong> that verifies if a password contains uppercase letters, lowercase letters, numbers, and special characters.</li></ol></p><p><hr></p><p><h2><strong>9️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to manipulate strings using different methods.
+- Formatting and combining text efficiently.
+- Checking and modifying string content.
+- Looping over strings and counting vowels.</p><p>🔜 <strong>Coming Up Next: Lists and Tuples - Organizing Data!</strong></p><p>💡 <strong>Tip:</strong> Strings are used everywhere! Try using them in real-world scenarios like user input validation and text processing. 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 02 Control Flow.html" class="nav-button">← Tutorial 2: Control Flow</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 04 Lists and Tuples.html" class="nav-button">Tutorial 4: Lists and Tuples →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

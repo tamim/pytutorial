@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 10: Object-Oriented Programming (OOP) in Python 🏗️ - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 10: Object-Oriented Programming (OOP) in Python 🏗️</h1></p><p><h2><strong>1️⃣ Why Learn OOP?</strong></h2>
+Object-Oriented Programming (OOP) allows us to model real-world concepts using <strong>classes</strong> and <strong>objects</strong>. It helps in:
+✅ Writing reusable and organized code.
+✅ Representing real-world entities with attributes and behaviors.
+✅ Structuring large programs efficiently.</p><p>🔍 <strong>In this tutorial, you’ll learn:</strong>
+- How to create <strong>classes and objects</strong>.
+- How to use <strong>attributes and methods</strong>.
+- The power of <strong>inheritance and encapsulation</strong>.
+- How to apply OOP to real-world problems.</p><p><hr>
+<h2><strong>2️⃣ Creating a Class and Object</strong> 🎭</h2>
+A <strong>class</strong> defines a blueprint for creating objects, while an <strong>object</strong> is an instance of a class.</p><p><pre><code class='language-python'>
+class Car:
+    def __init__(self, brand, model, year):
+        self.brand = brand  # Attribute
+        self.model = model
+        self.year = year
+    
+    def display_info(self):  # Method
+        print(f"Car: {self.brand} {self.model}, Year: {self.year}")</p><p><h1>Creating an object</h1>
+my_car = Car("Toyota", "Corolla", 2022)
+my_car.display_info()
+</code></pre>
+✅ <strong>Try-it:</strong> Modify the class to include an <code>engine_type</code> attribute.</p><p><hr>
+<h2><strong>3️⃣ Instance vs Class Attributes</strong> 📌</h2>
+<h3><strong>Instance Attributes (Unique to Each Object)</strong></h3>
+Each object has its own copy of instance attributes.
+<pre><code class='language-python'>
+class Dog:
+    def __init__(self, name, breed):
+        self.name = name  # Unique per object
+        self.breed = breed</p><p><h1>Each dog has a different name and breed</h1>
+dog1 = Dog("Buddy", "Golden Retriever")
+dog2 = Dog("Max", "Beagle")
+</code></pre></p><p><h3><strong>Class Attributes (Shared Across All Objects)</strong></h3>
+<pre><code class='language-python'>
+class Dog:
+    species = "Canine"  # Shared by all instances</p><p>print(Dog.species)  # Output: Canine
+</code></pre>
+✅ <strong>Mini Challenge:</strong> Create a class <code>Book</code> with <code>title</code>, <code>author</code>, and a <strong>shared</strong> class attribute <code>library = "City Library"</code>.</p><p><hr>
+<h2><strong>4️⃣ Encapsulation: Protecting Data</strong> 🔒</h2>
+Encapsulation hides implementation details from the user.
+<pre><code class='language-python'>
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance  # Private attribute
+    
+    def deposit(self, amount):
+        self.__balance += amount
+    
+    def get_balance(self):
+        return self.__balance</p><p>account = BankAccount("Alice", 1000)
+print(account.get_balance())  # Output: 1000
+</code></pre>
+✅ <strong>Challenge:</strong> Modify the class to prevent <strong>negative deposits</strong>.</p><p><hr>
+<h2><strong>5️⃣ Inheritance: Reusing Code Efficiently</strong> 📚</h2>
+A new class can <strong>inherit</strong> attributes and methods from another class.
+<pre><code class='language-python'>
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        return "Some sound"</p><p>class Dog(Animal):  # Dog inherits from Animal
+    def speak(self):
+        return "Bark!"</p><p>dog = Dog("Buddy")
+print(dog.name)  # Output: Buddy
+print(dog.speak())  # Output: Bark!
+</code></pre>
+✅ <strong>Try-it:</strong> Create a <code>Cat</code> class that inherits from <code>Animal</code> and returns "Meow!" in <code>speak()</code>.</p><p><hr>
+<h2><strong>6️⃣ Polymorphism: Using Common Methods Across Classes</strong> 🔄</h2>
+Polymorphism allows different classes to use the same method name with different behaviors.
+<pre><code class='language-python'>
+class Bird:
+    def make_sound(self):
+        return "Chirp"</p><p>class Lion:
+    def make_sound(self):
+        return "Roar"</p><p>animals = [Bird(), Lion()]
+for animal in animals:
+    print(animal.make_sound())  # Output: Chirp, Roar
+</code></pre>
+✅ <strong>Challenge:</strong> Modify the example to add a <code>Dog</code> class that returns "Bark!".</p><p><hr>
+<h2><strong>7️⃣ Real-World Example: Simple Employee Management System</strong> 🏢</h2>
+<pre><code class='language-python'>
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+    
+    def display_info(self):
+        print(f"Employee: {self.name}, Salary: ${self.salary}")</p><p>class Manager(Employee):
+    def __init__(self, name, salary, department):
+        super().__init__(name, salary)
+        self.department = department
+    
+    def display_info(self):
+        print(f"Manager: {self.name}, Department: {self.department}, Salary: ${self.salary}")</p><p>emp1 = Employee("Alice", 50000)
+manager1 = Manager("Bob", 80000, "IT")
+emp1.display_info()
+manager1.display_info()
+</code></pre>
+✅ <strong>Try-it:</strong> Add a <code>bonus</code> attribute for managers and modify <code>display_info()</code> accordingly.</p><p><hr>
+<h2><strong>8️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li><strong>Create a <code>Car</code> class</strong> with <code>brand</code>, <code>model</code>, and <code>year</code>. Add a method to display car info.</li></ol>
+<ol><li><strong>Create a <code>Person</code> class</strong> with <code>name</code> and <code>age</code>, and a method <code>introduce()</code>.</li></ol>
+<ol><li><strong>Modify the <code>BankAccount</code> class</strong> to allow withdrawal with balance checks.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li><strong>Implement a <code>Shape</code> class</strong> and create <code>Circle</code> and <code>Rectangle</code> subclasses.</li></ol>
+<ol><li><strong>Extend the <code>Employee</code> system</strong> to add an <code>Intern</code> class with a <code>stipend</code> instead of salary.</li></ol>
+<ol><li><strong>Create a <code>Zoo</code> system</strong>, where each animal has a name, species, and a <code>make_sound()</code> method.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li><strong>Build a Library System</strong> where books can be added, borrowed, and returned.</li></ol>
+<ol><li><strong>Create a Flight Reservation System</strong> with different ticket types and seat assignments.</li></ol>
+<ol><li><strong>Develop a Game Character System</strong> with different character types and abilities.</li></ol></p><p><hr>
+<h2><strong>9️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- <strong>How to design classes and objects.</strong>
+- <strong>Encapsulation, inheritance, and polymorphism.</strong>
+- <strong>How to apply OOP principles to real-world scenarios.</strong></p><p>🔜 <strong>Coming Up Next: Error Handling & Defensive Programming!</strong></p><p>💡 <strong>Tip:</strong> Start using OOP in your projects! Try converting an existing script into a class-based system. 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 09 Data Structures Revisited.html" class="nav-button">← Tutorial 9: Data Structures Revisited</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 11 Error Handling and Defensive Programming.html" class="nav-button">Tutorial 11: Error Handling and Defensive Programming →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

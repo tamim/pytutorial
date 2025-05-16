@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 11: Error Handling & Defensive Programming ⚠️🔍 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 11: Error Handling & Defensive Programming ⚠️🔍</h1></p><p><h2><strong>1️⃣ Why Learn Error Handling?</strong></h2>
+Programs often encounter errors due to unexpected inputs, missing files, or logic mistakes. Instead of letting a program crash, we can <strong>handle errors gracefully</strong> and make our code more robust.</p><p>✅ <strong>Why Error Handling?</strong>
+- Prevents program crashes.
+- Provides user-friendly error messages.
+- Helps debug and track issues efficiently.</p><p>🔍 <strong>In this tutorial, you’ll learn:</strong>
+- How to handle different types of errors using <code>try-except</code>.
+- How to raise custom exceptions.
+- Defensive programming techniques to prevent errors.</p><p><hr>
+<h2><strong>2️⃣ Handling Errors with Try-Except</strong> 🔄</h2>
+The <code>try-except</code> block allows us to catch errors and handle them gracefully.</p><p><pre><code class='language-python'>
+try:
+    num = int(input("Enter a number: "))
+    print(f"You entered: {num}")
+except ValueError:
+    print("Invalid input! Please enter a valid number.")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to keep asking the user until they enter a valid number.</p><p><h3><strong>Handling Multiple Exceptions</strong></h3>
+<pre><code class='language-python'>
+try:
+    x = 10 / 0  # Division by zero error
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero!")
+except ValueError:
+    print("Invalid value provided!")
+</code></pre>
+✅ <strong>Mini Challenge:</strong> Extend this to handle <code>KeyboardInterrupt</code> (when the user stops the program).</p><p><hr>
+<h2><strong>3️⃣ Raising Custom Exceptions</strong> 🚨</h2>
+You can create custom error messages using <code>raise</code>.</p><p><pre><code class='language-python'>
+def withdraw(amount):
+    if amount < 0:
+        raise ValueError("Withdrawal amount cannot be negative!")
+    print(f"Withdrawing ${amount}")</p><p>try:
+    withdraw(-100)
+except ValueError as e:
+    print(f"Error: {e}")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to prevent withdrawing more money than available in an account.</p><p><hr>
+<h2><strong>4️⃣ Defensive Programming Techniques 🛡️</strong></h2>
+Defensive programming helps <strong>prevent</strong> errors <strong>before</strong> they happen.</p><p><h3><strong>1. Input Validation</strong></h3>
+<pre><code class='language-python'>
+def get_positive_number():
+    while True:
+        try:
+            num = int(input("Enter a positive number: "))
+            if num > 0:
+                return num
+            else:
+                print("Please enter a positive number!")
+        except ValueError:
+            print("Invalid input! Enter a valid number.")</p><p>print(get_positive_number())
+</code></pre>
+✅ <strong>Challenge:</strong> Modify this to ensure the number is within a given range.</p><p><h3><strong>2. Checking File Existence Before Opening</strong> 📂</h3>
+<pre><code class='language-python'>
+import os</p><p>filename = "data.txt"
+if os.path.exists(filename):
+    with open(filename, "r") as file:
+        print(file.read())
+else:
+    print("Error: File does not exist!")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to prompt the user for a filename and check if it exists before opening.</p><p><hr>
+<h2><strong>5️⃣ Logging Errors for Debugging 📝</strong></h2>
+Instead of printing errors, logging helps track and debug issues efficiently.</p><p><h3><strong>Using the Logging Module</strong></h3>
+<pre><code class='language-python'>
+import logging</p><p>logging.basicConfig(filename="app.log", level=logging.ERROR)</p><p>try:
+    x = 1 / 0
+except ZeroDivisionError as e:
+    logging.error(f"Error occurred: {e}")
+    print("An error was logged!")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify this to log different types of errors and check the generated log file.</p><p><hr>
+<h2><strong>6️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li>Write a program that asks for a number and handles invalid inputs gracefully.</li></ol>
+<ol><li>Implement a <code>try-except</code> block that handles division by zero errors.</li></ol>
+<ol><li>Modify the <code>get_positive_number()</code> function to ensure the number is greater than 10.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li>Create a simple calculator that catches invalid operations (e.g., dividing by zero).</li></ol>
+<ol><li>Write a program that reads a file and handles <code>FileNotFoundError</code>.</li></ol>
+<ol><li>Modify the <code>withdraw</code> function to prevent withdrawing more than the balance.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li><strong>User Login System:</strong> Ask for a username/password and lock out users after 3 failed attempts.</li></ol>
+<ol><li><strong>Data Processing with Logging:</strong> Process a list of numbers and log any errors encountered.</li></ol>
+<ol><li><strong>Automated Error Reporter:</strong> Write a script that logs errors and emails them to an admin.</li></ol></p><p><hr>
+<h2><strong>7️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to <strong>handle errors</strong> using <code>try-except</code>.
+- How to <strong>raise custom exceptions</strong>.
+- How to use <strong>defensive programming</strong> to prevent bugs.
+- How to <strong>log errors</strong> for debugging.</p><p>🔜 <strong>Coming Up Next: Algorithmic Thinking & Problem-Solving!</strong></p><p>💡 <strong>Tip:</strong> Try using error handling in your existing projects to improve reliability! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 10 Introduction to OOP.html" class="nav-button">← Tutorial 10: Object-Oriented Programming</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 12 Algorithmic Thinking and Problem Solving.html" class="nav-button">Tutorial 12: Algorithmic Thinking and Problem Solving →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

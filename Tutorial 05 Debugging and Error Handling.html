@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 5: Test and Fix Your Code - Debugging & Problem Solving 🔍 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tutorial 5: Test and Fix Your Code - Debugging & Problem Solving 🔍</h1>
+            <div class="info-box">
+                <p><strong>Welcome!</strong> This tutorial is part of Tamim's ThinkLab Python Tutorial Series. While it was created for ThinkLab students, everyone is welcome to use and learn from these materials. If you find these helpful, consider contributing improvements via <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Your tutorial content will go here -->
+            <p><h1>Tutorial 5: Test and Fix Your Code - Debugging & Problem Solving 🔍</h1></p><p><h2><strong>1️⃣ Introduction: Debugging as a Learning Tool</strong></h2>
+Debugging is more than just fixing errors—it’s a way to <strong>solidify your understanding</strong> of programming. The process of <strong>finding and fixing bugs</strong> forces you to think critically, apply your knowledge, and become a better problem solver.</p><p>✅ <strong>Why Debugging is Important?</strong>
+- Reinforces programming concepts.
+- Helps identify gaps in understanding.
+- Develops problem-solving skills.</p><p>💡 <strong>Your Goal:</strong> Instead of just fixing bugs, reflect on <strong>why</strong> they happen and how to prevent them.</p><p><hr>
+<h2><strong>2️⃣ Common Types of Bugs in Python</strong> ⚠️</h2></p><p><h3><strong>1. Syntax Errors</strong> (Breaking the Rules)</h3>
+Occurs when Python doesn’t understand your code.</p><p><pre><code class='language-python'>
+print(&quot;Hello&quot;  # ❌ Missing closing parenthesis
+</code></pre></p><p><strong>How to fix it?</strong>
+- Read the error message carefully.
+- Check for missing colons, parentheses, or indentation issues.</p><p><h3><strong>2. Runtime Errors</strong> (Crashes While Running)</h3>
+Python understands your code but encounters an issue while executing.</p><p><pre><code class='language-python'>
+num = int(&quot;hello&quot;)  # ❌ ValueError: invalid literal for int()
+print(10 / 0)        # ❌ ZeroDivisionError: division by zero
+</code></pre></p><p><strong>How to fix it?</strong>
+- Validate user inputs.
+- Use <code>try-except</code> blocks to handle errors gracefully.</p><p><h3><strong>3. Logic Errors</strong> (Wrong Results)</h3>
+Your program runs but produces incorrect output.</p><p><pre><code class='language-python'>
+x = 10
+y = 5
+print("Sum:", x - y)  # ❌ Incorrect logic! Should be x + y
+</code></pre></p><p><strong>How to fix it?</strong>
+- Use print statements to track variable values.
+- Walk through the logic manually.</p><p><hr>
+<h2><strong>3️⃣ Debugging Techniques</strong> 🛠️</h2></p><p><h3><strong>1. Print Statements: Your First Debugging Tool</strong></h3>
+<pre><code class='language-python'>
+def calculate_total(price, tax):
+    print("Debug: price =", price, "tax =", tax)  # Print values before calculations
+    total = price * tax  # ❌ Incorrect logic!
+    print("Debug: total =", total)
+    return total</p><p>calculate_total(100, 0.1)
+</code></pre>
+✅ <strong>Fix:</strong> <code>total = price + (price * tax)</code></p><p><h3><strong>2. Using <code>assert</code> to Validate Assumptions</strong></h3>
+<pre><code class='language-python'>
+def divide(a, b):
+    assert b != 0, "Error: Division by zero!"
+    return a / b</p><p>print(divide(10, 2))  # ✅ Works fine
+print(divide(5, 0))   # ❌ AssertionError: Division by zero!
+</code></pre></p><p><h3><strong>3. Try-Except for Handling Errors</strong></h3>
+<pre><code class='language-python'>
+try:
+    num = int(input("Enter a number: "))
+    print("You entered:", num)
+except ValueError:
+    print("Invalid input! Please enter a valid number.")
+</code></pre></p><p><hr>
+<h2><strong>4️⃣ Debugging Challenges: Apply What You Learned!</strong> 🎯</h2></p><p><h3><strong>1. Fix the Broken ATM System</strong> 💰</h3>
+<pre><code class='language-python'>
+balance = 500
+amount = int(input("Enter amount to withdraw: "))
+if amount > balance:
+    print("Error: Not enough balance!")
+else:
+    balance = balance - amount  # Fix logical errors here
+    print("Transaction successful! New balance:", balance)
+</code></pre></p><p>✅ <strong>Your Task:</strong> Identify and fix errors so the ATM behaves correctly.</p><p><hr></p><p><h3><strong>2. Prime Number Detector</strong> 🔢</h3>
+<pre><code class='language-python'>
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True</p><p>print(is_prime(11))  # Expected output: True
+print(is_prime(4))   # Expected output: False
+</code></pre>
+✅ <strong>Your Task:</strong> Add print statements to explain each step.</p><p><hr>
+<h3><strong>3. FizzBuzz Debugging Challenge</strong> 🏆</h3>
+<pre><code class='language-python'>
+for num in range(1, 51):
+    if num % 3 == 0:
+        print("Fizz")
+    elif num % 5 == 0:
+        print("Buzz")
+    elif num % 3 == 0 and num % 5 == 0:
+        print("FizzBuzz")  # ❌ Bug: This condition never executes!
+    else:
+        print(num)
+</code></pre>
+✅ <strong>Your Task:</strong> Fix the logic so that multiples of both 3 and 5 print "FizzBuzz".</p><p><hr>
+<h2><strong>5️⃣ Reflection: What Did You Learn?</strong> 🔍</h2></p><p>- <strong>Did you understand the error messages?</strong>
+- <strong>Which debugging technique helped the most?</strong>
+- <strong>How can you prevent these errors in future programs?</strong></p><p><h3><strong>Final Challenge:</strong> Debug a program of your choice and document the errors you found and how you fixed them!</h3></p><p><hr>
+<h2><strong>6️⃣ Next Steps 🚀</strong></h2>
+✅ <strong>Congratulations!</strong> You’ve learned how to:
+- Identify common programming errors.
+- Use print statements, assertions, and try-except for debugging.
+- Improve your problem-solving skills through debugging challenges.</p><p>🔜 <strong>Coming Up Next: Data Structures - Lists & Tuples!</strong></p><p>💡 <strong>Tip:</strong> Debugging is a skill you’ll use throughout your programming journey. The more you practice, the better you become! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 04 Functions.html" class="nav-button">← Tutorial 4: Functions</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 06 Lists and Tuples.html" class="nav-button">Tutorial 6: Lists and Tuples →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

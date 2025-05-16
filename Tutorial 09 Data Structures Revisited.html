@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 9: Data Structures Revisited - Combining Lists, Tuples, Sets & Dictionaries 🔄📊 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 9: Data Structures Revisited - Combining Lists, Tuples, Sets & Dictionaries 🔄📊</h1></p><p><h2><strong>1️⃣ Why Combine Data Structures?</strong></h2>
+Real-world programming problems often require the use of <strong>multiple data structures</strong> together. By combining <strong>lists, tuples, sets, and dictionaries</strong>, you can:</p><p>✅ Store and process complex data efficiently.
+✅ Perform operations like filtering, sorting, and grouping.
+✅ Use visualization tools to represent data better.</p><p>🔍 <strong>In this tutorial, you’ll:</strong>
+- Work on examples that combine multiple data structures.
+- Learn how to process and visualize data.
+- Solve hands-on exercises that reflect real-world problems.</p><p><hr>
+<h2><strong>2️⃣ Example: Organizing Student Data</strong> 🎓</h2>
+Imagine you are building a system to track students' grades and attendance.</p><p><pre><code class='language-python'>
+students = {
+    "Alice": {"grades": [85, 90, 78], "attendance": {"present": 18, "absent": 2}},
+    "Bob": {"grades": [92, 88, 94], "attendance": {"present": 20, "absent": 0}},
+}</p><p><h1>Calculate average grades</h1>
+for name, info in students.items():
+    avg_grade = sum(info["grades"]) / len(info["grades"])
+    print(f"{name}'s average grade: {avg_grade}")
+</code></pre>
+✅ <strong>Try-it:</strong> Modify the program to find the student with the highest average grade.</p><p><hr>
+<h2><strong>3️⃣ Using Sets and Lists Together</strong> 🔢</h2>
+Let’s say we are tracking students who attended a math workshop.</p><p><pre><code class='language-python'>
+math_workshop = {&quot;Alice&quot;, &quot;Charlie&quot;, &quot;David&quot;}
+science_workshop = {"Bob", "Charlie", "Eve"}</p><p>both_workshops = math_workshop & science_workshop  # Intersection
+only_math = math_workshop - science_workshop  # Difference
+all_students = math_workshop | science_workshop  # Union</p><p>print("Students in both workshops:", both_workshops)
+print("Students only in math workshop:", only_math)
+print("All students who attended at least one workshop:", all_students)
+</code></pre>
+✅ <strong>Mini Challenge:</strong> Create a program that tracks club memberships using sets.</p><p><hr>
+<h2><strong>4️⃣ Visualizing Data with Matplotlib 📊</strong></h2>
+Let’s use <strong>Matplotlib</strong> to visualize student attendance.</p><p><h3><strong>Install Matplotlib (if not installed)</strong></h3>
+<code></code>`sh
+pip install matplotlib
+</code></pre></p><p><h3><strong>Plotting Student Attendance</strong></h3>
+<pre><code class='language-python'>
+import matplotlib.pyplot as plt</p><p>students = ["Alice", "Bob", "Charlie"]
+attendance = [18, 20, 15]  # Number of days present</p><p>plt.bar(students, attendance, color=['blue', 'green', 'orange'])
+plt.xlabel("Students")
+plt.ylabel("Attendance")
+plt.title("Student Attendance Record")
+plt.show()
+</code></pre>
+✅ <strong>Try-it:</strong> Modify the graph to show student grades instead.</p><p><hr>
+<h2><strong>5️⃣ Additional Examples</strong> 📌</h2></p><p><h3><strong>Example 1: Social Media Friend Tracking</strong> 🌐</h3>
+Track friendships using dictionaries and sets.
+<pre><code class='language-python'>
+friends = {
+    "Alice": {"Bob", "Charlie"},
+    "Bob": {"Alice", "David"},
+    "Charlie": {"Alice", "Eve"}
+}</p><p><h1>Find mutual friends</h1>
+def mutual_friends(user1, user2):
+    return friends[user1] & friends[user2]</p><p>print(mutual_friends("Alice", "Bob"))  # Output: {'Charlie'}
+</code></pre>
+✅ <strong>Challenge:</strong> Modify the program to add and remove friends dynamically.</p><p>#### <strong>Alternative: Using Lists Instead of Sets</strong>
+<pre><code class='language-python'>
+friends_list = {
+    "Alice": ["Bob", "Charlie"],
+    "Bob": ["Alice", "David"],
+    "Charlie": ["Alice", "Eve"]
+}
+</code></pre>
+✅ <strong>Pros & Cons:</strong>
+- <strong>Sets</strong> ensure uniqueness, making lookups faster.
+- <strong>Lists</strong> maintain order but allow duplicates, making searches slower.</p><p><h3><strong>Example 2: Weather Tracking System</strong> ☁️</h3>
+Use tuples as dictionary keys to store weather data.
+<pre><code class='language-python'>
+weather = {
+    ("New York", "2024-05-01"): {"temperature": 72, "humidity": 60},
+    ("Los Angeles", "2024-05-01"): {"temperature": 80, "humidity": 50},
+}</p><p><h1>Access data</h1>
+print(weather[("New York", "2024-05-01")]["temperature"])  # Output: 72
+</code></pre>
+✅ <strong>Challenge:</strong> Expand the system to track wind speed as well.</p><p><h3><strong>Example 3: Library Management System</strong> 📚</h3>
+Manage book loans using dictionaries and sets.
+<pre><code class='language-python'>
+library = {
+    "The Hobbit": {"available": 3, "borrowed": set()},
+    "1984": {"available": 2, "borrowed": {"Alice"}},
+}
+</code></pre>
+✅ <strong>Challenge:</strong> Implement a return book function.</p><p><hr>
+<h2><strong>6️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li><strong>Sports Tournament:</strong> Create a dictionary that tracks team names and their scores. Allow users to update scores.</li></ol>
+<ol><li><strong>Shopping List:</strong> Use a list to store grocery items, then convert it to a set to remove duplicates.</li></ol>
+<ol><li><strong>Student Attendance Tracker:</strong> Store student names and their attendance counts in a dictionary and print students who attended more than 15 days.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li><strong>Top Performer Finder:</strong> Given a dictionary of students and their grades, find the top-performing student.</li></ol>
+<ol><li><strong>Library System:</strong> Use a dictionary to track books and their availability (available/borrowed).</li></ol>
+<ol><li><strong>Common Interests:</strong> Take two sets representing student hobbies and find common hobbies.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li><strong>E-commerce Purchase Analysis:</strong> Given a dictionary of customers and their purchase history, find the most frequent buyer.</li></ol>
+<ol><li><strong>Social Media Mentions:</strong> Given a dictionary of user posts, count how many times a specific keyword appears.</li></ol>
+<ol><li><strong>Weather Data Visualization:</strong> Use <code>matplotlib</code> to plot daily temperature readings stored in a dictionary.</li></ol></p><p><hr>
+<h2><strong>7️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned how to:
+- Combine <strong>lists, tuples, sets, and dictionaries</strong> in real-world problems.
+- <strong>Use third-party modules</strong> like Matplotlib for data visualization.
+- Solve <strong>complex problems</strong> using multiple data structures.</p><p>🔜 <strong>What’s Next?</strong> Continue building projects that involve <strong>data processing, storage, and visualization</strong>!</p><p>💡 <strong>Tip:</strong> Combining data structures is a key skill in software development. Experiment with your own projects using multiple data structures! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 08 Sets and Dictionaries.html" class="nav-button">← Tutorial 8: Sets and Dictionaries</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="#" class="nav-button"> →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

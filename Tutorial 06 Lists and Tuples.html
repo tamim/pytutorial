@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 6: Lists & Tuples - Organizing Data 📜 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 6: Lists & Tuples - Organizing Data 📜</h1></p><p><h2><strong>1️⃣ Why Do We Need Lists and Tuples?</strong></h2>
+In Python, <strong>lists</strong> and <strong>tuples</strong> allow us to store multiple values in a single variable. Instead of creating separate variables for each piece of data, we can store them in a structured way.</p><p>✅ <strong>Why use Lists and Tuples?</strong>
+- Store multiple values in one variable.
+- Keep data organized and manageable.
+- Perform operations like sorting, filtering, and iteration efficiently.</p><p><hr>
+<h2><strong>2️⃣ Lists: Your Flexible Data Container</strong> 📋</h2>
+A <strong>list</strong> is an ordered, mutable (changeable) collection of elements.</p><p><h3><strong>Creating a List</strong></h3>
+<pre><code class='language-python'>
+fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+numbers = [1, 2, 3, 4, 5]
+mixed = ["hello", 42, 3.14, True]
+</code></pre></p><p><h3><strong>Accessing Elements</strong></h3>
+<pre><code class='language-python'>
+print(fruits[0])   # Output: apple
+print(fruits[-1])  # Output: cherry
+</code></pre></p><p><h3><strong>Modifying a List</strong></h3>
+<pre><code class='language-python'>
+fruits[1] = &quot;blueberry&quot;  # Changing &quot;banana&quot; to &quot;blueberry&quot;
+print(fruits)  # Output: ["apple", "blueberry", "cherry"]
+</code></pre></p><p><h3><strong>Adding and Removing Elements</strong></h3>
+<pre><code class='language-python'>
+fruits.append(&quot;orange&quot;)  # Add to the end
+fruits.insert(1, "grape")  # Insert at index 1
+print(fruits)  # ['apple', 'grape', 'blueberry', 'cherry', 'orange']</p><p>fruits.remove("cherry")  # Remove a specific item
+popped_fruit = fruits.pop()  # Removes and returns the last item
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a list of your favorite movies, add a new movie, and remove one you don’t like anymore.</p><p><hr>
+<h2><strong>3️⃣ Looping Through Lists</strong> 🔄</h2>
+<h3><strong>Using a <code>for</code> Loop</strong></h3>
+<pre><code class='language-python'>
+for fruit in fruits:
+    print(fruit)
+</code></pre></p><p><h3><strong>Using <code>enumerate()</code> to Get Index and Value</strong></h3>
+<pre><code class='language-python'>
+for index, fruit in enumerate(fruits):
+    print(f"Index {index}: {fruit}")
+</code></pre></p><p><h3><strong>Looping Using Index</strong></h3>
+<pre><code class='language-python'>
+for i in range(len(fruits)):
+    print(fruits[i])
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a list of numbers and print the square of each number using a loop.</p><p><hr>
+<h2><strong>4️⃣ Useful List Methods</strong> 🛠️</h2>
+<pre><code class='language-python'>
+numbers = [3, 1, 4, 1, 5, 9]
+numbers.sort()  # Sort the list
+print(numbers)  # [1, 1, 3, 4, 5, 9]</p><p>numbers.reverse()  # Reverse the order
+print(numbers)  # [9, 5, 4, 3, 1, 1]</p><p>print(numbers.count(1))  # Count occurrences of 1
+print(len(numbers))  # Get the length of the list
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a list of exam scores and find the highest and lowest scores.</p><p><hr>
+<h2><strong>5️⃣ Tuples: Immutable Data Containers</strong> 🔒</h2>
+A <strong>tuple</strong> is similar to a list but <strong>cannot be changed (immutable)</strong>.</p><p><h3><strong>Creating a Tuple</strong></h3>
+<pre><code class='language-python'>
+days = (&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;)
+numbers = (1, 2, 3, 4, 5)
+</code></pre></p><p><h3><strong>Accessing Elements</strong></h3>
+<pre><code class='language-python'>
+print(days[0])  # Output: Monday
+print(days[-1]) # Output: Wednesday
+</code></pre></p><p><h3><strong>Tuple Unpacking</strong></h3>
+<pre><code class='language-python'>
+tuple_data = (&quot;Alice&quot;, 25, &quot;Engineer&quot;)
+name, age, profession = tuple_data
+print(name)  # Output: Alice
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a tuple to store your birth date (year, month, day) and print each part separately.</p><p><hr>
+<h2><strong>6️⃣ Lists vs Tuples: Key Differences</strong> ⚖️</h2>
+| Feature  | List | Tuple |
+|----------|------|-------|
+| Mutability | ✅ Can change | ❌ Cannot change |
+| Performance | Slower | Faster |
+| Methods | More built-in methods | Fewer methods |</p><p>✅ Use <strong>lists</strong> when you need a collection that changes.
+✅ Use <strong>tuples</strong> when you need a <strong>fixed</strong> collection (e.g., coordinates, database records).</p><p><hr>
+<h2><strong>7️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li>Create a list of five colors and print each one.</li></ol>
+<ol><li>Write a program to find the largest number in a given list.</li></ol>
+<ol><li>Convert a tuple to a list, modify the list, and convert it back to a tuple.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li>Create a shopping list and allow the user to add/remove items.</li></ol>
+<ol><li>Write a program that finds the most frequent number in a list.</li></ol>
+<ol><li>Use tuple unpacking to assign values from a tuple to variables and print them.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li>Write a program that takes a list of numbers and returns a tuple with the min and max values.</li></ol>
+<ol><li>Implement a program that sorts a list <strong>without using <code>sort()</code></strong>.</li></ol>
+<ol><li>Write a function that takes two lists and returns a merged, sorted list without duplicates.</li></ol></p><p><hr>
+<h2><strong>8️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to use lists and tuples to organize data.
+- How to modify, loop through, and manipulate lists.
+- When to use lists vs tuples.</p><p>🔜 <strong>Coming Up Next: Working with Files!</strong></p><p>💡 <strong>Tip:</strong> Lists and tuples are <strong>everywhere</strong> in Python. Try using them to store and manage real-world data efficiently! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 05 Debugging and Error Handling.html" class="nav-button">← Tutorial 5: Debugging and Error Handling</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 07 Working with Files.html" class="nav-button">Tutorial 7: Working with Files →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

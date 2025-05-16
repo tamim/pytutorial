@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 4: Functions - Writing Reusable Code 🔧 - Python Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <p><h1>Tutorial 4: Functions - Writing Reusable Code 🔧</h1></p><p><h2><strong>1️⃣ What Are Functions?</strong> 🏗️</h2>
+A <strong>function</strong> is a reusable block of code that performs a specific task. Instead of repeating code, you can call a function whenever needed!</p><p>✅ <strong>Benefits of Using Functions:</strong>
+- <strong>Reusability</strong>: Write once, use multiple times.
+- <strong>Readability</strong>: Makes code organized and easier to understand.
+- <strong>Maintainability</strong>: Easier to modify and fix bugs.</p><p><hr>
+<h2><strong>2️⃣ Defining and Calling Functions</strong> 📞</h2>
+<h3><strong>Creating a Function</strong></h3>
+Use <code>def</code> to define a function, followed by a function name and parentheses <code>()</code>.</p><p><pre><code class='language-python'>
+def greet():
+    print("Hello, welcome to Python!")
+</code></pre></p><p><h3><strong>Calling a Function</strong></h3>
+To execute a function, type its name followed by <code>()</code>.</p><p><pre><code class='language-python'>
+greet()  # Output: Hello, welcome to Python!
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Define a function called <code>say_hello</code> that prints "Hello, User!" and call it.</p><p><hr>
+<h2><strong>3️⃣ Functions with Parameters</strong> 📥</h2>
+You can <strong>pass values</strong> (parameters) to functions to make them more flexible.</p><p><pre><code class='language-python'>
+def greet(name):
+    print(f"Hello, {name}!")</p><p>greet("Alice")  # Output: Hello, Alice!
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Modify <code>greet</code> to take a <code>greeting</code> message as an additional parameter.</p><p><hr>
+<h2><strong>4️⃣ Returning Values from Functions</strong> 📤</h2>
+A function can return a value using <code>return</code>.</p><p><pre><code class='language-python'>
+def add(a, b):
+    return a + b</p><p>result = add(3, 5)
+print(result)  # Output: 8
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Write a function <code>multiply</code> that takes two numbers and returns their product.</p><p><hr>
+<h2><strong>5️⃣ Function Scope: Local vs Global Variables</strong> 🌎</h2>
+<h3><strong>Local Scope (Inside Function)</strong></h3>
+Variables inside a function are <strong>local</strong> and exist only within that function.</p><p><pre><code class='language-python'>
+def show_number():
+    num = 10  # Local variable
+    print(num)</p><p>show_number()
+print(num)  # ❌ Error: 'num' is not defined outside the function
+</code></pre></p><p><h3><strong>Global Scope (Outside Function)</strong></h3>
+A variable declared outside any function is <strong>global</strong> and can be used anywhere.</p><p><pre><code class='language-python'>
+message = &quot;Hello&quot;</p><p>def greet():
+    print(message)  # Accessing global variable</p><p>greet()
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Modify a function to update a global variable inside it using the <code>global</code> keyword.</p><p><hr>
+<h2><strong>6️⃣ Default and Keyword Arguments</strong> 🛠️</h2>
+<h3><strong>Default Parameters</strong></h3>
+You can assign default values to parameters.</p><p><pre><code class='language-python'>
+def greet(name=&quot;User&quot;):
+    print(f"Hello, {name}!")</p><p>greet()      # Output: Hello, User!
+greet("Sam") # Output: Hello, Sam!
+</code></pre></p><p><h3><strong>Keyword Arguments</strong></h3>
+Use <strong>named arguments</strong> for better readability.</p><p><pre><code class='language-python'>
+def describe_pet(animal, name):
+    print(f"I have a {animal} named {name}.")</p><p>describe_pet(animal="dog", name="Buddy")
+describe_pet(name="Whiskers", animal="cat")
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Modify <code>describe_pet</code> to include a default value for <code>animal</code> as "dog".</p><p><hr>
+<h2><strong>7️⃣ Lambda Functions (Short Anonymous Functions)</strong> ⚡</h2>
+A <strong>lambda function</strong> is a short function that has no name.</p><p><pre><code class='language-python'>
+square = lambda x: x * x
+print(square(5))  # Output: 25
+</code></pre></p><p>💡 <strong>Mini Challenge:</strong> Create a lambda function to calculate the cube of a number.</p><p><hr>
+<h2><strong>8️⃣ Practice Exercises</strong> 🏋️‍♂️</h2>
+<h3><strong>Beginner Level</strong></h3>
+<ol><li>Write a function that prints "Welcome to Python!".</li></ol>
+<ol><li>Write a function that takes a number and prints whether it's even or odd.</li></ol>
+<ol><li>Write a function that takes a string and prints it in reverse.</li></ol></p><p><h3><strong>Intermediate Level</strong></h3>
+<ol><li>Write a function that returns the larger of two numbers.</li></ol>
+<ol><li>Write a function that takes a list of numbers and returns their sum.</li></ol>
+<ol><li>Write a function that checks if a number is prime.</li></ol></p><p><h3><strong>Challenge Level</strong> 💡</h3>
+<ol><li>Write a function that finds the factorial of a number.</li></ol>
+<ol><li>Write a function that takes a sentence and counts how many words it has.</li></ol>
+<ol><li>Write a function that generates a random password with a given length.</li></ol></p><p><hr>
+<h2><strong>9️⃣ Next Steps 🚀</strong></h2>
+✅ Congratulations! You’ve learned:
+- How to define and call functions.
+- Using parameters and return values.
+- Understanding scope (local vs global).
+- Advanced function techniques (default arguments, lambda functions).</p><p>🔜 <strong>Coming Up Next: Debugging & Error Handling - Fixing Bugs Like a Pro!</strong></p><p>💡 <strong>Tip:</strong> Functions make your code <strong>efficient and reusable</strong>. Try writing functions for repetitive tasks in your projects! 😃
+</p>
+        </main>
+        
+        <div class="chapter-navigation">
+            <a href="Tutorial 03 String.html" class="nav-button">← Tutorial 3: String Adventures</a>
+            <a href="index.html" class="nav-button">Home</a>
+            <a href="Tutorial 05 Debugging and Error Handling.html" class="nav-button">Tutorial 5: Debugging and Error Handling →</a>
+        </div>
+        
+        <footer>
+            <p>© 2025 Tamim's ThinkLab - Happy Coding! 🚀</p>
+            <p>Found this helpful? Consider contributing improvements via 
+            <a href="https://github.com/yourusername/python-tutorials" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
